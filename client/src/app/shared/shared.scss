@@ -1,0 +1,14 @@
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.navbar-nav > li > a.router-link-active {
+  &,
+  &:hover,
+  &:focus {
+    color: $navbar-default-link-active-color;
+    background-color: $navbar-default-link-active-bg;
+  }
+}
+
+[hidden] {
+  display: none !important;
+}

@@ -1,0 +1,25 @@
+version: '2'
+services:
+  server:
+    env_file: .env
+    build:
+      context: ./
+      dockerfile: docker/server/Dockerfile
+    image: 'server:latest'
+    restart: always
+    volumes:
+     - ./server:/opt/app/server
+     - /opt/app/server/node_modules
+  db:
+    env_file: .env
+    image: postgres:9.5
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+volumes:
+  data:
+  
+  
+  

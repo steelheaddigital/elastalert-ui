@@ -1,0 +1,35 @@
+version: '2'
+services:
+  server:
+    command: ["npm","start"]
+    links:
+     - testdb
+    ports:
+     - "3000:3000"
+    environment:
+      NODE_ENV: test
+      POSTGRES_USER: "test"
+      POSTGRES_PASSWORD: "test"
+  testdb:
+    env_file: .env
+    image: postgres:9.5
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: "test"
+      POSTGRES_PASSWORD: "test"
+    volumes:
+      - test_data:/var/lib/postgresql/data
+  test:
+    depends_on:
+     - server
+    build:
+      context: .
+      dockerfile: docker/test/Dockerfile
+    command: ["ng","test"]
+    links:
+     - testdb
+volumes:
+  test_data:
+

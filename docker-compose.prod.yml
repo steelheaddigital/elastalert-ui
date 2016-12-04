@@ -1,0 +1,21 @@
+version: '2'
+services:
+  server:
+    command: ["npm","start"]
+    links:
+     - db
+    ports:
+     - "3000:3000"
+    environment:
+      NODE_ENV: production
+  web:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    restart: always
+    volumes:
+     - ./client/dist:/usr/share/html
+    links:
+     - server:server
+    ports:
+     - "80:80"

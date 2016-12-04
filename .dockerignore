@@ -1,0 +1,15 @@
+.env
+.gitignore
+Dockerfile
+Vagrantfile
+docker-compose.yml
+.git/
+.vagrant/
+.vscode/
+client/typings/
+client/node_modules/
+client/dist/
+server/node_modules/
+server/typings/
+server/build/
+

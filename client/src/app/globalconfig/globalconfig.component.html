@@ -1,0 +1,81 @@
+<form [formGroup]="globalConfigForm" (submit)="save()">
+    <div class="form-group" [ngClass]="{ 'has-error' : !rulesFolder.valid && !rulesFolder.pristine}">
+        <label class="control-label" for="rulesFolder">Rules Folder</label>
+        <input type="text" class="form-control" placeholder="Rules Folder" formControlName="rulesFolder" />
+        <div *ngIf="!rulesFolder.valid && rulesFolder.hasError('required') && !rulesFolder.pristine" class="alert alert-danger">
+            Rules Folder is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !runEvery.valid && !runEvery.pristine}">
+        <label class="control-label" for="runEvery">Run Every</label>
+        <input type="number" class="form-control" placeholder="Run Every (Minutes)" formControlName="runEvery"/>
+        <div *ngIf="!runEvery.valid && runEvery.hasError('required') && !runEvery.pristine" class="alert alert-danger">
+            Run Every is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !bufferTime.valid && !bufferTime.pristine}">
+        <label class="control-label" for="bufferTime">Buffer Time</label>
+        <input type="number" class="form-control" placeholder="Buffer Time (Minutes)" formControlName="bufferTime"/>
+        <div *ngIf="!bufferTime.valid && bufferTime.hasError('required') && !bufferTime.pristine" class="alert alert-danger">
+            Buffer Time is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !esHost.valid && !esHost.pristine}">
+        <label class="control-label" for="esHost">ES Host</label>
+        <input type="text" class="form-control" placeholder="ES Host" formControlName="esHost"/>
+        <div *ngIf="!esHost.valid && esHost.hasError('required') && !esHost.pristine" class="alert alert-danger">
+            ES Host is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !esPort.valid && !esPort.pristine}">
+        <label class="control-label" for="esPort">ES Port</label>
+        <input type="text" class="form-control" placeholder="ES Port" formControlName="esPort"/>
+        <div *ngIf="!esPort.valid && esPort.hasError('required') && !esPort.pristine" class="alert alert-danger">
+            ES Port is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !esUrlPrefix.valid && !esUrlPrefix.pristine}">
+        <label class="control-label" for="esUrlPrefix">ES URL Prefix</label>
+        <input type="text" class="form-control" placeholder="ES URL Prefix" formControlName="esUrlPrefix"/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !useSsl.valid && !useSsl.pristine}">
+        <label class="control-label" for="useSsl">Use SSL</label>
+        <input type="checkbox" placeholder="Use SSL" formControlName="useSsl"/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !verifyCerts.valid && !verifyCerts.pristine}">
+        <label class="control-label" for="verifyCerts">Verify Certs</label>
+        <input type="checkbox" placeholder="Verify Certs" formControlName="verifyCerts"/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !esSendBodyAs.valid && !esSendBodyAs.pristine}">
+        <label class="control-label" for="esSendBodyAs">ES Send Body As</label>
+        <input type="text" class="form-control" placeholder="ES Send Body As" formControlName="esSendBodyAs"/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !esUserName.valid && !esUserName.pristine}">
+        <label class="control-label" for="esUserName">ES Username</label>
+        <input type="text" class="form-control" placeholder="ES Username" formControlName="esUserName"/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !esPassword.valid && !esPassword.pristine}">
+        <label class="control-label" for="esPassword">ES Password</label>
+        <input type="text" class="form-control" placeholder="ES Password" formControlName="esPassword"/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !writebackIndex.valid && !writebackIndex.pristine}">
+        <label class="control-label" for="writebackIndex">Writeback Index</label>
+        <input type="text" class="form-control" placeholder="Writeback Index" formControlName="writebackIndex"/>
+        <div *ngIf="!writebackIndex.valid && writebackIndex.hasError('required') && !writebackIndex.pristine" class="alert alert-danger">
+            Writeback Index is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !alertTimeLimitDays.valid && !alertTimeLimitDays.pristine}">
+        <label class="control-label" for="alertTimeLimitDays">Alert Time Limit</label>
+        <input type="number" class="form-control" placeholder="Alert Time Limit (Days)" formControlName="alertTimeLimitDays"/>
+        <div *ngIf="!alertTimeLimitDays.valid && alertTimeLimitDays.hasError('required') && !alertTimeLimitDays.pristine" class="alert alert-danger">
+            Alert Time Limit is required
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-inverse btn-lg btn-register"
+                [disabled]="!globalConfigForm.valid">
+            Save
+        </button>
+    </div>
+</form>
