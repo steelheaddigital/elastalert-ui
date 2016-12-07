@@ -1,0 +1,6 @@
+<hr>
+<router-outlet></router-outlet>
+<hr>
+
+<button (click)="goToNextStep('backward')" [disabled]="stepIsFirstOrLast('backward')">Back</button>
+<button (click)="goToNextStep('forward')" [disabled]="!state.isValid || stepIsFirstOrLast('forward')">Forward</button> 

@@ -9,13 +9,19 @@ import { NavbarComponent } from './shared/navbar';
 import { HomeComponent } from './home';
 import { CollapseModule } from 'ng2-bootstrap';
 import { GlobalConfigComponent } from './globalconfig/globalconfig.component';
+import { EditComponent } from './rules/edit/edit.component';
+import { MultistepStep1Component } from './rules/edit/multistep.step1.component';
+import { MultistepStep2Component } from './rules/edit/multistep.step2.component';
 
 @NgModule({
     declarations: [
       AppComponent, 
       NavbarComponent,
       HomeComponent,
-      GlobalConfigComponent
+      GlobalConfigComponent,
+      EditComponent,
+      MultistepStep1Component,
+      MultistepStep2Component
     ],
     imports:      [
         BrowserModule,
