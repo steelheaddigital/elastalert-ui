@@ -4,17 +4,17 @@ import { EditService } from './edit.service';
 import { MultistepFormClass } from '../../shared/multistep/multistep.form-class';
 
 @Component({ 
-  templateUrl: './multistep.step1.html',
+  templateUrl: './step1.component.html',
 })
 
-export class MultistepStep1Component extends MultistepFormClass implements OnInit, AfterViewChecked {
+export class EditStep1Component extends MultistepFormClass implements OnInit, AfterViewChecked {
   
-  @ViewChild('form') public latestForm: NgForm;
   public rules: string[];
 
-  constructor (
-    @Inject(EditService) public multistepService: EditService
-  ) { super(multistepService) }
+  constructor (public multistepService: EditService) 
+  { 
+    super(multistepService) 
+  }
 
   ngOnInit () {
     this.model = this.multistepService.model;

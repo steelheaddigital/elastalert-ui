@@ -10,8 +10,10 @@ import { HomeComponent } from './home';
 import { CollapseModule } from 'ng2-bootstrap';
 import { GlobalConfigComponent } from './globalconfig/globalconfig.component';
 import { EditComponent } from './rules/edit/edit.component';
-import { MultistepStep1Component } from './rules/edit/multistep.step1.component';
-import { MultistepStep2Component } from './rules/edit/multistep.step2.component';
+import { EditStep1Component } from './rules/edit/step1.component';
+import { EditStep2Component } from './rules/edit/step2.component';
+import { CardinalityComponent } from './rules/required/cardinality/cardinality.component';
+import { CommonComponent } from './rules/required/common/common.component';
 
 @NgModule({
     declarations: [
@@ -20,8 +22,10 @@ import { MultistepStep2Component } from './rules/edit/multistep.step2.component'
       HomeComponent,
       GlobalConfigComponent,
       EditComponent,
-      MultistepStep1Component,
-      MultistepStep2Component
+      EditStep1Component,
+      EditStep2Component,
+      CardinalityComponent,
+      CommonComponent
     ],
     imports:      [
         BrowserModule,
@@ -34,6 +38,7 @@ import { MultistepStep2Component } from './rules/edit/multistep.step2.component'
     providers: [
         APP_ROUTER_PROVIDERS
     ],
+    entryComponents: [EditStep2Component, CardinalityComponent],
     bootstrap:    [AppComponent],
 })
 export class AppModule {}

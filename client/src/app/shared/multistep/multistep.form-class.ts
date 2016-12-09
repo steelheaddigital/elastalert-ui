@@ -1,3 +1,4 @@
+import { ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MultistepService } from '../../shared/multistep/multistep.service';
 
@@ -5,7 +6,7 @@ export class MultistepFormClass {
 
   public model = {};
   private form: NgForm;
-  public latestForm: NgForm;
+  @ViewChild('form') public latestForm: NgForm;
 
   constructor(public multistepService: MultistepService) { }
 
@@ -38,15 +39,7 @@ export class MultistepFormClass {
       this.formErrors[field] = '';
       const control = form.get(field);
 
-      console.log(control); 
-
       this.multistepService.stateUpdateStream.next({dirty: true, isValid: control && control.valid});
-
-      if (control && control.dirty && !control.valid) {
-
-
-
-      }
     }
   }
 

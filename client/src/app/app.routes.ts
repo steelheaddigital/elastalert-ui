@@ -2,8 +2,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/index';
 import { GlobalConfigComponent } from './globalconfig/index';
 import { EditComponent } from './rules/edit/edit.component';
-import { MultistepStep1Component } from './rules/edit/multistep.step1.component';
-import { MultistepStep2Component } from './rules/edit/multistep.step2.component';
+import { EditStep1Component } from './rules/edit/step1.component';
+import { EditStep2Component } from './rules/edit/step2.component';
 
 export const routes: Routes = [
   {
@@ -24,11 +24,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'step1',
-        component: MultistepStep1Component
+        component: EditStep1Component
       },
       {
         path: 'step2',
-        component: MultistepStep2Component
+        component: EditStep2Component
       }
     ]
   }
