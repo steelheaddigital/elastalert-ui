@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
 import { Observable, Subject } from 'rxjs/Rx';
 import { MultistepService } from '../../shared/multistep/multistep.service';
-import { EDIT_PATH } from '../../shared/api';
+import { RULE_PATH } from '../../shared/api';
 import { BaseService, IJsendResponse, JsonRequest } from '../../shared/base.service';
 
 export interface IState {
@@ -28,12 +28,20 @@ export class EditService extends MultistepService{
   };
 
   public ruleNames(): Observable<string[]> {
-    return this.http.get(EDIT_PATH)
+    return this.http.get(RULE_PATH)
       .map(result => {
         var response: IJsendResponse = super.extractData(result)
         let ruleNames = response.data as Array<string>;
         return ruleNames;
       });
+  }
+
+  public loadRule(ruleName: string): Observable<Object> {
+    return this.http.get(RULE_PATH + '/' + ruleName)
+      .map(result => {
+        var response: IJsendResponse = super.extractData(result)
+        return response.data;
+      })
   }
 
 };                      

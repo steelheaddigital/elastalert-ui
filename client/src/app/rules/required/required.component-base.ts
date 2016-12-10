@@ -1,7 +1,11 @@
+import { Input } from '@angular/core';
 import { BaseFormComponent } from '../../shared/base-form.component';
 import { FormBuilder, Validators } from '@angular/forms';
 
 export class RequiredBaseComponent extends BaseFormComponent {
+
+  @Input()
+  public model = { }
 
   constructor(protected builder: FormBuilder ){
     super();
@@ -9,8 +13,6 @@ export class RequiredBaseComponent extends BaseFormComponent {
 
   protected buildCommonForm() {
     return this.builder.group({
-      esHost: ['', Validators.required],
-      esPort: ['', Validators.required],
       index: ['', Validators.required],
       name: ['', Validators.required],
       type: ['', Validators.required],

@@ -11,17 +11,17 @@ export class BaseService {
     this.configPath = this.getConfigPath();
   }
 
-public rulesDirectory(): Promise<any> {
-  return new Promise( (resolve,reject) => {
-    let configPath: string = this.configPath;
-    fs.readFile(configPath, 'utf8', (err,data) => {
-      if(err !== null) return reject(err);
-      let doc = yaml.safeLoad(data);
-      let rulesDirectory = doc.rules_folder;
-      resolve(path.join(config.elastalertDir,rulesDirectory));
+  public rulesDirectory(): Promise<any> {
+    return new Promise( (resolve,reject) => {
+      let configPath: string = this.configPath;
+      fs.readFile(configPath, 'utf8', (err,data) => {
+        if(err !== null) return reject(err);
+        let doc = yaml.safeLoad(data);
+        let rulesDirectory = doc.rules_folder;
+        resolve(path.join(config.elastalertDir,rulesDirectory));
+      });
     });
-  });
-}
+  }
 
   public getConfigPath(): string {
     let configPath: string = config.elastalertDir + 'config.yaml';

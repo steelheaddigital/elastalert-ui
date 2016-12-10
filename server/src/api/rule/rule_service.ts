@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { BaseService } from '../common/base_service';
 let config = require('../../../config');
 
-export class EditService extends BaseService {
+export class RuleService extends BaseService {
   constructor(){
     super();
   }
@@ -28,19 +28,16 @@ export class EditService extends BaseService {
     });
   }
 
-  public saveGlobalConfig(configData): Promise<any> {
-    return new Promise( (resolve,reject) => {
-      let doc = _(configData).omitBy(_.isNull)
-                             .omitBy(_.isUndefined)
-                             .value();
-
-      let yamlDoc = yaml.safeDump(doc);
-      fs.writeFile(config.elastalertDir + 'config.yaml', yamlDoc, 'utf8', (err) => {
-        if(err !== null) return reject(err);
-        resolve();
-      });
-      resolve();
-    });
+  public rule(ruleName: string) : Promise<any> {
+      return this.rulesDirectory().then(rulesDirectory => {
+        return new Promise( (resolve,reject) => {
+            let filePath =  path.join(rulesDirectory, ruleName + '.yaml')
+            fs.readFile(filePath, 'utf8', (err,data) => {
+                if(err !== null) return reject(err);
+                let doc = yaml.safeLoad(data);
+                resolve(doc);
+            });
+        });
+      })
   }
-
 }

@@ -21,7 +21,7 @@ app.use(jsend.middleware);
 
 // configure routes
 app.use('/api/globalconfig', require('./api/globalconfig'));
-app.use('/api/edit', require('./api/edit'));
+app.use('/api/rule', require('./api/rule'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

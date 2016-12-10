@@ -1,18 +1,4 @@
 <div [formGroup]="commonForm">
-   <div class="form-group" [ngClass]="{ 'has-error' : !commonForm.controls.esHost.valid && !commonForm.controls.esHost.pristine}">
-      <label class="control-label" for="esHost">ES Host</label>
-      <input type="text" class="form-control" placeholder="ES Host" formControlName="esHost" />
-      <div *ngIf="!commonForm.controls.esHost.valid && commonForm.controls.esHost.hasError('required') && !commonForm.controls.esHost.pristine" class="alert alert-danger">
-          ES Host is required
-      </div>
-   </div>
-    <div class="form-group" [ngClass]="{ 'has-error' : !commonForm.controls.esPort.valid && !commonForm.controls.esPort.pristine}">
-      <label class="control-label" for="esport">ES Port</label>
-      <input type="number" class="form-control" placeholder="ES Port" formControlName="esPort" />
-      <div *ngIf="!commonForm.controls.esPort.valid && commonForm.controls.esPort.hasError('required') && !commonForm.controls.esPort.pristine" class="alert alert-danger">
-          ES Port is required
-      </div>
-   </div>
    <div class="form-group" [ngClass]="{ 'has-error' : !commonForm.controls.index.valid && !commonForm.controls.index.pristine}">
       <label class="control-label" for="name">Index</label>
       <input type="text" class="form-control" placeholder="Index" formControlName="index" />

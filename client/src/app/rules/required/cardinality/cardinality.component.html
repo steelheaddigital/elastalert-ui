@@ -1,6 +1,6 @@
 <form [formGroup]="cardinalityForm" (submit)="save()">
     <div formGroupName="commonForm">
-      <rules-common [group]="cardinalityForm.controls.commonForm" ></rules-common>
+      <rules-common [group]="cardinalityForm.controls.commonForm" [model]="model"></rules-common>
     </div>
     <div>
         <button type="submit" class="btn btn-inverse btn-lg btn-register"
