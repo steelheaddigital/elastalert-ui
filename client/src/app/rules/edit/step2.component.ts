@@ -24,9 +24,11 @@ export class EditStep2Component extends MultistepFormClass implements OnInit, Af
       while(true) {
         if(this.parent) {
           this.loadRule().subscribe(ruleData => {
-            let childComponent = this.resolveRuleTypeComponent(ruleData['type']);
-            let componentRef = this.parent.createComponent(childComponent);
-            componentRef.instance.model = this.model;
+            if(ruleData){
+              let childComponent = this.resolveRuleTypeComponent(ruleData['type']);
+              let componentRef = this.parent.createComponent(childComponent);
+              componentRef.instance.model = this.model;
+            }
           });
           break;
         }
@@ -37,7 +39,7 @@ export class EditStep2Component extends MultistepFormClass implements OnInit, Af
   }
 
   private loadRule(): Observable<any> {
-    let selectedRule = this.model['selectedRule'];
+    let selectedRule = this.model['selectedRule'] === undefined ? '' : this.model['selectedRule'];
     return this.multistepService.loadRule(selectedRule)
       .map(result => {
         this.model['ruleData'] = result;

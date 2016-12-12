@@ -16,7 +16,15 @@ export class RequiredBaseComponent extends BaseFormComponent {
       index: ['', Validators.required],
       name: ['', Validators.required],
       type: ['', Validators.required],
-      alert: ['', Validators.required]
+      alerts: this.buildAlertForm() 
     })
+  }
+
+  protected buildAlertForm() {
+    return this.builder.array([
+      this.builder.group({
+        type: ['', Validators.required]
+      })
+    ])
   }
 }

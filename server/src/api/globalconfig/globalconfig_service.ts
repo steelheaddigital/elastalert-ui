@@ -1,5 +1,6 @@
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
+import * as path from 'path'
 import * as _ from 'lodash';
 import { BaseService } from '../common/base_service';
 let config = require('../../../config');
@@ -26,7 +27,7 @@ export class GlobalConfigService extends BaseService {
                              .value();
 
       let yamlDoc = yaml.safeDump(doc);
-      fs.writeFile(config.elastalertDir + 'config.yaml', yamlDoc, 'utf8', (err) => {
+      fs.writeFile(path.join(config.elastalertDir,'config.yaml'), yamlDoc, 'utf8', (err) => {
         if(err !== null) return reject(err);
         resolve();
       });

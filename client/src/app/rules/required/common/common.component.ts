@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { BaseFormComponent, ValidationResult } from '../../../shared/base-form.component'
 
 @Component({
@@ -24,5 +24,11 @@ export class CommonComponent extends BaseFormComponent implements OnInit {
     this.commonForm.controls['index'].setValue(this.model['ruleData']['index']);
     this.commonForm.controls['name'].setValue(this.model['ruleData']['name']);
     this.commonForm.controls['type'].setValue(this.model['ruleData']['type']);
+
+    let alerts: FormArray = this.commonForm.controls['alerts'] as FormArray
+    for(var i = 0; i < alerts.length; i++){
+        let group: FormGroup = alerts.controls[i] as FormGroup;
+        group.controls['type'].setValue(this.model['ruleData']['alert'][i]);
+    }
   }
 }

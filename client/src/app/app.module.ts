@@ -14,6 +14,8 @@ import { EditStep1Component } from './rules/edit/step1.component';
 import { EditStep2Component } from './rules/edit/step2.component';
 import { CardinalityComponent } from './rules/required/cardinality/cardinality.component';
 import { CommonComponent } from './rules/required/common/common.component';
+import { AlertComponent } from './rules/alert/alert.component';
+import { EmailComponent } from './rules/alert/email/email.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +27,9 @@ import { CommonComponent } from './rules/required/common/common.component';
       EditStep1Component,
       EditStep2Component,
       CardinalityComponent,
-      CommonComponent
+      CommonComponent,
+      AlertComponent,
+      EmailComponent
     ],
     imports:      [
         BrowserModule,
@@ -38,7 +42,7 @@ import { CommonComponent } from './rules/required/common/common.component';
     providers: [
         APP_ROUTER_PROVIDERS
     ],
-    entryComponents: [EditStep2Component, CardinalityComponent],
+    entryComponents: [EditStep2Component, CardinalityComponent, AlertComponent, EmailComponent],
     bootstrap:    [AppComponent],
 })
 export class AppModule {}

@@ -20,11 +20,11 @@
           Type is required
       </div>
    </div>
-   <div class="form-group" [ngClass]="{ 'has-error' : !commonForm.controls.alert.valid && !commonForm.controls.alert.pristine}">
-      <label class="control-label" for="type">Alert</label>
-      <input type="text" class="form-control" placeholder="Alert" formControlName="alert" />
-      <div *ngIf="!commonForm.controls.alert.valid && commonForm.controls.alert.hasError('required') && !commonForm.controls.alert.pristine" class="alert alert-danger">
-          Type is required
-      </div>
-   </div>
+   <div formArrayName="alerts">
+        <div *ngFor="let alert of commonForm.controls.alerts.controls; let i=index">
+            <div [formGroupName]="i">
+                <app-alert [group]="commonForm.controls.alerts.controls[i]" [model]="model"></app-alert>
+            </div>
+        </div>
+    </div>
 </div>

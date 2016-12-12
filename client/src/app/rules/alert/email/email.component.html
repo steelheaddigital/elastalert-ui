@@ -1,0 +1,9 @@
+<div [formGroup]="emailForm">
+   <div class="form-group" [ngClass]="{ 'has-error' : !emailForm.controls.email.valid && !emailForm.controls.email.pristine}">
+      <label class="control-label" for="name">Email</label>
+      <input type="text" class="form-control" placeholder="Email" formControlName="email" />
+      <div *ngIf="!emailForm.controls.email.valid && emailForm.controls.email.hasError('required') && !emailForm.controls.email.pristine" class="alert alert-danger">
+          Email is required
+      </div>
+   </div>
+</div>

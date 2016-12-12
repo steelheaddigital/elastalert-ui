@@ -22,7 +22,7 @@ export class CardinalityComponent extends RequiredBaseComponent implements OnIni
 
   private buildForm(): void {
     this.cardinalityForm = this.builder.group({
-      commonForm: this.buildCommonForm()
+      commonForm: this.buildCommonForm(),
     });
   }
 }
