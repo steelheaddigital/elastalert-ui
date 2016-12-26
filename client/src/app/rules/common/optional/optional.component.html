@@ -1,0 +1,6 @@
+<div [formGroup]="optionalCommonForm">
+   <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.esHost.valid && !optionalCommonForm.controls.esHost.pristine}">
+      <label class="control-label" for="name">ES Host</label>
+      <input type="text" class="form-control" placeholder="ES Host" formControlName="esHost" />
+   </div>
+</div>

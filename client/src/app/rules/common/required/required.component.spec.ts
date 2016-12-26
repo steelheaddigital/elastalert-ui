@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CommonComponent } from './common.component';
+import { CommonComponent } from './required.component';
 
 describe('CommonComponent', () => {
   let component: CommonComponent;

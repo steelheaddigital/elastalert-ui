@@ -1,0 +1,16 @@
+<form [formGroup]="cardinalityForm" (submit)="save()">
+    <h1>Required Settings</h1>
+    <div formGroupName="commonRequiredForm">
+      <required-common [requiredGroup]="cardinalityForm.controls.commonRequiredForm" [model]="model"></required-common>
+    </div>
+    <h1>Optional Settings</h1>
+    <div formGroupName="commonOptionalForm">
+      <optional-common [optionalGroup]="cardinalityForm.controls.commonOptionalForm" [model]="model"></optional-common>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-inverse btn-lg btn-register"
+                [disabled]="!cardinalityForm.valid">
+            Save
+        </button>
+    </div>
+</form>

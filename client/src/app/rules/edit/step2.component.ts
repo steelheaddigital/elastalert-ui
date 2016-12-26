@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import { EditService } from './edit.service';
 import { MultistepFormClass } from '../../shared/multistep/multistep.form-class';
-import { CardinalityComponent } from '../required/cardinality/cardinality.component';
+import { CardinalityComponent } from '../cardinality/cardinality.component';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -11,10 +11,12 @@ import { Observable } from 'rxjs/Observable';
 
 export class EditStep2Component extends MultistepFormClass implements OnInit, AfterViewChecked {
 
-  @ViewChild('parent', {read: ViewContainerRef})
-  parent: ViewContainerRef;
+  editForm: FormGroup;
 
-  constructor (public multistepService: EditService, private componentFactoryResolver: ComponentFactoryResolver) 
+  @ViewChild('rule', {read: ViewContainerRef})
+  required: ViewContainerRef;
+
+  constructor (public multistepService: EditService, private componentFactoryResolver: ComponentFactoryResolver, private builder: FormBuilder) 
   { 
     super(multistepService);
   }
@@ -22,12 +24,12 @@ export class EditStep2Component extends MultistepFormClass implements OnInit, Af
   ngOnInit () {
     setTimeout(() => {
       while(true) {
-        if(this.parent) {
+        if(this.required) {
           this.loadRule().subscribe(ruleData => {
             if(ruleData){
-              let childComponent = this.resolveRuleTypeComponent(ruleData['type']);
-              let componentRef = this.parent.createComponent(childComponent);
-              componentRef.instance.model = this.model;
+              let requiredComponent = this.resolveRequiredComponent(ruleData['type']);
+              let requiredComponentRef = this.required.createComponent(requiredComponent);
+              requiredComponentRef.instance.model = this.model;
             }
           });
           break;
@@ -47,7 +49,7 @@ export class EditStep2Component extends MultistepFormClass implements OnInit, Af
       })
   }
 
-  private resolveRuleTypeComponent(ruleType: string): ComponentFactory<any> {
+  private resolveRequiredComponent(ruleType: string): ComponentFactory<any> {
     switch (ruleType) {
       case 'cardinality':
         return this.componentFactoryResolver.resolveComponentFactory(CardinalityComponent);

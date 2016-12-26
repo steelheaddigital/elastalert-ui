@@ -12,10 +12,11 @@ import { GlobalConfigComponent } from './globalconfig/globalconfig.component';
 import { EditComponent } from './rules/edit/edit.component';
 import { EditStep1Component } from './rules/edit/step1.component';
 import { EditStep2Component } from './rules/edit/step2.component';
-import { CardinalityComponent } from './rules/required/cardinality/cardinality.component';
-import { CommonComponent } from './rules/required/common/common.component';
+import { CardinalityComponent } from './rules/cardinality/cardinality.component';
+import { RequiredCommonComponent } from './rules/common/required/required.component';
 import { AlertComponent } from './rules/alert/alert.component';
 import { EmailComponent } from './rules/alert/email/email.component';
+import { OptionalComponent } from './rules/common/optional/optional.component';
 
 @NgModule({
     declarations: [
@@ -27,9 +28,10 @@ import { EmailComponent } from './rules/alert/email/email.component';
       EditStep1Component,
       EditStep2Component,
       CardinalityComponent,
-      CommonComponent,
+      RequiredCommonComponent,
       AlertComponent,
-      EmailComponent
+      EmailComponent,
+      OptionalComponent
     ],
     imports:      [
         BrowserModule,

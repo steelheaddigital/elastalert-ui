@@ -31,7 +31,6 @@ export class AlertComponent implements OnInit {
           let childComponent = this.resolveAlertTypeComponent('email');
           let componentRef = this.alertParent.createComponent(childComponent);
           componentRef.instance.model = this.model;
-          (componentRef.instance as EmailComponent).emailForm.controls['email'].setValue((this.model['ruleData']['email'] as string[]).join(','));
         }
         break;
       }
