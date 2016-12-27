@@ -15,21 +15,29 @@ export class RuleController{
   };
 
   /* GET rules */
-  public rule = (req: Request, res: Response, next: NextFunction) => {
+  public getRule = (req: Request, res: Response, next: NextFunction) => {
       let ruleName = req.params.rulename;
-      this.ruleService.rule(ruleName).then(rule => {
+      this.ruleService.getRule(ruleName).then(rule => {
           res.jsend.success(rule);
       })
       .catch(next);
   }
 
-  /* POST Save Global Settings */
-  public save = (req: Request, res: Response, next: NextFunction) => {
+  /* POST Save new rule */
+  public create = (req: Request, res: Response, next: NextFunction) => {
     // this.globalConfigService.saveGlobalConfig(req.body).then(config => {
     //   res.jsend.success(true);
     // })
     // .catch(next);
   }
 
+  /* PUT Update rule */
+  public update = (req: Request, res: Response, next: NextFunction) => {
+    let ruleName = req.params.rulename;
+    this.ruleService.saveRule(ruleName, req.body).then(config => {
+      res.jsend.success(true);
+    })
+    .catch(next);
+  }
 
 }

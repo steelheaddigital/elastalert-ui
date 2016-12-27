@@ -6,8 +6,7 @@ export class AlertService {
   constructor() { }
 
   public alertTypes: string[] = [
-    "",
-    "email"
+    "email",
   ]
 
 }

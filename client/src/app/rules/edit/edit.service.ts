@@ -4,7 +4,7 @@ import { Http, Response } from '@angular/http';
 import { Observable, Subject } from 'rxjs/Rx';
 import { MultistepService } from '../../shared/multistep/multistep.service';
 import { RULE_PATH } from '../../shared/api';
-import { BaseService, IJsendResponse, JsonRequest } from '../../shared/base.service';
+import { IJsendResponse, JsonRequest } from '../../shared/base.service';
 
 export interface IState {
 
@@ -16,7 +16,7 @@ export interface IState {
 export type IStepDirection = 'backward' | 'forward';
 
 @Injectable()
-export class EditService extends MultistepService{ 
+export class EditService extends MultistepService { 
 
   constructor (public router: Router, private http: Http) { 
     super(router)
@@ -43,5 +43,4 @@ export class EditService extends MultistepService{
         return response.data;
       })
   }
-
 };                      

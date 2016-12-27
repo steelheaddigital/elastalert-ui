@@ -28,16 +28,34 @@ export class RuleService extends BaseService {
     });
   }
 
-  public rule(ruleName: string) : Promise<any> {
-      return this.rulesDirectory().then(rulesDirectory => {
-        return new Promise( (resolve,reject) => {
-            let filePath =  path.join(rulesDirectory, ruleName + '.yaml')
-            fs.readFile(filePath, 'utf8', (err,data) => {
-                if(err !== null) return reject(err);
-                let doc = yaml.safeLoad(data);
-                resolve(doc);
-            });
+  public getRule(ruleName: string) : Promise<any> {
+    return this.rulesDirectory().then(rulesDirectory => {
+      return new Promise( (resolve,reject) => {
+          let filePath =  path.join(rulesDirectory, ruleName + '.yaml')
+          fs.readFile(filePath, 'utf8', (err,data) => {
+              if(err !== null) return reject(err);
+              let doc = yaml.safeLoad(data);
+              resolve(doc);
+          });
+      });
+    });
+  }
+
+  public saveRule(ruleName: string, ruleData: Object) : Promise<any> {
+    return this.rulesDirectory().then(rulesDirectory => {
+      return new Promise( (resolve,reject) => {
+        let doc = _(ruleData).omitBy(_.isNull)
+                              .omitBy(_.isUndefined)
+                              .value();
+
+        let yamlDoc = yaml.safeDump(doc);
+        let fileName = ruleName + '.yaml'
+        fs.writeFile(path.join(rulesDirectory, fileName), yamlDoc, 'utf8', (err) => {
+          if(err !== null) return reject(err);
+          resolve();
         });
-      })
+        resolve();
+      });
+    });
   }
 }

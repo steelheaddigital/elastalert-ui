@@ -28,7 +28,8 @@ export class AlertComponent implements OnInit {
     setTimeout(() => {
       while(true) {
         if(this.alertParent) {
-          let childComponent = this.resolveAlertTypeComponent('email');
+          let alertType = this.alertForm.controls['type'].value;
+          let childComponent = this.resolveAlertTypeComponent(alertType);
           let componentRef = this.alertParent.createComponent(childComponent);
           componentRef.instance.model = this.model;
         }

@@ -1,17 +1,24 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { RulesService } from '../rules.service';
+import { BaseFormComponent } from '../../shared/base-form.component'
 
 @Component({
   selector: 'app-cardinality',
   templateUrl: './cardinality.component.html',
-  styleUrls: ['./cardinality.component.css']
+  styleUrls: ['./cardinality.component.css'],
+  providers: [RulesService]
 })
-export class CardinalityComponent implements OnInit {
+export class CardinalityComponent extends BaseFormComponent implements OnInit {
+
+  @Input()
+  model: Object;
 
   cardinalityForm: FormGroup;
 
-  constructor(protected builder: FormBuilder) 
+  constructor(protected builder: FormBuilder, private rulesService: RulesService) 
   { 
+    super();
     this.buildForm();
   }
 
@@ -19,16 +26,13 @@ export class CardinalityComponent implements OnInit {
   }
 
   public save() {
-    let rule: Object = { }
-    let commonRequiredForm = this.cardinalityForm.controls['commonRequiredForm'] as FormGroup
-    rule['index'] = commonRequiredForm.controls['index'].value;
-    rule['name'] = commonRequiredForm.controls['name'].value;
-    rule['type'] = commonRequiredForm.controls['type'].value;
-
-    let alerts = commonRequiredForm.controls['alerts'] as FormArray
-    for( let i = 0; i < alerts.length; i++) {
-      let formGroup = alerts.controls[i] as FormGroup
-    }
+    this.rulesService.save(this.model).subscribe(
+        result => {
+          this.buildForm();
+        },
+        error => {
+          super.handleError(this.cardinalityForm, error);
+        })
   }
 
   private buildForm(): void {

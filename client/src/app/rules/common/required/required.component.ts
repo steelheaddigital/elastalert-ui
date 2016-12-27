@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
-import { BaseFormComponent, ValidationResult } from '../../../shared/base-form.component'
+import { BaseFormComponent, ValidationResult } from '../../../shared/base-form.component';
+import { Subscription }   from 'rxjs/Subscription';
 
 @Component({
   selector: 'required-common',
@@ -15,6 +16,8 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
   @Input()
   model: Object;
 
+  subscriptions: Array<Subscription> = new Array<Subscription>();
+
   constructor(private builder: FormBuilder) 
   { 
     super();
@@ -26,9 +29,32 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
     this.requiredCommonForm.controls['type'].setValue(this.model['ruleData']['type']);
 
     let alerts: FormArray = this.requiredCommonForm.controls['alerts'] as FormArray
-    for(var i = 0; i < alerts.length; i++){
-        let group: FormGroup = alerts.controls[i] as FormGroup;
-        group.controls['type'].setValue(this.model['ruleData']['alert'][i]);
+    for(let i = 0; i < alerts.length; i++){
+      let group: FormGroup = alerts.controls[i] as FormGroup;
+      group.controls['type'].setValue(this.model['ruleData']['alert'][i]);
+      this.subscriptions.push(group.controls['type'].valueChanges.subscribe(val => {
+        (this.model['ruleData']['alert'] as Array<string>)[i] = val;
+      }))
     }
+
+    this.bindControls();
+  }
+
+  ngOnDestroy() {
+    for(let i = 0; i < this.subscriptions.length; i++){
+      this.subscriptions[i].unsubscribe();
+    }
+  }
+
+  private bindControls() {
+    this.subscriptions.push(this.requiredCommonForm.controls['index'].valueChanges.subscribe(val => {
+      this.model['ruleData']['index'] = val;
+    }));
+    this.subscriptions.push(this.requiredCommonForm.controls['name'].valueChanges.subscribe(val => {
+      this.model['ruleData']['name'] = val;
+    }));
+    this.subscriptions.push(this.requiredCommonForm.controls['type'].valueChanges.subscribe(val => {
+      this.model['ruleData']['type'] = val;
+    }));
   }
 }
