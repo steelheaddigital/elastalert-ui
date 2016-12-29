@@ -77,7 +77,7 @@ export class GlobalConfigComponent extends BaseFormComponent implements OnInit {
     this.globalConfigService.saveGlobalConfigData(globalConfig)
       .subscribe(
         result => {
-          this.buildForm();
+          alert("Global Config Successfully Saved")
         },
         error => {
           super.handleError(this.globalConfigForm, error);

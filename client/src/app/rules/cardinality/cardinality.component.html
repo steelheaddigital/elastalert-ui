@@ -24,11 +24,11 @@
     </div>
     <div class="form-group" [ngClass]="{ 'has-error' : !cardinalityForm.controls.maxCardinality.valid && !cardinalityForm.controls.maxCardinality.pristine}">
         <label class="control-label" for="name">Max Cardinality</label>
-        <input type="checkbox" formControlName="maxCardinality" />
+        <input type="number" class="form-control" placeholder="Max Cardinality" formControlName="maxCardinality" />
     </div>
     <div class="form-group" [ngClass]="{ 'has-error' : !cardinalityForm.controls.minCardinality.valid && !cardinalityForm.controls.minCardinality.pristine}">
         <label class="control-label" for="name">Min Cardinality</label>
-        <input type="checkbox" formControlName="minCardinality" />
+        <input type="number" class="form-control" placeholder="Min Cardinality" formControlName="minCardinality" />
     </div>
     <div formGroupName="commonOptionalForm">
       <optional-common [optionalGroup]="cardinalityForm.controls.commonOptionalForm" [model]="model"></optional-common>
