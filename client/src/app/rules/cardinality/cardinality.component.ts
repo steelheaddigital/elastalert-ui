@@ -19,16 +19,16 @@ export class CardinalityComponent extends BaseFormComponent implements OnInit {
   constructor(protected builder: FormBuilder, private rulesService: RulesService) 
   { 
     super();
-    this.buildForm();
   }
 
   ngOnInit() {
+    this.buildForm();
   }
 
   public save() {
     this.rulesService.save(this.model).subscribe(
         result => {
-          this.buildForm();
+          alert("Rule Successfully Saved");
         },
         error => {
           super.handleError(this.cardinalityForm, error);
@@ -44,7 +44,41 @@ export class CardinalityComponent extends BaseFormComponent implements OnInit {
 
   private buildOptionalCommonForm() {
     return this.builder.group({
-      esHost: ''
+      esHost: '',
+      esPort: '',
+      useStrFtimeIndex: false,
+      useSsl: false,
+      verifyCerts: true,
+      esUsername: '',
+      esPassword: '',
+      esUrlPrefix: '',
+      esSendGetBodyAs: 'GET',
+      aggregation: null,
+      description: '',
+      generateKibanaLink: false,
+      useKibanaDashboard: '',
+      kibanaUrl: '',
+      useKibana4Dashboard: '',
+      kibana4StartTimeDelta: 10,
+      kibana4EndTimeDelta: 10,
+      useLocalTime: true,
+      realert: 1,
+      exponentialRealert: null,
+      matchEnhancements: null,
+      topCountNumber: 5,
+      topCountKeys: null,
+      rawCountKeys: true,
+      include: '*',
+      maxQuerySize: null,
+      queryDelay: 0,
+      owner: '',
+      priority: 2,
+      useCountQuery: false,
+      useTermsQuery: false,
+      bufferTime: null,
+      timestampType: 'iso',
+      timestampFormat: "%Y-%m-%dT%H:%M:%SZ",
+      _sourceEnabled: true
     })
   }
 
@@ -53,6 +87,7 @@ export class CardinalityComponent extends BaseFormComponent implements OnInit {
       index: ['', Validators.required],
       name: ['', Validators.required],
       type: ['', Validators.required],
+      filter: ['', Validators.required],
       alerts: this.buildAlertForm() 
     })
   }

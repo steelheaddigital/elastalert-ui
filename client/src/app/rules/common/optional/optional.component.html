@@ -1,6 +1,142 @@
 <div [formGroup]="optionalCommonForm">
-   <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.esHost.valid && !optionalCommonForm.controls.esHost.pristine}">
-      <label class="control-label" for="name">ES Host</label>
-      <input type="text" class="form-control" placeholder="ES Host" formControlName="esHost" />
-   </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.esHost.valid && !optionalCommonForm.controls.esHost.pristine}">
+        <label class="control-label" for="name">ES Host</label>
+        <input type="text" class="form-control" placeholder="ES Host" formControlName="esHost" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.esPort.valid && !optionalCommonForm.controls.esPort.pristine}">
+        <label class="control-label" for="name">ES Port</label>
+        <input type="text" class="form-control" placeholder="ES Port" formControlName="esPort" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.useStrFtimeIndex.valid && !optionalCommonForm.controls.useStrFtimeIndex.pristine}">
+        <label class="control-label" for="useStrFtimeIndex">Use strftime Index</label>
+        <input type="checkbox" formControlName="useStrFtimeIndex"/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.useSsl.valid && !optionalCommonForm.controls.useSsl.pristine}">
+        <label class="control-label" for="useSsl">Use SSL</label>
+        <input type="checkbox" formControlName="useSsl"/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.verifyCerts.valid && !optionalCommonForm.controls.verifyCerts.pristine}">
+        <label class="control-label" for="verifyCerts">Verify Certs</label>
+        <input type="checkbox" formControlName="verifyCerts"/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.esUsername.valid && !optionalCommonForm.controls.esUsername.pristine}">
+        <label class="control-label" for="name">ES Username</label>
+        <input type="text" class="form-control" placeholder="ES Username" formControlName="esUsername" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.esPassword.valid && !optionalCommonForm.controls.esPassword.pristine}">
+        <label class="control-label" for="name">ES Password</label>
+        <input type="password" class="form-control" placeholder="ES Password" formControlName="esPassword" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.esUrlPrefix.valid && !optionalCommonForm.controls.esUrlPrefix.pristine}">
+        <label class="control-label" for="name">ES URL Prefix</label>
+        <input type="text" class="form-control" placeholder="ES URL Prefix" formControlName="esUrlPrefix" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.esSendGetBodyAs.valid && !optionalCommonForm.controls.esSendGetBodyAs.pristine}">
+        <label class="control-label" for="name">ES Send Get Body As</label>
+        <input type="text" class="form-control" placeholder="Send Get Body As" formControlName="esSendGetBodyAs" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.aggregation.valid && !optionalCommonForm.controls.aggregation.pristine}">
+        <label class="control-label" for="name">Aggregation (Minutes)</label>
+        <input type="number" class="form-control" placeholder="Aggregation" formControlName="aggregation" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.description.valid && !optionalCommonForm.controls.description.pristine}">
+        <label class="control-label" for="name">Description</label>
+        <input type="text" class="form-control" placeholder="Description" formControlName="description" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.generateKibanaLink.valid && !optionalCommonForm.controls.generateKibanaLink.pristine}">
+        <label class="control-label" for="name">Generate Kibana Link</label>
+        <input type="checkbox" formControlName="generateKibanaLink" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.useKibanaDashboard.valid && !optionalCommonForm.controls.useKibanaDashboard.pristine}">
+        <label class="control-label" for="name">Use Kibana Dashboard</label>
+        <input type="text" class="form-control" placeholder="Use Kibana Dashboard" formControlName="useKibanaDashboard" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.kibanaUrl.valid && !optionalCommonForm.controls.kibanaUrl.pristine}">
+        <label class="control-label" for="name">Kibana URL</label>
+        <input type="text" class="form-control" placeholder="Kibana URL" formControlName="kibanaUrl" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.useKibana4Dashboard.valid && !optionalCommonForm.controls.useKibana4Dashboard.pristine}">
+        <label class="control-label" for="name">Use Kibana 4 Dashboard</label>
+        <input type="text" class="form-control" placeholder="Use Kibana 4 Dashboard" formControlName="useKibana4Dashboard" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.kibana4StartTimeDelta.valid && !optionalCommonForm.controls.kibana4StartTimeDelta.pristine}">
+        <label class="control-label" for="name">Kibana 4 Start Time Delta (Minutes)</label>
+        <input type="number" class="form-control" placeholder="Kibana 4 Start Time Delta" formControlName="kibana4StartTimeDelta" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.kibana4EndTimeDelta.valid && !optionalCommonForm.controls.kibana4EndTimeDelta.pristine}">
+        <label class="control-label" for="name">Kibana 4 End Time Delta (Minutes)</label>
+        <input type="number" class="form-control" placeholder="Kibana 4 End Time Delta" formControlName="kibana4EndTimeDelta" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.useLocalTime.valid && !optionalCommonForm.controls.useLocalTime.pristine}">
+        <label class="control-label" for="Use Local Time">Verify Certs</label>
+        <input type="checkbox" formControlName="useLocalTime"/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.realert.valid && !optionalCommonForm.controls.realert.pristine}">
+        <label class="control-label" for="name">Realert (Minutes)</label>
+        <input type="number" class="form-control" placeholder="Realert" formControlName="realert" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.exponentialRealert.valid && !optionalCommonForm.controls.exponentialRealert.pristine}">
+        <label class="control-label" for="name">Exponential Realert (Minutes)</label>
+        <input type="number" class="form-control" placeholder="Exponential Realert" formControlName="exponentialRealert" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.matchEnhancements.valid && !optionalCommonForm.controls.matchEnhancements.pristine}">
+        <label class="control-label" for="name">Match Enhancements (Comma-Seperated List)</label>
+        <input type="text" class="form-control" placeholder="Match Enhancements" formControlName="matchEnhancements" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.topCountNumber.valid && !optionalCommonForm.controls.topCountNumber.pristine}">
+        <label class="control-label" for="name">Top Count Number</label>
+        <input type="number" class="form-control" placeholder="Top Count Number" formControlName="topCountNumber" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.topCountKeys.valid && !optionalCommonForm.controls.topCountKeys.pristine}">
+        <label class="control-label" for="name">Top Count Keys (Comma-Seperated List)</label>
+        <input type="text" class="form-control" placeholder="Top Count Keys" formControlName="topCountKeys" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.rawCountKeys.valid && !optionalCommonForm.controls.rawCountKeys.pristine}">
+        <label class="control-label" for="name">Raw Count Keys</label>
+        <input type="checkbox" formControlName="rawCountKeys" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.include.valid && !optionalCommonForm.controls.include.pristine}">
+        <label class="control-label" for="name">Include (Comma-Seperated List)</label>
+        <input type="text" class="form-control" placeholder="Include" formControlName="include" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.maxQuerySize.valid && !optionalCommonForm.controls.maxQuerySize.pristine}">
+        <label class="control-label" for="name">Max Query Size</label>
+        <input type="number" class="form-control" placeholder="Max Query Size" formControlName="maxQuerySize" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.queryDelay.valid && !optionalCommonForm.controls.queryDelay.pristine}">
+        <label class="control-label" for="name">Query Delay</label>
+        <input type="number" class="form-control" placeholder="Query Delay" formControlName="queryDelay" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.owner.valid && !optionalCommonForm.controls.owner.pristine}">
+        <label class="control-label" for="name">Owner</label>
+        <input type="text" class="form-control" placeholder="Owner" formControlName="owner" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.priority.valid && !optionalCommonForm.controls.priority.pristine}">
+        <label class="control-label" for="name">Priority</label>
+        <input type="number" class="form-control" placeholder="Priority" formControlName="priority" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.useCountQuery.valid && !optionalCommonForm.controls.useCountQuery.pristine}">
+        <label class="control-label" for="name">Use Count Query</label>
+        <input type="checkbox" formControlName="useCountQuery" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.useTermsQuery.valid && !optionalCommonForm.controls.useTermsQuery.pristine}">
+        <label class="control-label" for="name">Use Terms Query</label>
+        <input type="checkbox" formControlName="useTermsQuery" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.bufferTime.valid && !optionalCommonForm.controls.bufferTime.pristine}">
+        <label class="control-label" for="name">Buffer Time (Minutes)</label>
+        <input type="number" class="form-control" placeholder="Buffer Time" formControlName="bufferTime" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.timestampType.valid && !optionalCommonForm.controls.timestampType.pristine}">
+        <label class="control-label" for="name">Time Stamp Type</label>
+        <input type="text" class="form-control" placeholder="Time Stamp Type" formControlName="timestampType" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.timestampFormat.valid && !optionalCommonForm.controls.timestampFormat.pristine}">
+        <label class="control-label" for="name">Time Stamp Format</label>
+        <input type="text" class="form-control" placeholder="Time Stamp Format" formControlName="timestampFormat" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls._sourceEnabled.valid && !optionalCommonForm.controls._sourceEnabled.pristine}">
+        <label class="control-label" for="name">_source Enabled</label>
+        <input type="checkbox" formControlName="_sourceEnabled" />
+    </div>
 </div>

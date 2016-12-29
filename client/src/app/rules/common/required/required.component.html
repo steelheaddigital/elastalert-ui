@@ -20,6 +20,13 @@
           Type is required
       </div>
    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !requiredCommonForm.controls.filter.valid && !requiredCommonForm.controls.filter.pristine}">
+      <label class="control-label" for="type">Filter</label>
+      <input type="text" class="form-control" placeholder="Filter" formControlName="filter" />
+      <div *ngIf="!requiredCommonForm.controls.filter.valid && requiredCommonForm.controls.filter.hasError('required') && !requiredCommonForm.controls.filter.pristine" class="alert alert-danger">
+          Filter is required
+      </div>
+   </div>
    <h2>Alerts</h2>
    <div formArrayName="alerts">
         <div *ngFor="let alert of requiredCommonForm.controls.alerts.controls; let i=index">
