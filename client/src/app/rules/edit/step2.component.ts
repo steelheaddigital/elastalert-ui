@@ -28,8 +28,10 @@ export class EditStep2Component extends MultistepFormClass implements OnInit, Af
           this.loadRule().subscribe(ruleData => {
             if(ruleData){
               let requiredComponent = this.resolveRequiredComponent(ruleData['type']);
-              let requiredComponentRef = this.required.createComponent(requiredComponent);
-              requiredComponentRef.instance.model = this.model;
+              if(requiredComponent) {
+                let requiredComponentRef = this.required.createComponent(requiredComponent);
+                requiredComponentRef.instance.model = this.model;
+              }
             }
           });
           break;
