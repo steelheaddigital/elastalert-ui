@@ -15,6 +15,8 @@ import { RequiredCommonComponent } from './rules/common/required/required.compon
 import { AlertComponent } from './rules/alert/alert.component';
 import { EmailComponent } from './rules/alert/email/email.component';
 import { OptionalComponent } from './rules/common/optional/optional.component';
+import { CreateComponent } from './rules/create/create.component';
+import { AnyComponent } from './rules/any/any.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,9 @@ import { OptionalComponent } from './rules/common/optional/optional.component';
       RequiredCommonComponent,
       AlertComponent,
       EmailComponent,
-      OptionalComponent
+      OptionalComponent,
+      CreateComponent,
+      AnyComponent
     ],
     imports:      [
         BrowserModule,

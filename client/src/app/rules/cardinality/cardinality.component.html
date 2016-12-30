@@ -1,5 +1,8 @@
 <form [formGroup]="cardinalityForm" (submit)="save()">
     <h1>Required Settings</h1>
+    <div formGroupName="commonRequiredForm">
+      <required-common [requiredGroup]="cardinalityForm.controls.commonRequiredForm" [model]="model"></required-common>
+    </div>
     <div class="form-group" [ngClass]="{ 'has-error' : !cardinalityForm.controls.timeFrame.valid && !cardinalityForm.controls.timeFrame.pristine}">
         <label class="control-label" for="type">Timeframe (Minutes)</label>
         <input type="text" class="form-control" placeholder="Timeframe" formControlName="timeFrame" />
@@ -14,10 +17,10 @@
             Filter is required
         </div>
     </div>
-    <div formGroupName="commonRequiredForm">
-      <required-common [requiredGroup]="cardinalityForm.controls.commonRequiredForm" [model]="model"></required-common>
-    </div>
     <h1>Optional Settings</h1>
+    <div formGroupName="commonOptionalForm">
+      <optional-common [optionalGroup]="cardinalityForm.controls.commonOptionalForm" [model]="model"></optional-common>
+    </div>
     <div class="form-group" [ngClass]="{ 'has-error' : !cardinalityForm.controls.queryKey.valid && !cardinalityForm.controls.queryKey.pristine}">
         <label class="control-label" for="name">Query Key</label>
         <input type="text" class="form-control" placeholder="Query Key" formControlName="queryKey" />
@@ -29,9 +32,6 @@
     <div class="form-group" [ngClass]="{ 'has-error' : !cardinalityForm.controls.minCardinality.valid && !cardinalityForm.controls.minCardinality.pristine}">
         <label class="control-label" for="name">Min Cardinality</label>
         <input type="number" class="form-control" placeholder="Min Cardinality" formControlName="minCardinality" />
-    </div>
-    <div formGroupName="commonOptionalForm">
-      <optional-common [optionalGroup]="cardinalityForm.controls.commonOptionalForm" [model]="model"></optional-common>
     </div>
     <div>
         <button type="submit" class="btn btn-inverse btn-lg btn-register"

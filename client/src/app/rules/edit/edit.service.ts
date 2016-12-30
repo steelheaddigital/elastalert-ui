@@ -1,13 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
-import { Observable, Subject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 import { RULE_PATH } from '../../shared/api';
 import { BaseService, IJsendResponse, JsonRequest } from '../../shared/base.service';
 
 @Injectable()
 export class EditService extends BaseService{ 
-  public model = {};
+  public model = { };
 
   constructor (private http: Http) {
     super();

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { BaseFormComponent, ValidationResult } from '../../../shared/base-form.component';
 import { Subscription }   from 'rxjs/Subscription';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'required-common',
@@ -26,7 +27,7 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
   ngOnInit() {
     this.requiredCommonForm.controls['index'].setValue(this.model['ruleData']['index']);
     this.requiredCommonForm.controls['name'].setValue(this.model['ruleData']['name']);
-    this.requiredCommonForm.controls['type'].setValue(this.model['ruleData']['type']);
+    this.requiredCommonForm.controls['type'].setValue(this.model['ruleData']['type'] );
     this.requiredCommonForm.controls['filter'].setValue(this.model['ruleData']['filter'][0]['query_string']['query']);
 
     let alerts: FormArray = this.requiredCommonForm.controls['alerts'] as FormArray
@@ -56,6 +57,14 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
     }));
     this.subscriptions.push(this.requiredCommonForm.controls['type'].valueChanges.subscribe(val => {
       this.model['ruleData']['type'] = val;
+    }));
+    this.subscriptions.push(this.requiredCommonForm.controls['filter'].valueChanges.subscribe(val => {
+      if (this.model['ruleData']['filter'] === undefined) {
+        this.model['ruleData']['filter'] = [{
+          'query_string': { }  
+        }];
+      }
+      this.model['ruleData']['filter'][0]['query_string']['query'] = val;
     }));
   }
 }
