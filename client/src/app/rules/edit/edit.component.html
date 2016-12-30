@@ -1,6 +1,19 @@
-<hr>
-<router-outlet></router-outlet>
-<hr>
-
-<button (click)="goToNextStep('backward')" [disabled]="stepIsFirstOrLast('backward')">Back</button>
-<button (click)="goToNextStep('forward')" [disabled]="!state.isValid || stepIsFirstOrLast('forward')">Forward</button> 
+<div class="row">
+    <div class="col-sm-12">
+        <form class="ui form" [formGroup]="editForm"> 
+            <div class="form-group">
+                <label for="rule">Select Rule</label>
+                <select id="rule" name="rule" [(ngModel)]="model.selectedRule" class="form-control" formControlName="ruleSelect" >
+                <option *ngFor="let rule of rules" [value]="rule">
+                    {{rule}}
+                </option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div #rule></div>
+    </div>
+</div>

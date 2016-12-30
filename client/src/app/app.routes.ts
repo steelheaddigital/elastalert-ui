@@ -20,17 +20,7 @@ export const routes: Routes = [
   },
   {
     path: 'rules/edit',
-    component: EditComponent,
-    children: [
-      {
-        path: 'step1',
-        component: EditStep1Component
-      },
-      {
-        path: 'step2',
-        component: EditStep2Component
-      }
-    ]
+    component: EditComponent
   }
 ];
 

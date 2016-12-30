@@ -2,29 +2,15 @@ import { Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
 import { Observable, Subject } from 'rxjs/Rx';
-import { MultistepService } from '../../shared/multistep/multistep.service';
 import { RULE_PATH } from '../../shared/api';
-import { IJsendResponse, JsonRequest } from '../../shared/base.service';
-
-export interface IState {
-
-  dirty: boolean,
-  isValid: boolean
-
-}
-
-export type IStepDirection = 'backward' | 'forward';
+import { BaseService, IJsendResponse, JsonRequest } from '../../shared/base.service';
 
 @Injectable()
-export class EditService extends MultistepService { 
+export class EditService extends BaseService{ 
+  public model = {};
 
-  constructor (public router: Router, private http: Http) { 
-    super(router)
-    this.baseRoute = '/rules/edit'
-    this.steps = [
-        'step1', 
-        'step2'
-    ]
+  constructor (private http: Http) {
+    super();
   };
 
   public ruleNames(): Observable<string[]> {

@@ -10,8 +10,6 @@ import { HomeComponent } from './home';
 import { CollapseModule } from 'ng2-bootstrap';
 import { GlobalConfigComponent } from './globalconfig/globalconfig.component';
 import { EditComponent } from './rules/edit/edit.component';
-import { EditStep1Component } from './rules/edit/step1.component';
-import { EditStep2Component } from './rules/edit/step2.component';
 import { CardinalityComponent } from './rules/cardinality/cardinality.component';
 import { RequiredCommonComponent } from './rules/common/required/required.component';
 import { AlertComponent } from './rules/alert/alert.component';
@@ -25,8 +23,6 @@ import { OptionalComponent } from './rules/common/optional/optional.component';
       HomeComponent,
       GlobalConfigComponent,
       EditComponent,
-      EditStep1Component,
-      EditStep2Component,
       CardinalityComponent,
       RequiredCommonComponent,
       AlertComponent,
@@ -44,7 +40,7 @@ import { OptionalComponent } from './rules/common/optional/optional.component';
     providers: [
         APP_ROUTER_PROVIDERS
     ],
-    entryComponents: [EditStep2Component, CardinalityComponent, AlertComponent, EmailComponent],
+    entryComponents: [CardinalityComponent, AlertComponent, EmailComponent],
     bootstrap:    [AppComponent],
 })
 export class AppModule {}

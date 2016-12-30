@@ -18,7 +18,7 @@
         <li [hidden]="isLoggedIn()"><a [routerLink]="['/login']">Login</a></li>
         <li [hidden]="!isLoggedIn()"><a href="#" (click)="logout($event)">Logout</a></li>-->
         <li><a [routerLink]="['/globalconfig']">Global Config</a></li>
-        <li><a [routerLink]="['/rules/edit/step1']">Edit Rules</a></li>
+        <li><a [routerLink]="['/rules/edit']">Edit Rules</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
