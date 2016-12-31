@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { RulesService } from '../rules.service';
 import { BaseFormComponent } from '../../shared/base-form.component';
@@ -12,10 +12,13 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class AnyComponent extends BaseFormComponent implements OnInit {
 
-    @Input()
+  @Input()
   model: Object;
 
-  cardinalityForm: FormGroup;
+  @Output()
+  typeUpdated = new EventEmitter();
+
+  anyForm: FormGroup;
   subscriptions: Array<Subscription> = new Array<Subscription>();
 
   constructor(protected builder: FormBuilder, private rulesService: RulesService) 
@@ -39,12 +42,16 @@ export class AnyComponent extends BaseFormComponent implements OnInit {
           alert("Rule Successfully Saved");
         },
         error => {
-          super.handleError(this.cardinalityForm, error);
+          super.handleError(this.anyForm, error);
         })
   }
 
+  public typeUpdate(type){
+    this.typeUpdated.emit(type);
+  }
+
   private buildForm(): void {
-    this.cardinalityForm = this.builder.group({
+    this.anyForm = this.builder.group({
       commonRequiredForm: this.rulesService.buildRequiredCommonForm(),
       commonOptionalForm: this.rulesService.buildOptionalCommonForm()
     });

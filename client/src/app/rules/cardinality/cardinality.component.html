@@ -1,7 +1,7 @@
 <form [formGroup]="cardinalityForm" (submit)="save()">
     <h1>Required Settings</h1>
     <div formGroupName="commonRequiredForm">
-      <required-common [requiredGroup]="cardinalityForm.controls.commonRequiredForm" [model]="model"></required-common>
+      <required-common [requiredGroup]="cardinalityForm.controls.commonRequiredForm" [model]="model" (typeUpdated)="typeUpdate($event)"></required-common>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error' : !cardinalityForm.controls.timeFrame.valid && !cardinalityForm.controls.timeFrame.pristine}">
         <label class="control-label" for="type">Timeframe (Minutes)</label>

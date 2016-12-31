@@ -1,7 +1,11 @@
 <div [formGroup]="requiredCommonForm">
-    <div class="form-group" [ngClass]="{ 'has-error' : !requiredCommonForm.controls.type.valid && !requiredCommonForm.controls.type.pristine}">
+    <div class="form-group">
         <label class="control-label" for="type">Type</label>
-        <input type="text" class="form-control" placeholder="Type" formControlName="type" />
+        <select id="type" name="type" class="form-control" formControlName="type" required >
+            <option *ngFor="let ruleType of ruleTypes" [value]="ruleType">
+                {{ruleType}}
+            </option>
+        </select>
         <div *ngIf="!requiredCommonForm.controls.type.valid && requiredCommonForm.controls.type.hasError('required') && !requiredCommonForm.controls.type.pristine" class="alert alert-danger">
             Type is required
         </div>

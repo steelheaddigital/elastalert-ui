@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { RulesService } from '../rules.service';
 import { BaseFormComponent } from '../../shared/base-form.component';
@@ -15,8 +15,12 @@ export class CardinalityComponent extends BaseFormComponent implements OnInit {
   @Input()
   model: Object;
 
+  @Output()
+  typeUpdated = new EventEmitter();
+
   cardinalityForm: FormGroup;
   subscriptions: Array<Subscription> = new Array<Subscription>();
+
 
   constructor(protected builder: FormBuilder, private rulesService: RulesService) 
   { 
@@ -46,6 +50,10 @@ export class CardinalityComponent extends BaseFormComponent implements OnInit {
         error => {
           super.handleError(this.cardinalityForm, error);
         })
+  }
+
+  public typeUpdate(type){
+    this.typeUpdated.emit(type);
   }
 
   private buildForm(): void {

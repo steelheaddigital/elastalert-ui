@@ -1,14 +1,12 @@
 import { Component, OnInit, Input , ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory} from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AlertService } from './alert.service';
 import { Observable } from 'rxjs/Observable';
 import { EmailComponent } from './email/email.component';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss'],
-  providers: [AlertService]
+  styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent implements OnInit {
   @Input('group') 
@@ -20,9 +18,11 @@ export class AlertComponent implements OnInit {
   @ViewChild('alertParent', {read: ViewContainerRef})
   alertParent: ViewContainerRef;
 
-  public alertTypes: string[];
+  public alertTypes: string[] = [
+    "email",
+  ]
 
-  constructor(private alertService: AlertService, private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -36,8 +36,6 @@ export class AlertComponent implements OnInit {
         break;
       }
     }, 1);
-
-    this.alertTypes = this.alertService.alertTypes;
   }
 
   private resolveAlertTypeComponent(alertType: string): ComponentFactory<any> {

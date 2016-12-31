@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { BaseFormComponent, ValidationResult } from '../../../shared/base-form.component';
 import { Subscription }   from 'rxjs/Subscription';
@@ -17,7 +17,15 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
   @Input()
   model: Object;
 
+  @Output()
+  typeUpdated = new EventEmitter();
+
   subscriptions: Array<Subscription> = new Array<Subscription>();
+
+  public ruleTypes: string[] = [
+    "cardinality",
+    "any"
+  ]
 
   constructor(private builder: FormBuilder) 
   { 
@@ -55,8 +63,11 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
     this.subscriptions.push(this.requiredCommonForm.controls['name'].valueChanges.subscribe(val => {
       this.model['ruleData']['name'] = val;
     }));
-    this.subscriptions.push(this.requiredCommonForm.controls['type'].valueChanges.subscribe(val => {
+    this.subscriptions.push(this.requiredCommonForm.controls['type'].valueChanges
+    .debounceTime(250)
+    .subscribe(val => {
       this.model['ruleData']['type'] = val;
+      this.typeUpdated.emit(val);
     }));
     this.subscriptions.push(this.requiredCommonForm.controls['filter'].valueChanges.subscribe(val => {
       if (this.model['ruleData']['filter'] === undefined) {

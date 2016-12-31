@@ -44,7 +44,7 @@ import { AnyComponent } from './rules/any/any.component';
     providers: [
         APP_ROUTER_PROVIDERS
     ],
-    entryComponents: [CardinalityComponent, AlertComponent, EmailComponent],
+    entryComponents: [CardinalityComponent, AnyComponent, AlertComponent, EmailComponent],
     bootstrap:    [AppComponent],
 })
 export class AppModule {}

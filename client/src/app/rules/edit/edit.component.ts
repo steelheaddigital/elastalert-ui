@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EditService } from './edit.service';
 import { Observable } from 'rxjs/Observable';
 import { CardinalityComponent } from '../cardinality/cardinality.component';
+import { AnyComponent } from '../any/any.component';
 
 @Component({
   templateUrl: './edit.component.html',
@@ -47,10 +48,11 @@ export class EditComponent implements OnInit {
         if(this.rule) {
           this.loadRule().subscribe(ruleData => {
             if(ruleData){
-              let requiredComponent = this.resolveRuleComponent(ruleData['type']);
-              if(requiredComponent) {
-                let requiredComponentRef = this.rule.createComponent(requiredComponent);
-                requiredComponentRef.instance.model = this.model;
+              let ruleComponent = this.resolveRuleComponent(ruleData['type']);
+              if(ruleComponent) {
+                let ruleComponentRef = this.rule.createComponent(ruleComponent);
+                ruleComponentRef.instance.model = this.model;
+                ruleComponentRef.instance.typeUpdated.subscribe(this.loadComponent.bind(this));
               }
             }
           });
@@ -73,8 +75,18 @@ export class EditComponent implements OnInit {
     switch (ruleType) {
       case 'cardinality':
         return this.componentFactoryResolver.resolveComponentFactory(CardinalityComponent);
+      case 'any':
+        return this.componentFactoryResolver.resolveComponentFactory(AnyComponent);
       default:
         return null;
     }
+  }
+
+  private loadComponent(type){
+    let ruleComponent = this.resolveRuleComponent(type);
+    this.rule.clear();
+    let ruleComponentRef = this.rule.createComponent(ruleComponent);
+    ruleComponentRef.instance.model = this.model;
+    ruleComponentRef.instance.typeUpdated.subscribe(this.loadComponent.bind(this));
   }
 }
