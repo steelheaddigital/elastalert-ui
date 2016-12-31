@@ -72,6 +72,12 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
     control.push(group);
   }
 
+  public removeAlert(index: number) {
+    let control = <FormArray>this.requiredCommonForm.controls['alerts'];
+    control.removeAt(index);
+    (this.model['ruleData']['alert'] as Array<string>).splice(index, 1);
+  }
+
   public alertTypeUpdate($event){
     alert("alert type updated. i=" + $event.index + " type=" + $event.type)
   }
