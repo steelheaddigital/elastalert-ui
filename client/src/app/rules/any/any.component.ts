@@ -53,11 +53,23 @@ export class AnyComponent extends BaseFormComponent implements OnInit {
   private buildForm(): void {
     this.anyForm = this.builder.group({
       commonRequiredForm: this.rulesService.buildRequiredCommonForm(),
-      commonOptionalForm: this.rulesService.buildOptionalCommonForm()
+      commonOptionalForm: this.rulesService.buildOptionalCommonForm(),
+      queryKey: '',
+      aggregationKey: '',
+      summaryTableFields: ''
     });
   }
 
   private bindControls() {
+    this.subscriptions.push(this.anyForm.controls['queryKey'].valueChanges.subscribe(val => {
+      this.model['ruleData']['query_key'] = val;
+    }));
+    this.subscriptions.push(this.anyForm.controls['aggregationKey'].valueChanges.subscribe(val => {
+      this.model['ruleData']['aggregation_key'] = val;
+    }));
+    this.subscriptions.push(this.anyForm.controls['summaryTableFields'].valueChanges.subscribe(val => {
+      this.model['ruleData']['summary_table_fields'] = (val as string).split(',');
+    }));
   }
 
 }

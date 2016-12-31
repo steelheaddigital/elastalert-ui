@@ -160,7 +160,7 @@ export class OptionalComponent implements OnInit {
       this.model['ruleData']['raw_count_keys'] = val;
     }));
     this.subscriptions.push(this.optionalCommonForm.controls['include'].valueChanges.subscribe(val => {
-      this.model['ruleData']['include'] = (val as string).split(',');;
+      this.model['ruleData']['include'] = (val as string).split(',');
     }));
     this.subscriptions.push(this.optionalCommonForm.controls['maxQuerySize'].valueChanges.subscribe(val => {
       this.model['ruleData']['max_query_size'] = val;
