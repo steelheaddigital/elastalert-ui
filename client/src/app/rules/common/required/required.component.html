@@ -32,11 +32,16 @@
         </div>
     </div>
     <h2>Alerts</h2>
-    <div formArrayName="alerts">
+    <div formArrayName="alerts" class="well">
         <div *ngFor="let alert of requiredCommonForm.controls.alerts.controls; let i=index">
             <div [formGroupName]="i" class="well">
                 <app-alert [group]="requiredCommonForm.controls.alerts.controls[i]" [model]="model"></app-alert>
             </div>
+        </div>
+        <div>
+            <a (click)="addAlert()" style="cursor: pointer">
+                Add another alert +
+            </a>
         </div>
     </div>
 </div>

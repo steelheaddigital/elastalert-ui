@@ -17,6 +17,7 @@ import { EmailComponent } from './rules/alert/email/email.component';
 import { OptionalComponent } from './rules/common/optional/optional.component';
 import { CreateComponent } from './rules/create/create.component';
 import { AnyComponent } from './rules/any/any.component';
+import { HipchatComponent } from './rules/alert/hipchat/hipchat.component';
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import { AnyComponent } from './rules/any/any.component';
       EmailComponent,
       OptionalComponent,
       CreateComponent,
-      AnyComponent
+      AnyComponent,
+      HipchatComponent
     ],
     imports:      [
         BrowserModule,
@@ -44,7 +46,7 @@ import { AnyComponent } from './rules/any/any.component';
     providers: [
         APP_ROUTER_PROVIDERS
     ],
-    entryComponents: [CardinalityComponent, AnyComponent, AlertComponent, EmailComponent],
+    entryComponents: [CardinalityComponent, AnyComponent, AlertComponent, EmailComponent, HipchatComponent],
     bootstrap:    [AppComponent],
 })
 export class AppModule {}

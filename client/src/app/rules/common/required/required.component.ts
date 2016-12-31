@@ -3,11 +3,13 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@ang
 import { BaseFormComponent, ValidationResult } from '../../../shared/base-form.component';
 import { Subscription }   from 'rxjs/Subscription';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { RulesService } from '../../rules.service';
 
 @Component({
   selector: 'required-common',
   templateUrl: './required.component.html',
-  styleUrls: ['./required.component.scss']
+  styleUrls: ['./required.component.scss'],
+  providers: [RulesService]
 })
 export class RequiredCommonComponent extends BaseFormComponent implements OnInit {
   
@@ -27,7 +29,7 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
     "any"
   ]
 
-  constructor(private builder: FormBuilder) 
+  constructor(private rulesService: RulesService, private builder: FormBuilder) 
   { 
     super();
   }
@@ -56,6 +58,15 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
     }
   }
 
+  public addAlert() {
+    let control = <FormArray>this.requiredCommonForm.controls['alerts'];
+    control.push(this.rulesService.buildAlertForm());
+  }
+
+  public alertTypeUpdate($event){
+    alert("alert type updated. i=" + $event.index + " type=" + $event.type)
+  }
+
   private bindControls() {
     this.subscriptions.push(this.requiredCommonForm.controls['index'].valueChanges.subscribe(val => {
       this.model['ruleData']['index'] = val;
@@ -63,9 +74,7 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
     this.subscriptions.push(this.requiredCommonForm.controls['name'].valueChanges.subscribe(val => {
       this.model['ruleData']['name'] = val;
     }));
-    this.subscriptions.push(this.requiredCommonForm.controls['type'].valueChanges
-    .debounceTime(250)
-    .subscribe(val => {
+    this.subscriptions.push(this.requiredCommonForm.controls['type'].valueChanges.subscribe(val => {
       this.model['ruleData']['type'] = val;
       this.typeUpdated.emit(val);
     }));

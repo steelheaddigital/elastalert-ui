@@ -72,16 +72,20 @@ export class RulesService extends BaseService {
       name: ['', Validators.required],
       type: ['', Validators.required],
       filter: ['', Validators.required],
-      alerts: this.buildAlertForm() 
+      alerts: this.buildAlertFormArray() 
     })
   }
 
-  public buildAlertForm() {
+  public buildAlertFormArray() {
     return this.builder.array([
-      this.builder.group({
-        type: ['', Validators.required]
-      })
-    ])
+      this.buildAlertForm()
+    ]);
+  }
+
+  public buildAlertForm(){
+    return this.builder.group({
+      type: ['', Validators.required]
+    })
   }
 
 }
