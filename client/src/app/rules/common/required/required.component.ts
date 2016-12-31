@@ -40,13 +40,18 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
     this.requiredCommonForm.controls['type'].setValue(this.model['ruleData']['type'] );
     this.requiredCommonForm.controls['filter'].setValue(this.model['ruleData']['filter'][0]['query_string']['query']);
 
+    let alertData = this.model['ruleData']['alert'];
     let alerts: FormArray = this.requiredCommonForm.controls['alerts'] as FormArray
-    for(let i = 0; i < alerts.length; i++){
+    for(let i = 0; i < alertData.length; i++){
       let group: FormGroup = alerts.controls[i] as FormGroup;
-      group.controls['type'].setValue(this.model['ruleData']['alert'][i]);
+      if(!group){
+        group = this.rulesService.buildAlertForm();
+        alerts.push(group);
+      }
+      group.controls['type'].setValue(alertData[i]);
       this.subscriptions.push(group.controls['type'].valueChanges.subscribe(val => {
         (this.model['ruleData']['alert'] as Array<string>)[i] = val;
-      }))
+      }));
     }
 
     this.bindControls();
@@ -60,7 +65,11 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
 
   public addAlert() {
     let control = <FormArray>this.requiredCommonForm.controls['alerts'];
-    control.push(this.rulesService.buildAlertForm());
+    let group: FormGroup = this.rulesService.buildAlertForm();
+    this.subscriptions.push(group.controls['type'].valueChanges.subscribe(val => {
+      (this.model['ruleData']['alert'] as Array<string>)[control.length - 1] = val;
+    }));
+    control.push(group);
   }
 
   public alertTypeUpdate($event){
