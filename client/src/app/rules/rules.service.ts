@@ -25,4 +25,21 @@ export class RulesService extends BaseService {
       })
       .catch(super.handleError);
   }
+
+  public ruleNames(): Observable<string[]> {
+    return this.http.get(RULE_PATH)
+      .map(result => {
+        var response: IJsendResponse = super.extractData(result)
+        let ruleNames = response.data as Array<string>;
+        return ruleNames;
+      });
+  }
+
+  public loadRule(ruleName: string): Observable<Object> {
+    return this.http.get(RULE_PATH + '/' + ruleName)
+      .map(result => {
+        var response: IJsendResponse = super.extractData(result)
+        return response.data;
+      })
+  }
 }
