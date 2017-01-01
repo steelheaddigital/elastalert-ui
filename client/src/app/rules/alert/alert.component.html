@@ -1,7 +1,7 @@
 <div [formGroup]="alertForm">
    <div class="form-group">
       <label class="control-label" for="type">Alert Type</label>
-      <select id="type" name="type" class="form-control" formControlName="type" required >
+      <select id="type" name="type" class="form-control" formControlName="type" >
         <option *ngFor="let alertType of alertTypes" [value]="alertType">
           {{alertType}}
         </option>

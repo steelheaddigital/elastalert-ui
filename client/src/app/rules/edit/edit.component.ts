@@ -21,7 +21,7 @@ export class EditComponent implements OnInit {
   @ViewChild('rule', {read: ViewContainerRef})
   rule: ViewContainerRef;
 
-  constructor (private editService: RulesService, private builder: FormBuilder, private componentFactoryResolver: ComponentFactoryResolver,) { 
+  constructor (private editService: RulesService, private builder: FormBuilder, private componentFactoryResolver: ComponentFactoryResolver) { 
   }
 
   ngOnInit() {
@@ -47,12 +47,7 @@ export class EditComponent implements OnInit {
         if(this.rule) {
           this.loadRule().subscribe(ruleData => {
             if(ruleData){
-              let ruleComponent = this.resolveRuleComponent(ruleData['type']);
-              if(ruleComponent) {
-                let ruleComponentRef = this.rule.createComponent(ruleComponent);
-                ruleComponentRef.instance.model = this.model;
-                ruleComponentRef.instance.typeUpdated.subscribe(this.loadComponent.bind(this));
-              }
+              this.loadComponent(ruleData['type'])
             }
           });
           break;
@@ -84,8 +79,10 @@ export class EditComponent implements OnInit {
   private loadComponent(type){
     let ruleComponent = this.resolveRuleComponent(type);
     this.rule.clear();
-    let ruleComponentRef = this.rule.createComponent(ruleComponent);
-    ruleComponentRef.instance.model = this.model;
-    ruleComponentRef.instance.typeUpdated.subscribe(this.loadComponent.bind(this));
+    if(ruleComponent) {
+      let ruleComponentRef = this.rule.createComponent(ruleComponent);
+      ruleComponentRef.instance.model = this.model;
+      ruleComponentRef.instance.typeUpdated.subscribe(this.loadComponent.bind(this));
+    }
   }
 }

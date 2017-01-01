@@ -38,7 +38,7 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
     this.requiredCommonForm.controls['index'].setValue(this.model['ruleData']['index']);
     this.requiredCommonForm.controls['name'].setValue(this.model['ruleData']['name']);
     this.requiredCommonForm.controls['type'].setValue(this.model['ruleData']['type'] );
-    this.requiredCommonForm.controls['filter'].setValue(this.model['ruleData']['filter'][0]['query_string']['query']);
+    this.requiredCommonForm.controls['filter'].setValue(this.model['ruleData']['filter'] !== undefined ? this.model['ruleData']['filter'][0]['query_string']['query'] : null);
 
     this.bindControls();
   }

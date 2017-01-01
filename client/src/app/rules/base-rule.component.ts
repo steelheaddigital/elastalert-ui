@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class BaseRuleComponent extends BaseFormComponent implements OnInit, OnDestroy {
 
   protected subscriptions: Array<Subscription> = new Array<Subscription>();
-  protected ruleForm: FormGroup
+  protected ruleForm: FormGroup;
 
   @Input()
   model: Object;
@@ -24,17 +24,19 @@ export class BaseRuleComponent extends BaseFormComponent implements OnInit, OnDe
     this.ruleForm.controls['alerts'] = this.buildAlertFormArray();
 
     let alertData = this.model['ruleData']['alert'];
-    let alerts: FormArray = this.ruleForm.controls['alerts'] as FormArray
-    for(let i = 0; i < alertData.length; i++){
-      let group: FormGroup = alerts.controls[i] as FormGroup;
-      if(!group){
-        group = this.buildAlertForm();
-        alerts.push(group);
+    if(alertData) {
+      let alerts: FormArray = this.ruleForm.controls['alerts'] as FormArray
+      for(let i = 0; i < alertData.length; i++){
+        let group: FormGroup = alerts.controls[i] as FormGroup;
+        if(!group){
+          group = this.buildAlertForm();
+          alerts.push(group);
+        }
+        group.controls['type'].setValue(alertData[i]);
+        this.subscriptions.push(group.controls['type'].valueChanges.subscribe(val => {
+          (this.model['ruleData']['alert'] as Array<string>)[i] = val;
+        }));
       }
-      group.controls['type'].setValue(alertData[i]);
-      this.subscriptions.push(group.controls['type'].valueChanges.subscribe(val => {
-        (this.model['ruleData']['alert'] as Array<string>)[i] = val;
-      }));
     }
   }
 
@@ -115,7 +117,7 @@ export class BaseRuleComponent extends BaseFormComponent implements OnInit, OnDe
 
   public buildAlertForm(){
     return this.builder.group({
-      type: ['', Validators.required]
+      type: ['email', Validators.required]
     })
   }
 }

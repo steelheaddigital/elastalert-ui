@@ -21,6 +21,7 @@ export class AnyComponent extends BaseRuleComponent implements OnInit {
     this.ruleForm.controls['queryKey'].setValue(this.model['ruleData']['query_key']);
     this.ruleForm.controls['aggregationKey'].setValue(this.model['ruleData']['aggregation_key']);
     this.ruleForm.controls['summaryTableFields'].setValue(this.model['ruleData']['summary_table_fields']);
+
     super.ngOnInit();
   }
 

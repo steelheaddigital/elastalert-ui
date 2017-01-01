@@ -2,8 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/index';
 import { GlobalConfigComponent } from './globalconfig/index';
 import { EditComponent } from './rules/edit/edit.component';
-import { EditStep1Component } from './rules/edit/step1.component';
-import { EditStep2Component } from './rules/edit/step2.component';
+import { CreateComponent } from './rules/create/create.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +20,11 @@ export const routes: Routes = [
   {
     path: 'rules/edit',
     component: EditComponent
+  }
+  ,
+  {
+    path: 'rules/create',
+    component: CreateComponent
   }
 ];
 

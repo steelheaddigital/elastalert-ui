@@ -19,12 +19,14 @@ export class CardinalityComponent extends BaseRuleComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
-    this.ruleForm.controls['timeFrame'].setValue(this.model['ruleData']['timeframe'] !== undefined ? this.model['ruleData']['timeframe']['minutes'] : null);
-    this.ruleForm.controls['cardinalityField'].setValue(this.model['ruleData']['cardinality_field']);
-    this.ruleForm.controls['queryKey'].setValue(this.model['ruleData']['query_key']);
-    this.ruleForm.controls['maxCardinality'].setValue(this.model['ruleData']['max_cardinality']);
-    this.ruleForm.controls['minCardinality'].setValue(this.model['ruleData']['min_cardinality']);
-    super.ngOnInit();
+    if(this.model['ruleData']){
+      this.ruleForm.controls['timeFrame'].setValue(this.model['ruleData']['timeframe'] !== undefined ? this.model['ruleData']['timeframe']['minutes'] : null);
+      this.ruleForm.controls['cardinalityField'].setValue(this.model['ruleData']['cardinality_field']);
+      this.ruleForm.controls['queryKey'].setValue(this.model['ruleData']['query_key']);
+      this.ruleForm.controls['maxCardinality'].setValue(this.model['ruleData']['max_cardinality']);
+      this.ruleForm.controls['minCardinality'].setValue(this.model['ruleData']['min_cardinality']);
+      super.ngOnInit();
+    }
   }
 
   private buildForm(): void {

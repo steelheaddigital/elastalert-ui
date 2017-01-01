@@ -29,7 +29,7 @@ export class EmailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.email.setValue((this.model['ruleData']['email'] as string[]).join(','));
+    this.email.setValue(this.model['ruleData']['email'] !== undefined ? (this.model['ruleData']['email']as string[]).join(',') : null);
     this.smtpHost.setValue((this.model['ruleData']['smtp_host']));
     this.smtpPort.setValue((this.model['ruleData']['smtp_port']));
     this.smtpSsl.setValue((this.model['ruleData']['smtpSsl']));
