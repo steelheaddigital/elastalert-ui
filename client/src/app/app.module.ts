@@ -18,6 +18,7 @@ import { OptionalComponent } from './rules/common/optional/optional.component';
 import { CreateComponent } from './rules/create/create.component';
 import { AnyComponent } from './rules/any/any.component';
 import { HipchatComponent } from './rules/alert/hipchat/hipchat.component';
+import { AlertsComponent } from './rules/alerts/alerts.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import { HipchatComponent } from './rules/alert/hipchat/hipchat.component';
       OptionalComponent,
       CreateComponent,
       AnyComponent,
-      HipchatComponent
+      HipchatComponent,
+      AlertsComponent
     ],
     imports:      [
         BrowserModule,

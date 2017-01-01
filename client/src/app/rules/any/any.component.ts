@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { RulesService } from '../rules.service';
-import { BaseFormComponent } from '../../shared/base-form.component';
-import { Subscription } from 'rxjs/Subscription';
+import { BaseRuleComponent } from '../base-rule.component';
 
 @Component({
   selector: 'app-any',
@@ -10,50 +9,25 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./any.component.scss'],
   providers: [RulesService]
 })
-export class AnyComponent extends BaseFormComponent implements OnInit {
+export class AnyComponent extends BaseRuleComponent implements OnInit {
 
-  @Input()
-  model: Object;
-
-  @Output()
-  typeUpdated = new EventEmitter();
-
-  anyForm: FormGroup;
-  subscriptions: Array<Subscription> = new Array<Subscription>();
-
-  constructor(protected builder: FormBuilder, private rulesService: RulesService) 
+  constructor(protected builder: FormBuilder, protected rulesService: RulesService) 
   { 
-    super();
+    super(builder, rulesService);
   }
 
   ngOnInit() {
     this.buildForm();
-  }
-
-  ngOnDestroy() {
-    for(let i = 0; i < this.subscriptions.length; i++){
-      this.subscriptions[i].unsubscribe();
-    }
-  }
-
-  public save() {
-    this.rulesService.save(this.model).subscribe(
-        result => {
-          alert("Rule Successfully Saved");
-        },
-        error => {
-          super.handleError(this.anyForm, error);
-        })
-  }
-
-  public typeUpdate(type){
-    this.typeUpdated.emit(type);
+    this.ruleForm.controls['queryKey'].setValue(this.model['ruleData']['query_key']);
+    this.ruleForm.controls['aggregationKey'].setValue(this.model['ruleData']['aggregation_key']);
+    this.ruleForm.controls['summaryTableFields'].setValue(this.model['ruleData']['summary_table_fields']);
+    super.ngOnInit();
   }
 
   private buildForm(): void {
-    this.anyForm = this.builder.group({
-      commonRequiredForm: this.rulesService.buildRequiredCommonForm(),
-      commonOptionalForm: this.rulesService.buildOptionalCommonForm(),
+    this.ruleForm = this.builder.group({
+      commonRequiredForm: this.buildRequiredCommonForm(),
+      commonOptionalForm: this.buildOptionalCommonForm(),
       queryKey: '',
       aggregationKey: '',
       summaryTableFields: ''
@@ -61,13 +35,13 @@ export class AnyComponent extends BaseFormComponent implements OnInit {
   }
 
   private bindControls() {
-    this.subscriptions.push(this.anyForm.controls['queryKey'].valueChanges.subscribe(val => {
+    this.subscriptions.push(this.ruleForm.controls['queryKey'].valueChanges.subscribe(val => {
       this.model['ruleData']['query_key'] = val;
     }));
-    this.subscriptions.push(this.anyForm.controls['aggregationKey'].valueChanges.subscribe(val => {
+    this.subscriptions.push(this.ruleForm.controls['aggregationKey'].valueChanges.subscribe(val => {
       this.model['ruleData']['aggregation_key'] = val;
     }));
-    this.subscriptions.push(this.anyForm.controls['summaryTableFields'].valueChanges.subscribe(val => {
+    this.subscriptions.push(this.ruleForm.controls['summaryTableFields'].valueChanges.subscribe(val => {
       this.model['ruleData']['summary_table_fields'] = (val as string).split(',');
     }));
   }

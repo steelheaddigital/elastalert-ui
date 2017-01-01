@@ -1,0 +1,20 @@
+<h2>Alerts</h2>
+<div [formGroup]="alertGroup">
+  <div formArrayName="alerts" class="well">
+      <div *ngFor="let alert of alertGroup.controls.alerts.controls; let i=index">
+          <div [formGroupName]="i" class="well">  
+              <div>
+                  <a class="pull-right" style="cursor: pointer" *ngIf="alertGroup.controls.alerts.controls.length > 1" (click)="removeAlert(i)">
+                      Remove
+                  </a>
+              </div>
+              <app-alert [group]="alertGroup.controls.alerts.controls[i]" [model]="model"></app-alert>
+          </div>
+      </div>
+      <div>
+          <a (click)="addAlert()" style="cursor: pointer">
+              Add another alert +
+          </a>
+      </div>
+  </div>
+</div>

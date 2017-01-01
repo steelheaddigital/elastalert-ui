@@ -1,27 +1,28 @@
-<form [formGroup]="anyForm" (submit)="save()">
+<form [formGroup]="ruleForm" (submit)="save()">
     <h1>Required Settings</h1>
     <div formGroupName="commonRequiredForm">
-      <required-common [requiredGroup]="anyForm.controls.commonRequiredForm" [model]="model" (typeUpdated)="typeUpdate($event)"></required-common>
+      <required-common [requiredGroup]="ruleForm.controls.commonRequiredForm" [model]="model" (typeUpdated)="typeUpdate($event)"></required-common>
     </div>
+    <app-alerts [alertGroup]="ruleForm" [model]="model"></app-alerts>
     <h1>Optional Settings</h1>
     <div formGroupName="commonOptionalForm">
-      <optional-common [optionalGroup]="anyForm.controls.commonOptionalForm" [model]="model"></optional-common>
+      <optional-common [optionalGroup]="ruleForm.controls.commonOptionalForm" [model]="model"></optional-common>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error' : !anyForm.controls.queryKey.valid && !anyForm.controls.queryKey.pristine}">
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.queryKey.valid && !ruleForm.controls.queryKey.pristine}">
         <label class="control-label" for="name">Query Key</label>
         <input type="text" class="form-control" placeholder="Query Key" formControlName="queryKey" />
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error' : !anyForm.controls.aggregationKey.valid && !anyForm.controls.aggregationKey.pristine}">
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.aggregationKey.valid && !ruleForm.controls.aggregationKey.pristine}">
         <label class="control-label" for="name">Aggregation Key</label>
         <input type="text" class="form-control" placeholder="Aggregation Key" formControlName="aggregationKey" />
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error' : !anyForm.controls.summaryTableFields.valid && !anyForm.controls.summaryTableFields.pristine}">
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.summaryTableFields.valid && !ruleForm.controls.summaryTableFields.pristine}">
         <label class="control-label" for="name">Summary Table Fields (Comma-Seperated)</label>
         <input type="text" class="form-control" placeholder="Summary Table Fields" formControlName="summaryTableFields" />
     </div>
     <div>
         <button type="submit" class="btn btn-inverse btn-lg btn-register"
-                [disabled]="!anyForm.valid">
+                [disabled]="!ruleForm.valid">
             Save
         </button>
     </div>
