@@ -2,6 +2,7 @@
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+import { ElastalertManager } from './elastalert/elastalert_manager';
 import * as express from 'express';
 import path = require('path');
 const jsend = require('jsend');
@@ -9,6 +10,9 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const exec = require('child_process').exec;
+const config = require('../config');
+const fs = require('fs');
 
 let app = express();
 
@@ -29,6 +33,10 @@ app.use(function(req, res, next) {
   res.status(404);
   next(err);
 });
+
+//start elastalert
+let elastalertManager = new ElastalertManager();
+elastalertManager.start();
 
 // error handlers
 

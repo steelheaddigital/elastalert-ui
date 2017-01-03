@@ -16,7 +16,7 @@ function compileServer(gulp, basePath) {
       }
     }))
     .pipe(sourcemaps.init())
-    .pipe(ts(tsProject))
+    .pipe(tsProject())
     .pipe(sourcemaps.write({sourceRoot: function (file) {
       var sourceFile = path.join(file.cwd + '/build/', file.sourceMap.file);
       return path.relative(path.dirname(sourceFile), file.cwd) + '/src/';
