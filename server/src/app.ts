@@ -10,9 +10,6 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const exec = require('child_process').exec;
-const config = require('../config');
-const fs = require('fs');
 
 let app = express();
 
@@ -26,6 +23,7 @@ app.use(jsend.middleware);
 // configure routes
 app.use('/api/globalconfig', require('./api/globalconfig'));
 app.use('/api/rule', require('./api/rule'));
+app.use('/api/elastalert', require('./api/elastalert'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

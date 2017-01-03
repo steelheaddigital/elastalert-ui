@@ -19,7 +19,7 @@ export class RulesService extends BaseService {
     let ruleName: string = model.selectedRule ? model.selectedRule : model.ruleData.name;
     let path = RULE_PATH + '/' + ruleName;
     
-    return this.http.put(path, request.body, request.options)
+    return this.http.post(path, request.body, request.options)
       .map(super.extractData)
       .map((res) => {
         let success = res.status === 'success';

@@ -9,7 +9,6 @@ var ruleController = new RuleController(ruleService);
 
 router.get('/', ruleController.ruleNames)
 router.get('/:rulename', ruleController.getRule);
-router.post('/', ruleController.create);
-router.put('/:rulename', ruleController.update)
+router.post('/:rulename', ruleController.save)
 
 module.exports = router;

@@ -23,16 +23,8 @@ export class RuleController{
       .catch(next);
   }
 
-  /* POST Save new rule */
-  public create = (req: Request, res: Response, next: NextFunction) => {
-    // this.globalConfigService.saveGlobalConfig(req.body).then(config => {
-    //   res.jsend.success(true);
-    // })
-    // .catch(next);
-  }
-
-  /* PUT Update rule */
-  public update = (req: Request, res: Response, next: NextFunction) => {
+  /* POST Update rule */
+  public save = (req: Request, res: Response, next: NextFunction) => {
     let ruleName = req.params.rulename;
     this.ruleService.saveRule(ruleName, req.body).then(config => {
       res.jsend.success(true);
