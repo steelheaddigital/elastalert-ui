@@ -3,10 +3,11 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as _ from 'lodash';
 import { BaseService } from '../common/base_service';
+import { ElastalertManager} from '../../elastalert/elastalert_manager';
 let config = require('../../../config');
 
 export class RuleService extends BaseService {
-  constructor(){
+  constructor(private elastalertManager: ElastalertManager){
     super();
   }
 
@@ -52,9 +53,10 @@ export class RuleService extends BaseService {
         let fileName = ruleName + '.yaml'
         fs.writeFile(path.join(rulesDirectory, fileName), yamlDoc, 'utf8', (err) => {
           if(err !== null) return reject(err);
-          resolve();
+          return this.elastalertManager.restart().then(() => {
+            resolve();
+          });
         });
-        resolve();
       });
     });
   }

@@ -1,14 +1,22 @@
 version: '2'
 services:
-  server:
-    command: ["gulp"]
-    links:
-     - db
+  # server:
+  #   command: ["gulp"]
+  #   links:
+  #    - elasticsearch
+  #   ports:
+  #    - "3000:3000"
+  #    - "5858:5858"
+  #    - "49152:49152"
+  #    - "4200:4200"
+  #   environment:
+  #     NODE_ENV: development
+  elasticsearch:
+    image: elasticsearch:latest
     ports:
-     - "3000:3000"
-     - "5858:5858"
-     - "49152:49152"
-     - "4200:4200"
+      - "9200:9200"
+      - "9300:9300"
     environment:
-      NODE_ENV: development
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+
 
