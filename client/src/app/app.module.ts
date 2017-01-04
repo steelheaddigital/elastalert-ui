@@ -6,8 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthHttp, AuthConfig, AUTH_PROVIDERS } from 'angular2-jwt';
 import { HttpModule, Http } from '@angular/http';
 import { NavbarComponent } from './shared/navbar';
+import { SidebarComponent } from './shared/sidebar';
 import { HomeComponent } from './home';
 import { CollapseModule } from 'ng2-bootstrap';
+import { FontAwesomeDirective } from 'ng2-fontawesome';
 import { GlobalConfigComponent } from './globalconfig/globalconfig.component';
 import { EditComponent } from './rules/edit/edit.component';
 import { CardinalityComponent } from './rules/cardinality/cardinality.component';
@@ -25,6 +27,7 @@ import { ElastalertControlComponent } from './dashboard/elastalert-control/elast
     declarations: [
       AppComponent, 
       NavbarComponent,
+      SidebarComponent,
       HomeComponent,
       GlobalConfigComponent,
       EditComponent,
@@ -37,7 +40,8 @@ import { ElastalertControlComponent } from './dashboard/elastalert-control/elast
       AnyComponent,
       HipchatComponent,
       AlertsComponent,
-      ElastalertControlComponent
+      ElastalertControlComponent,
+      FontAwesomeDirective
     ],
     imports:      [
         BrowserModule,
