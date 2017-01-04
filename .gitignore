@@ -1,3 +1,4 @@
 .vagrant
 .vscode
 .env
+ubuntu-xenial-*

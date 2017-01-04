@@ -19,6 +19,7 @@ import { CreateComponent } from './rules/create/create.component';
 import { AnyComponent } from './rules/any/any.component';
 import { HipchatComponent } from './rules/alert/hipchat/hipchat.component';
 import { AlertsComponent } from './rules/alerts/alerts.component';
+import { ElastalertControlComponent } from './dashboard/elastalert-control/elastalert-control.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { AlertsComponent } from './rules/alerts/alerts.component';
       CreateComponent,
       AnyComponent,
       HipchatComponent,
-      AlertsComponent
+      AlertsComponent,
+      ElastalertControlComponent
     ],
     imports:      [
         BrowserModule,

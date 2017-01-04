@@ -12,7 +12,7 @@ services:
   #   environment:
   #     NODE_ENV: development
   elasticsearch:
-    image: elasticsearch:latest
+    image: elasticsearch:2.4.3
     ports:
       - "9200:9200"
       - "9300:9300"
