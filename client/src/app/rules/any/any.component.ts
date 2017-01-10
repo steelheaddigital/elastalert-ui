@@ -6,8 +6,7 @@ import { BaseRuleComponent } from '../base-rule.component';
 @Component({
   selector: 'app-any',
   templateUrl: './any.component.html',
-  styleUrls: ['./any.component.scss'],
-  providers: [RulesService]
+  styleUrls: ['./any.component.scss']
 })
 export class AnyComponent extends BaseRuleComponent implements OnInit {
 
@@ -20,9 +19,10 @@ export class AnyComponent extends BaseRuleComponent implements OnInit {
     this.buildForm();
     this.ruleForm.controls['queryKey'].setValue(this.model['ruleData']['query_key']);
     this.ruleForm.controls['aggregationKey'].setValue(this.model['ruleData']['aggregation_key']);
-    this.ruleForm.controls['summaryTableFields'].setValue(this.model['ruleData']['summary_table_fields']);
-
+    this.ruleForm.controls['summaryTableFields'].setValue(this.model['ruleData']['summary_table_fields'] !== undefined ? (this.model['ruleData']['summary_table_fields'] as string[]).join(',') : null);
     super.ngOnInit();
+
+    this.bindControls();
   }
 
   private buildForm(): void {

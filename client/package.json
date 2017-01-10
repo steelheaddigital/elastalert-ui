@@ -54,12 +54,10 @@
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.0.2",
     "karma-remap-istanbul": "^0.2.1",
-    "karma-testdouble": "^1.0.2",
     "protractor": "4.0.9",
-    "testdouble": "^1.7.0",
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
-    "typemoq": "^0.3.2",
+    "typemoq": "^1.1.0",
     "typescript": "2.0.2"
   }
 }

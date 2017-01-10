@@ -3,13 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@ang
 import { BaseFormComponent, ValidationResult } from '../../../shared/base-form.component';
 import { Subscription }   from 'rxjs/Subscription';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { RulesService } from '../../rules.service';
 
 @Component({
   selector: 'required-common',
   templateUrl: './required.component.html',
-  styleUrls: ['./required.component.scss'],
-  providers: [RulesService]
+  styleUrls: ['./required.component.scss']
 })
 export class RequiredCommonComponent extends BaseFormComponent implements OnInit {
   
@@ -29,7 +27,7 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
     "any"
   ]
 
-  constructor(private rulesService: RulesService, private builder: FormBuilder) 
+  constructor(private builder: FormBuilder) 
   { 
     super();
   }

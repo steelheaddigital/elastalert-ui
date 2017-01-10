@@ -1,4 +1,4 @@
-import { Component, OnInit, ComponentFactoryResolver, ComponentFactory, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ComponentFactory, ViewChild, ViewContainerRef, ComponentRef } from '@angular/core';
 import { CardinalityComponent } from '../cardinality/cardinality.component';
 import { AnyComponent } from '../any/any.component';
 
@@ -9,26 +9,27 @@ import { AnyComponent } from '../any/any.component';
 })
 export class CreateComponent implements OnInit {
 
-  @ViewChild('rule', {read: ViewContainerRef})
-  rule: ViewContainerRef;
+  public ruleComponentRef: ComponentRef<any>;
 
   public model = {
     "ruleData": {
       type: 'any',
-     }
+    }
   };
+
+  @ViewChild('rule', {read: ViewContainerRef})
+  rule: ViewContainerRef;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      while(true) {
-        if(this.rule) {
-          this.loadComponent(this.model.ruleData.type);
-          break;
-        }
+    while(true) {
+      if(this.rule) {
+        console.log('loading rule')
+        this.loadComponent(this.model.ruleData.type);
+        break;
       }
-    }, 1);
+    }
   }
 
   private resolveRuleComponent(ruleType: string): ComponentFactory<any> {
@@ -46,9 +47,9 @@ export class CreateComponent implements OnInit {
     let ruleComponent = this.resolveRuleComponent(type);
     this.rule.clear();
     if(ruleComponent) {
-      let ruleComponentRef = this.rule.createComponent(ruleComponent);
-      ruleComponentRef.instance.model = this.model;
-      ruleComponentRef.instance.typeUpdated.subscribe(this.loadComponent.bind(this));
+      this.ruleComponentRef = this.rule.createComponent(ruleComponent);
+      this.ruleComponentRef.instance.model = this.model;
+      this.ruleComponentRef.instance.typeUpdated.subscribe(this.loadComponent.bind(this));
     }
   }
 

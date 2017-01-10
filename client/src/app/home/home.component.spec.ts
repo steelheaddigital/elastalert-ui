@@ -1,6 +1,4 @@
 /* tslint:disable:no-unused-variable */
-/// <reference path="../../../node_modules/@types/jasmine/index.d.ts" />
-
 import { By }           from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { async, inject } from '@angular/core/testing';

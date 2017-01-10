@@ -7,8 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-cardinality',
   templateUrl: './cardinality.component.html',
-  styleUrls: ['./cardinality.component.css'],
-  providers: [RulesService]
+  styleUrls: ['./cardinality.component.css']
 })
 export class CardinalityComponent extends BaseRuleComponent implements OnInit {
 
@@ -26,6 +25,8 @@ export class CardinalityComponent extends BaseRuleComponent implements OnInit {
       this.ruleForm.controls['maxCardinality'].setValue(this.model['ruleData']['max_cardinality']);
       this.ruleForm.controls['minCardinality'].setValue(this.model['ruleData']['min_cardinality']);
       super.ngOnInit();
+
+      this.bindControls();
     }
   }
 
@@ -43,10 +44,10 @@ export class CardinalityComponent extends BaseRuleComponent implements OnInit {
 
   private bindControls() {
     this.subscriptions.push(this.ruleForm.controls['timeFrame'].valueChanges.subscribe(val => {
-      if (this.model['ruleData']['time_frame'] === undefined) {
-        this.model['ruleData']['time_frame'] = { };
+      if (this.model['ruleData']['timerame'] === undefined) {
+        this.model['ruleData']['timeframe'] = { };
       }
-      this.model['ruleData']['time_frame']['minutes'] = val;
+      this.model['ruleData']['timeframe']['minutes'] = val;
     }));
     this.subscriptions.push(this.ruleForm.controls['cardinalityField'].valueChanges.subscribe(val => {
       this.model['ruleData']['cardinality_field'] = val;

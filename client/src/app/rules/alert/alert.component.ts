@@ -1,4 +1,4 @@
-import { Component, OnInit, Input , ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory} from '@angular/core';
+import { Component, OnInit, Input , ViewChild, ViewContainerRef, ComponentRef, ComponentFactoryResolver, ComponentFactory} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { EmailComponent } from './email/email.component';
@@ -19,6 +19,8 @@ export class AlertComponent implements OnInit {
   @ViewChild('alertParent', {read: ViewContainerRef})
   alertParent: ViewContainerRef;
 
+  public childComponentRef: ComponentRef<any>;
+
   public alertTypes: string[] = [
     "email",
     "hipchat"
@@ -27,27 +29,25 @@ export class AlertComponent implements OnInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      while(true) {
-        if(this.alertParent) {
-          let alertType = this.alertForm.controls['type'].value;
-          this.loadAlert(alertType);
-        }
-        break;
+    while(true) {
+      if(this.alertParent) {
+        let alertType = this.alertForm.controls['type'].value;
+        this.loadAlert(alertType);
       }
-    }, 1);
+      break;
+    }
 
     this.alertForm.controls['type'].valueChanges.subscribe(type => { 
       this.loadAlert(type);
     });
   }
 
-  public loadAlert(alertType: string){
+  private loadAlert(alertType: string){
     let childComponent = this.resolveAlertTypeComponent(alertType);
     if(childComponent) {
       this.alertParent.clear();
-      let componentRef = this.alertParent.createComponent(childComponent);
-      componentRef.instance.model = this.model;
+      this.childComponentRef = this.alertParent.createComponent(childComponent);
+      this.childComponentRef.instance.model = this.model;
     }
   }
 

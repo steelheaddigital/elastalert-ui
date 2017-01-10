@@ -7,7 +7,7 @@ import { Subscription }   from 'rxjs/Subscription';
   templateUrl: './optional.component.html',
   styleUrls: ['./optional.component.scss']
 })
-export class OptionalComponent implements OnInit {
+export class OptionalCommonComponent implements OnInit {
 
   @Input('optionalGroup')
   optionalCommonForm: FormGroup;
@@ -46,7 +46,7 @@ export class OptionalComponent implements OnInit {
     this.optionalCommonForm.controls['rawCountKeys'].setValue(this.model['ruleData']['raw_count_keys']);
     this.optionalCommonForm.controls['include'].setValue(this.model['ruleData']['include'] !== undefined ? (this.model['ruleData']['include'] as string[]).join(',') : null);
     this.optionalCommonForm.controls['maxQuerySize'].setValue(this.model['ruleData']['max_query_size']);
-    this.optionalCommonForm.controls['queryDelay'].setValue(this.model['ruleData']['query_delay']);
+    this.optionalCommonForm.controls['queryDelay'].setValue(this.model['ruleData']['query_delay'] !== undefined ? this.model['ruleData']['query_delay']['minutes'] : null);
     this.optionalCommonForm.controls['owner'].setValue(this.model['ruleData']['owner']);
     this.optionalCommonForm.controls['priority'].setValue(this.model['ruleData']['priority']);
     this.optionalCommonForm.controls['useCountQuery'].setValue(this.model['ruleData']['use_count_query'] as boolean);
@@ -166,7 +166,10 @@ export class OptionalComponent implements OnInit {
       this.model['ruleData']['max_query_size'] = val;
     }));
     this.subscriptions.push(this.optionalCommonForm.controls['queryDelay'].valueChanges.subscribe(val => {
-      this.model['ruleData']['query_delay'] = val;
+      if (this.model['ruleData']['query_delay'] === undefined) {
+        this.model['ruleData']['query_delay'] = { };
+      }
+      this.model['ruleData']['query_delay']['minutes'] = val;
     }));
     this.subscriptions.push(this.optionalCommonForm.controls['owner'].valueChanges.subscribe(val => {
       this.model['ruleData']['owner'] = val;

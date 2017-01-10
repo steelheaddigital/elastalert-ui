@@ -104,7 +104,7 @@
         <input type="number" class="form-control" placeholder="Max Query Size" formControlName="maxQuerySize" />
     </div>
     <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.queryDelay.valid && !optionalCommonForm.controls.queryDelay.pristine}">
-        <label class="control-label" for="name">Query Delay</label>
+        <label class="control-label" for="name">Query Delay (Minutes)</label>
         <input type="number" class="form-control" placeholder="Query Delay" formControlName="queryDelay" />
     </div>
     <div class="form-group" [ngClass]="{ 'has-error' : !optionalCommonForm.controls.owner.valid && !optionalCommonForm.controls.owner.pristine}">

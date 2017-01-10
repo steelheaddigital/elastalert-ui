@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BaseService, IJsendResponse, JsonRequest } from '../shared/base.service';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { RULE_PATH } from '../shared/api';
@@ -10,7 +9,7 @@ import { RULE_PATH } from '../shared/api';
 @Injectable()
 export class RulesService extends BaseService {
 
-  constructor(private http: Http, private builder: FormBuilder) {
+  constructor(private http: Http) {
     super();
    }
 

@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DebugElement, ComponentFactoryResolver } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { CreateComponent } from './create.component';
+import { EditComponent } from './edit.component';
 import { CardinalityComponent } from '../cardinality/cardinality.component'
 import { AnyComponent } from '../any/any.component';
 import { RequiredCommonComponent } from '../common/required/required.component';
@@ -19,15 +19,29 @@ import * as Rx from 'rxjs';
 
 
 describe('CreateComponent', () => {
-  let component: CreateComponent;
-  let fixture: ComponentFixture<CreateComponent>;
+  let component: EditComponent;
+  let fixture: ComponentFixture<EditComponent>;
   let rulesService: TypeMoq.IMock<RulesService>;
 
   beforeEach(async(() => {
     rulesService = TypeMoq.Mock.ofType(RulesService);
+    let ruleNames = [
+      'ruleName1',
+      'ruleName2'
+    ]
+    let rule = {
+      type: 'any'
+    }
+    rulesService.setup(x => x.ruleNames()).returns(() => new Rx.Observable<string[]>((observer: Rx.Subscriber<string[]>) => {
+      observer.next(ruleNames);
+    }));
+    rulesService.setup(x => x.loadRule(TypeMoq.It.isAnyString())).returns(() => new Rx.Observable<Object>((observer: Rx.Subscriber<Object>) => {
+      observer.next(rule);
+    }));
+
     TestBed.configureTestingModule({
       declarations: [
-        CreateComponent,
+        EditComponent,
         CardinalityComponent, 
         AnyComponent,
         OptionalCommonComponent,
@@ -61,7 +75,7 @@ describe('CreateComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateComponent);
+    fixture = TestBed.createComponent(EditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -69,10 +83,25 @@ describe('CreateComponent', () => {
   it('should create and initialize', () => {
     expect(component).toBeTruthy();
     expect(component.ruleComponentRef.componentType).toBe(AnyComponent);
+    expect(component.rules).toEqual([
+      'ruleName1',
+      'ruleName2'
+    ])
   });
 
   it('should update child component when rule type is changed', async(() => {
     component.ruleComponentRef.instance.typeUpdated.emit('cardinality');
     expect(component.ruleComponentRef.componentType).toBe(CardinalityComponent);
+  }));
+
+  it('should update rule when selected rule changes', async(() => {
+    rulesService.setup(x => x.loadRule(TypeMoq.It.isAnyString())).returns(() => new Rx.Observable<Object>((observer: Rx.Subscriber<Object>) => {
+      observer.next({type: 'cardinality'});
+    }));
+    
+    component.ruleSelect.setValue('ruleName2');
+    
+    expect(component.model['ruleData']).toEqual({type: 'cardinality'});
+    rulesService.verify(x => x.loadRule(TypeMoq.It.isValue<string>("ruleName2")), TypeMoq.Times.atLeastOnce())
   }));
 });

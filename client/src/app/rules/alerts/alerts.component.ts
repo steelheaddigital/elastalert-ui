@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { RulesService } from '../rules.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -18,7 +17,7 @@ export class AlertsComponent implements OnInit {
 
   protected subscriptions: Array<Subscription> = new Array<Subscription>();
 
-  constructor(protected builder: FormBuilder, protected rulesService: RulesService) { 
+  constructor(protected builder: FormBuilder) { 
   }
 
   ngOnInit() {

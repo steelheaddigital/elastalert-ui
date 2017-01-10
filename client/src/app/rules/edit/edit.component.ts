@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ViewContainerRef, ComponentRef, ComponentFactoryResolver, ComponentFactory } from '@angular/core';
 import { NgForm, FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RulesService } from '../rules.service';
@@ -7,8 +7,9 @@ import { CardinalityComponent } from '../cardinality/cardinality.component';
 import { AnyComponent } from '../any/any.component';
 
 @Component({
+  selector: 'app-edit',
   templateUrl: './edit.component.html',
-  providers: [RulesService]
+  styleUrls: ['./edit.component.scss']
 }) 
 
 export class EditComponent implements OnInit {
@@ -17,6 +18,7 @@ export class EditComponent implements OnInit {
   public rules: string[];
   public editForm: FormGroup
   public ruleSelect: FormControl;
+  public ruleComponentRef: ComponentRef<any>;
 
   @ViewChild('rule', {read: ViewContainerRef})
   rule: ViewContainerRef;
@@ -42,18 +44,16 @@ export class EditComponent implements OnInit {
   }
 
   private onSelectedRuleChanged() {
-    setTimeout(() => {
-      while(true) {
-        if(this.rule) {
-          this.loadRule().subscribe(ruleData => {
-            if(ruleData){
-              this.loadComponent(ruleData['type'])
-            }
-          });
-          break;
-        }
+    while(true) {
+      if(this.rule) {
+        this.loadRule().subscribe(ruleData => {
+          if(ruleData){
+            this.loadComponent(ruleData['type'])
+          }
+        });
+        break;
       }
-    }, 1);
+    }
   }
 
   private loadRule(): Observable<any> {
@@ -80,9 +80,9 @@ export class EditComponent implements OnInit {
     let ruleComponent = this.resolveRuleComponent(type);
     this.rule.clear();
     if(ruleComponent) {
-      let ruleComponentRef = this.rule.createComponent(ruleComponent);
-      ruleComponentRef.instance.model = this.model;
-      ruleComponentRef.instance.typeUpdated.subscribe(this.loadComponent.bind(this));
+      this.ruleComponentRef = this.rule.createComponent(ruleComponent);
+      this.ruleComponentRef.instance.model = this.model;
+      this.ruleComponentRef.instance.typeUpdated.subscribe(this.loadComponent.bind(this));
     }
   }
 }

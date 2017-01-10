@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class BaseRuleComponent extends BaseFormComponent implements OnInit, OnDestroy {
 
   protected subscriptions: Array<Subscription> = new Array<Subscription>();
-  protected ruleForm: FormGroup;
+  public ruleForm: FormGroup;
 
   @Input()
   model: Object;

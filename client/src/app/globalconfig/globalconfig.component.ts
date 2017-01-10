@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Http } from '@angular/http';
 import { GlobalConfigService, GlobalConfig } from './globalconfig.service';
 import { BaseFormComponent, ValidationResult } from '../shared/base-form.component'
 
 @Component({
   selector: 'app-globalconfig',
   templateUrl: './globalconfig.component.html',
-  styleUrls: ['./globalconfig.component.scss'],
-  providers: [GlobalConfigService]
+  styleUrls: ['./globalconfig.component.scss']
 })
 export class GlobalConfigComponent extends BaseFormComponent implements OnInit {
   globalConfigData: GlobalConfig;

@@ -5,28 +5,28 @@ import { routing, APP_ROUTER_PROVIDERS } from './app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthHttp, AuthConfig, AUTH_PROVIDERS } from 'angular2-jwt';
 import { HttpModule, Http } from '@angular/http';
-import { NavbarComponent } from './shared/navbar';
 import { SidebarComponent } from './shared/sidebar';
 import { HomeComponent } from './home';
 import { CollapseModule } from 'ng2-bootstrap';
-import { FontAwesomeDirective } from 'ng2-fontawesome';
 import { GlobalConfigComponent } from './globalconfig/globalconfig.component';
 import { EditComponent } from './rules/edit/edit.component';
 import { CardinalityComponent } from './rules/cardinality/cardinality.component';
 import { RequiredCommonComponent } from './rules/common/required/required.component';
 import { AlertComponent } from './rules/alert/alert.component';
 import { EmailComponent } from './rules/alert/email/email.component';
-import { OptionalComponent } from './rules/common/optional/optional.component';
+import { OptionalCommonComponent } from './rules/common/optional/optional.component';
 import { CreateComponent } from './rules/create/create.component';
 import { AnyComponent } from './rules/any/any.component';
 import { HipchatComponent } from './rules/alert/hipchat/hipchat.component';
 import { AlertsComponent } from './rules/alerts/alerts.component';
 import { ElastalertControlComponent } from './dashboard/elastalert-control/elastalert-control.component';
+import { GlobalConfigService } from './globalconfig/globalconfig.service';
+import { ElastalertControlService } from './dashboard/elastalert-control/elastalert-control.service';
+import { RulesService } from './rules/rules.service';
 
 @NgModule({
     declarations: [
       AppComponent, 
-      NavbarComponent,
       SidebarComponent,
       HomeComponent,
       GlobalConfigComponent,
@@ -35,13 +35,12 @@ import { ElastalertControlComponent } from './dashboard/elastalert-control/elast
       RequiredCommonComponent,
       AlertComponent,
       EmailComponent,
-      OptionalComponent,
+      OptionalCommonComponent,
       CreateComponent,
       AnyComponent,
       HipchatComponent,
       AlertsComponent,
-      ElastalertControlComponent,
-      FontAwesomeDirective
+      ElastalertControlComponent
     ],
     imports:      [
         BrowserModule,
@@ -52,9 +51,14 @@ import { ElastalertControlComponent } from './dashboard/elastalert-control/elast
         routing
     ],
     providers: [
-        APP_ROUTER_PROVIDERS
+        APP_ROUTER_PROVIDERS,
+        GlobalConfigService,
+        ElastalertControlService,
+        RulesService
     ],
     entryComponents: [CardinalityComponent, AnyComponent, AlertComponent, EmailComponent, HipchatComponent],
-    bootstrap:    [AppComponent],
+    bootstrap: [
+      AppComponent
+    ],
 })
 export class AppModule {}

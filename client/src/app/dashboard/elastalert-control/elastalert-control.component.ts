@@ -4,8 +4,7 @@ import { ElastalertControlService } from './elastalert-control.service'
 @Component({
   selector: 'elastalert-control',
   templateUrl: './elastalert-control.component.html',
-  styleUrls: ['./elastalert-control.component.scss'],
-  providers: [ElastalertControlService]
+  styleUrls: ['./elastalert-control.component.scss']
 })
 export class ElastalertControlComponent implements OnInit {
 
@@ -22,13 +21,13 @@ export class ElastalertControlComponent implements OnInit {
 
   public start() {
     this.controlService.start().subscribe(pid => {
-      alert("Elastalert successfully restarted with PID: " + pid)
+      alert("Elastalert successfully started with PID: " + pid)
     })
   }
 
    public stop() {
-    this.controlService.start().subscribe(pid => {
-      alert("Elastalert successfully restarted with PID: " + pid)
+    this.controlService.stop().subscribe(pid => {
+      alert("Elastalert successfully stopped for PID: " + pid)
     })
   }
 
