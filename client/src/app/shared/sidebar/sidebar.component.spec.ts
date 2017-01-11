@@ -1,28 +1,43 @@
-// /* tslint:disable:no-unused-variable */
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-// import { By } from '@angular/platform-browser';
-// import { DebugElement } from '@angular/core';
+/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+import { SidebarComponent } from './sidebar.component';
+import { routing, APP_ROUTER_PROVIDERS } from '../../app.routes';
+import { RouterTestingModule } from '@angular/router/testing';
 
-// import { SidebarComponent } from './sidebar.component';
+describe('SidebarComponent', () => {
+  let component: SidebarComponent;
+  let fixture: ComponentFixture<SidebarComponent>;
 
-// describe('SidebarComponent', () => {
-//   let component: SidebarComponent;
-//   let fixture: ComponentFixture<SidebarComponent>;
+  class MockRouter {
+    public currentPath: string
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ SidebarComponent ]
-//     })
-//     .compileComponents();
-//   }));
+    public navigate(path) {
+      this.currentPath = path
+    }
+  }
+  let mockRouter = new MockRouter();
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(SidebarComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ 
+        SidebarComponent
+      ],
+      imports: [
+        RouterTestingModule.withRoutes([])
+      ]
+    })
+    .compileComponents();
+  }));
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SidebarComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
