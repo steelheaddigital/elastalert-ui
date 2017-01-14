@@ -1,5 +1,5 @@
 import { BaseService } from '../common/base_service';
-import { ElastalertManager} from '../../elastalert/elastalert_manager'
+import { ElastalertManager} from '../common/elastalert_manager'
 let config = require('../../../config');
 
 export class ElastalertService extends BaseService {

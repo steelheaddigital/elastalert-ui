@@ -1,7 +1,7 @@
 import * as fs from 'fs';
+import * as winston from 'winston';
 const exec = require('child_process').exec;
-const config = require('../../config');
-
+const config = require('../../../config');
 
 export class ElastalertManager {
   pidFilePath = config.elastalertDir + '/pid';
@@ -20,22 +20,23 @@ export class ElastalertManager {
       pidFile.end();
     }
 
-    child.stdout.on('data', function(data) {
-      console.log('stdout: ' + data);
-    });
+    //for some reason elastalert writes everthing to stderr
     child.stderr.on('data', function(data) {
-      console.log('stdout: ' + data);
+      winston.info(data, {process: 'elastalert'})
     });
+    
     child.on('close', function(code) {
-      console.log('closing code: ' + code);
+      winston.log('info', code), {process: 'elastalert'};
       removePidFile();
     });
 
     process.on('SIGTERM', function() {
       removePidFile();
+      process.exit();
     });
     process.on('SIGINT', function() {
       removePidFile();
+      process.exit();
     });
 
     function removePidFile() {

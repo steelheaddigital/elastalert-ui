@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { ElastalertController } from './elastalert_controller';
 import { ElastalertService } from './elastalert_service';
-import { ElastalertManager } from '../../elastalert/elastalert_manager';
+import { ElastalertManager } from '../common/elastalert_manager';
 
 let router = express.Router();
 

@@ -1,12 +1,11 @@
 import * as express from 'express';
 import { RuleController } from './rule_controller';
 import { RuleService } from './rule_service';
-import { ElastalertManager} from '../../elastalert/elastalert_manager';
+import { ElastalertManager} from '../common/elastalert_manager';
 
 var router = express.Router();
 
-var elastalertManager = new ElastalertManager();
-var ruleService = new RuleService(elastalertManager);
+var ruleService = new RuleService(new ElastalertManager());
 var ruleController = new RuleController(ruleService);
 
 router.get('/', ruleController.ruleNames)

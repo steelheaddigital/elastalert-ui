@@ -2,7 +2,7 @@
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-import { ElastalertManager } from './elastalert/elastalert_manager';
+import { ElastalertManager } from './api/common/elastalert_manager';
 import * as express from 'express';
 import path = require('path');
 const jsend = require('jsend');
