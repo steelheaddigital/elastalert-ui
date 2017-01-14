@@ -23,21 +23,13 @@ export class BaseRuleComponent extends BaseFormComponent implements OnInit, OnDe
   ngOnInit() {
     this.ruleForm.controls['alerts'] = this.buildAlertFormArray();
 
-    let alertData = this.model['ruleData']['alert'];
-    if(alertData) {
-      let alerts: FormArray = this.ruleForm.controls['alerts'] as FormArray
-      for(let i = 0; i < alertData.length; i++){
-        let group: FormGroup = alerts.controls[i] as FormGroup;
-        if(!group){
-          group = this.buildAlertForm();
-          alerts.push(group);
-        }
-        group.controls['type'].setValue(alertData[i]);
-        this.subscriptions.push(group.controls['type'].valueChanges.subscribe(val => {
-          (this.model['ruleData']['alert'] as Array<string>)[i] = val;
-        }));
-      }
-    }
+    let alertData = this.model['ruleData']['alert'] as string[];
+    if(!alertData) {
+      alertData = ['email']
+      this.model['ruleData']['alert'] = alertData;
+    } 
+
+    this.setupAlerts(alertData)
   }
 
   ngOnDestroy() {
@@ -119,5 +111,22 @@ export class BaseRuleComponent extends BaseFormComponent implements OnInit, OnDe
     return this.builder.group({
       type: ['email', Validators.required]
     })
+  }
+
+  private setupAlerts(alertData: string[]){
+    if(alertData) {
+      let alerts: FormArray = this.ruleForm.controls['alerts'] as FormArray
+      for(let i = 0; i < alertData.length; i++){
+        let group: FormGroup = alerts.controls[i] as FormGroup;
+        if(!group){
+          group = this.buildAlertForm();
+          alerts.push(group);
+        }
+        group.controls['type'].setValue(alertData[i]);
+        this.subscriptions.push(group.controls['type'].valueChanges.subscribe(val => {
+          (this.model['ruleData']['alert'] as Array<string>)[i] = val;
+        }));
+      }
+    }
   }
 }

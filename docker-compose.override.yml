@@ -1,16 +1,16 @@
 version: '2'
 services:
-  # server:
-  #   command: ["gulp"]
-  #   links:
-  #    - elasticsearch
-  #   ports:
-  #    - "3000:3000"
-  #    - "5858:5858"
-  #    - "49152:49152"
-  #    - "4200:4200"
-  #   environment:
-  #     NODE_ENV: development
+  server:
+    command: ["gulp"]
+    links:
+     - elasticsearch
+    ports:
+     - "3000:3000"
+     - "5858:5858"
+     - "49152:49152"
+     - "4200:4200"
+    environment:
+      NODE_ENV: development
   elasticsearch:
     image: elasticsearch:2.4.3
     ports:

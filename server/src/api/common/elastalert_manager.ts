@@ -52,7 +52,13 @@ export class ElastalertManager {
     return new Promise( (resolve,reject) => {
       fs.readFile(this.pidFilePath, 'utf8', (err,data) => {
         let pid: number = <number><any>data;
-        process.kill(pid, 'SIGTERM');
+        try {
+           process.kill(pid, 'SIGTERM');
+        } 
+        catch(TypeError) {
+          winston.warn('attempted to stop elastalert, but pid' + pid + 'was not valid');
+        }
+       
         resolve(pid)       
       });
     });

@@ -26,7 +26,7 @@ export class BaseService {
   public getConfigPath(): string {
     let configPath: string = path.join(config.elastalertDir, 'config.yaml');
     if(!fs.existsSync(configPath)){
-      configPath = config.elastalertDir + 'config.yaml.example';
+      configPath = path.join(config.elastalertDir + 'config.yaml.example');
     }
 
     return configPath

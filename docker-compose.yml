@@ -1,11 +1,12 @@
 version: '2'
-# services:
-#   server:
-#     build:
-#       context: ./
-#       dockerfile: docker/server/Dockerfile
-#     image: 'server:latest'
-#     restart: always
-#     volumes:
-#      - ./server:/opt/app/server
-#      - /opt/app/server/node_modules
+services:
+  server:
+    build:
+      context: ./
+      dockerfile: docker/server/Dockerfile
+    image: 'server:latest'
+    restart: always
+    volumes:
+     - ./server:/opt/app/server
+     - /opt/app/server/node_modules
+     - ./elastalert:/opt/elastalert
