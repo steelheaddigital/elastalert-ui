@@ -40,7 +40,7 @@ export class ElastalertManager {
     });
 
     function removePidFile() {
-      fs.unlink(config.elastalertDir + '/pid', function (err) {
+      fs.unlink(config.elastalertDir + '/pid', (err) => {
         console.log(err);
       });
     }
@@ -49,21 +49,17 @@ export class ElastalertManager {
   }
 
   public stop(): Promise<number> {
-    return new Promise( (resolve,reject) => {
+    return new Promise((resolve,reject) => {
       fs.readFile(this.pidFilePath, 'utf8', (err,data) => {
         let pid: number = <number><any>data;
-        try {
-           process.kill(pid, 'SIGTERM');
-        } 
-        catch(TypeError) {
-          winston.warn('attempted to stop elastalert, but pid' + pid + 'was not valid');
-        }
-       
-        resolve(pid)       
+        process.kill(pid, 'SIGTERM');
+        fs.unlink(config.elastalertDir + '/pid', (err) => {
+          resolve(pid);
+        });
       });
     });
   }
-
+  
   public restart(): Promise<number> {
     return new Promise( (resolve,reject) => {
       return this.stop().then(oldPid => {

@@ -8,5 +8,8 @@ dist/
 venv/
 docs/build/
 build/
+pid
 
-my_rules
+rules
+!rules/.keep
+
