@@ -30,18 +30,22 @@ export class ElastalertManager {
       removePidFile();
     });
 
-    process.on('SIGTERM', function() {
-      removePidFile();
-      process.exit();
+    process.on('SIGTERM', () => {
+      this.removePidFile().then(() => {
+        process.exit();
+      });
     });
-    process.on('SIGINT', function() {
-      removePidFile();
-      process.exit();
+    process.on('SIGINT', () => {
+      this.removePidFile().then(() => {
+        process.exit();
+      });
     });
 
     function removePidFile() {
       fs.unlink(config.elastalertDir + '/pid', (err) => {
-        console.log(err);
+        if(err && err.message){
+          winston.error(err.message);
+        }
       });
     }
 
@@ -53,9 +57,10 @@ export class ElastalertManager {
       fs.readFile(this.pidFilePath, 'utf8', (err,data) => {
         let pid: number = <number><any>data;
         process.kill(pid, 'SIGTERM');
-        fs.unlink(config.elastalertDir + '/pid', (err) => {
+
+        return this.removePidFile().then(() => {
           resolve(pid);
-        });
+        })
       });
     });
   }
@@ -72,6 +77,15 @@ export class ElastalertManager {
             },1)
           }
         },1)
+      });
+    });
+  }
+
+  private removePidFile(): Promise<any> {
+    return new Promise((resolve,reject) => {
+      fs.unlink(config.elastalertDir + '/pid', (err) => {
+        if(err) { reject(err) }
+        resolve();
       });
     });
   }

@@ -27,7 +27,7 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
     "any"
   ]
 
-  constructor(private builder: FormBuilder) 
+  constructor(private builder: FormBuilder)
   { 
     super();
   }
@@ -52,6 +52,7 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
       this.model['ruleData']['index'] = val;
     }));
     this.subscriptions.push(this.requiredCommonForm.controls['name'].valueChanges.subscribe(val => {
+      this.model['previousRuleName'] = this.model['ruleData']['name'];
       this.model['ruleData']['name'] = val;
     }));
     this.subscriptions.push(this.requiredCommonForm.controls['type'].valueChanges.subscribe(val => {

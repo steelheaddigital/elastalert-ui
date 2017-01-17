@@ -16,17 +16,18 @@ export class RuleController{
 
   /* GET rules */
   public getRule = (req: Request, res: Response, next: NextFunction) => {
-      let ruleName = req.params.rulename;
-      this.ruleService.getRule(ruleName).then(rule => {
-          res.jsend.success(rule);
-      })
-      .catch(next);
+    let ruleName = req.params.rulename;
+    this.ruleService.getRule(ruleName).then(rule => {
+      res.jsend.success(rule);
+    })
+    .catch(next);
   }
 
   /* POST Update rule */
   public save = (req: Request, res: Response, next: NextFunction) => {
     let ruleName = req.params.rulename;
-    this.ruleService.saveRule(ruleName, req.body).then(config => {
+    let prevRuleName = req.query.prevrulename
+    this.ruleService.saveRule(ruleName, req.body, prevRuleName).then(() => {
       res.jsend.success(true);
     })
     .catch(next);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseService, IJsendResponse, JsonRequest } from '../shared/base.service';
-import { Http, Response } from '@angular/http';
+import { Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -11,11 +11,16 @@ export class RulesService extends BaseService {
 
   constructor(private http: Http) {
     super();
-   }
+  }
 
   public save(model): Observable<boolean> {
     let request = super.BuildJsonRequest(model.ruleData);
-    let ruleName: string = model.selectedRule ? model.selectedRule : model.ruleData.name;
+    if(model.previousRuleName){
+      let params: URLSearchParams = new URLSearchParams();
+      params.set('prevrulename', model.previousRuleName);
+      request.options.search = params;
+    }
+    let ruleName: string = model.ruleData.name;
     let path = RULE_PATH + '/' + ruleName;
     
     return this.http.post(path, request.body, request.options)
