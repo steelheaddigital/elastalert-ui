@@ -23,6 +23,7 @@ import { ElastalertControlComponent } from './dashboard/elastalert-control/elast
 import { GlobalConfigService } from './globalconfig/globalconfig.service';
 import { ElastalertControlService } from './dashboard/elastalert-control/elastalert-control.service';
 import { RulesService } from './rules/rules.service';
+import { BlacklistComponent } from './rules/blacklist/blacklist.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import { RulesService } from './rules/rules.service';
       AnyComponent,
       HipchatComponent,
       AlertsComponent,
-      ElastalertControlComponent
+      ElastalertControlComponent,
+      BlacklistComponent
     ],
     imports:      [
         BrowserModule,
@@ -56,7 +58,7 @@ import { RulesService } from './rules/rules.service';
         ElastalertControlService,
         RulesService
     ],
-    entryComponents: [CardinalityComponent, AnyComponent, AlertComponent, EmailComponent, HipchatComponent],
+    entryComponents: [CardinalityComponent, AnyComponent, BlacklistComponent, AlertComponent, EmailComponent, HipchatComponent],
     bootstrap: [
       AppComponent
     ],

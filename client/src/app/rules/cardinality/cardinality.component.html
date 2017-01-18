@@ -7,14 +7,14 @@
         <label class="control-label" for="type">Timeframe (Minutes)</label>
         <input type="text" class="form-control" placeholder="Timeframe" formControlName="timeFrame" />
         <div *ngIf="!ruleForm.controls.timeFrame.valid && ruleForm.controls.timeFrame.hasError('required') && !ruleForm.controls.timeFrame.pristine" class="alert alert-danger">
-            Filter is required
+            Timeframe is required
         </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.cardinalityField.valid && !ruleForm.controls.cardinalityField.pristine}">
         <label class="control-label" for="type">Cardinality Field</label>
         <input type="text" class="form-control" placeholder="Cardinality Field" formControlName="cardinalityField" />
         <div *ngIf="!ruleForm.controls.cardinalityField.valid && ruleForm.controls.cardinalityField.hasError('required') && !ruleForm.controls.cardinalityField.pristine" class="alert alert-danger">
-            Filter is required
+            Cardinality Field is required
         </div>
     </div>
     <app-alerts [alertGroup]="ruleForm" [model]="model"></app-alerts>

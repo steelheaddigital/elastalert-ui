@@ -24,7 +24,8 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
 
   public ruleTypes: string[] = [
     "cardinality",
-    "any"
+    "any",
+    "blacklist"
   ]
 
   constructor(private builder: FormBuilder)

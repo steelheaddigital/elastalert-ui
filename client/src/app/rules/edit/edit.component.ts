@@ -5,6 +5,7 @@ import { RulesService } from '../rules.service';
 import { Observable } from 'rxjs/Observable';
 import { CardinalityComponent } from '../cardinality/cardinality.component';
 import { AnyComponent } from '../any/any.component';
+import { BlacklistComponent } from '../blacklist/blacklist.component';
 
 @Component({
   selector: 'app-edit',
@@ -71,6 +72,8 @@ export class EditComponent implements OnInit {
         return this.componentFactoryResolver.resolveComponentFactory(CardinalityComponent);
       case 'any':
         return this.componentFactoryResolver.resolveComponentFactory(AnyComponent);
+      case 'blacklist':
+        return this.componentFactoryResolver.resolveComponentFactory(BlacklistComponent);
       default:
         return null;
     }

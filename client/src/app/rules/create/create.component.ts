@@ -1,6 +1,7 @@
 import { Component, OnInit, ComponentFactoryResolver, ComponentFactory, ViewChild, ViewContainerRef, ComponentRef } from '@angular/core';
 import { CardinalityComponent } from '../cardinality/cardinality.component';
 import { AnyComponent } from '../any/any.component';
+import { BlacklistComponent } from '../blacklist/blacklist.component';
 
 @Component({
   selector: 'app-create',
@@ -25,7 +26,6 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
     while(true) {
       if(this.rule) {
-        console.log('loading rule')
         this.loadComponent(this.model.ruleData.type);
         break;
       }
@@ -38,6 +38,8 @@ export class CreateComponent implements OnInit {
         return this.componentFactoryResolver.resolveComponentFactory(CardinalityComponent);
       case 'any':
         return this.componentFactoryResolver.resolveComponentFactory(AnyComponent);
+      case 'blacklist':
+        return this.componentFactoryResolver.resolveComponentFactory(BlacklistComponent);
       default:
         return null;
     }

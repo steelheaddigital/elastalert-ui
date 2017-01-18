@@ -89,10 +89,43 @@ describe('RulesService', () => {
       inject([RulesService, MockBackend], fakeAsync((rulesService:RulesService, mockBackend:MockBackend) => {
         let result: Object;
         let model = {
+          ruleData: {
+            type: 'any',
+            name: 'testRule'
+          },
           selectedRule: 'testRule'
         }
         mockBackend.connections.subscribe((c: MockConnection) => {
           expect(c.request.url).toBe(RULE_PATH + '/' + 'testRule');
+          let mockResponseBody: IJsendResponse = {
+            status: 'success',
+            data: { },
+            message: ''
+          };
+          let response = new ResponseOptions({body: JSON.stringify(mockResponseBody)});
+          c.mockRespond(new Response(response));
+        });
+        rulesService.save(model).subscribe(response => {
+          result = response;
+        });
+        tick();
+        expect(result).toBe(true);
+      })
+    ))
+
+    it('should save rule data when name changes',
+      inject([RulesService, MockBackend], fakeAsync((rulesService:RulesService, mockBackend:MockBackend) => {
+        let result: Object;
+        let model = {
+          ruleData: {
+            type: 'any',
+            name: 'testRule'
+          },
+          selectedRule: 'testRule',
+          previousRuleName: 'previousRuleName'
+        }
+        mockBackend.connections.subscribe((c: MockConnection) => {
+          expect(c.request.url).toBe(RULE_PATH + '/' + 'testRule?prevrulename=previousRuleName');
           let mockResponseBody: IJsendResponse = {
             status: 'success',
             data: { },

@@ -1,0 +1,31 @@
+<form [formGroup]="ruleForm" (submit)="save()">
+    <h1>Required Settings</h1>
+    <div formGroupName="commonRequiredForm">
+      <required-common [requiredGroup]="ruleForm.controls.commonRequiredForm" [model]="model" (typeUpdated)="typeUpdate($event)"></required-common>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.compareKey.valid && !ruleForm.controls.compareKey.pristine}">
+        <label class="control-label" for="type">Compare Key</label>
+        <input type="text" class="form-control" placeholder="Compare Key" formControlName="compareKey" />
+        <div *ngIf="!ruleForm.controls.compareKey.valid && ruleForm.controls.compareKey.hasError('required') && !ruleForm.controls.compareKey.pristine" class="alert alert-danger">
+            Compare Key is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.blacklist.valid && !ruleForm.controls.blacklist.pristine}">
+        <label class="control-label" for="type">Blacklist (Comma-Seperated)</label>
+        <input type="text" class="form-control" placeholder="Blacklist" formControlName="blacklist" />
+        <div *ngIf="!ruleForm.controls.blacklist.valid && ruleForm.controls.blacklist.hasError('required') && !ruleForm.controls.blacklist.pristine" class="alert alert-danger">
+            Blacklist is required
+        </div>
+    </div>
+    <app-alerts [alertGroup]="ruleForm" [model]="model"></app-alerts>
+    <h1>Optional Settings</h1>
+    <div formGroupName="commonOptionalForm">
+      <optional-common [optionalGroup]="ruleForm.controls.commonOptionalForm" [model]="model"></optional-common>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-inverse btn-lg btn-register"
+                [disabled]="!ruleForm.valid">
+            Save
+        </button>
+    </div>
+</form>
