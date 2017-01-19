@@ -2,6 +2,8 @@ import { Component, OnInit, ComponentFactoryResolver, ComponentFactory, ViewChil
 import { CardinalityComponent } from '../cardinality/cardinality.component';
 import { AnyComponent } from '../any/any.component';
 import { BlacklistComponent } from '../blacklist/blacklist.component';
+import { WhitelistComponent } from '../whitelist/whitelist.component';
+import { ChangeComponent } from '../change/change.component';
 
 @Component({
   selector: 'app-create',
@@ -40,6 +42,10 @@ export class CreateComponent implements OnInit {
         return this.componentFactoryResolver.resolveComponentFactory(AnyComponent);
       case 'blacklist':
         return this.componentFactoryResolver.resolveComponentFactory(BlacklistComponent);
+      case 'whitelist':
+        return this.componentFactoryResolver.resolveComponentFactory(WhitelistComponent);
+      case 'change':
+        return this.componentFactoryResolver.resolveComponentFactory(ChangeComponent);
       default:
         return null;
     }

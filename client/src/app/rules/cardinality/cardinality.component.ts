@@ -44,7 +44,7 @@ export class CardinalityComponent extends BaseRuleComponent implements OnInit {
 
   private bindControls() {
     this.subscriptions.push(this.ruleForm.controls['timeFrame'].valueChanges.subscribe(val => {
-      if (this.model['ruleData']['timerame'] === undefined) {
+      if (this.model['ruleData']['timeframe'] === undefined) {
         this.model['ruleData']['timeframe'] = { };
       }
       this.model['ruleData']['timeframe']['minutes'] = val;

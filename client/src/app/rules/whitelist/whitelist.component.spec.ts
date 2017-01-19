@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DebugElement } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
-import { BlacklistComponent } from './blacklist.component';
+import { WhitelistComponent } from './whitelist.component';
 import { OptionalCommonComponent } from '../common/optional/optional.component';
 import { RequiredCommonComponent } from '../common/required/required.component';
 import { AlertsComponent } from '../alerts/alerts.component';
@@ -16,21 +16,22 @@ import * as TypeMoq from "typemoq";
 import * as Rx from 'rxjs';
 
 
-describe('BlacklistComponent', () => {
-  let component: BlacklistComponent;
+describe('WhitelistComponent', () => {
+  let component: WhitelistComponent;
   let rulesService: TypeMoq.IMock<RulesService>;
-  let fixture: ComponentFixture<BlacklistComponent>;
+  let fixture: ComponentFixture<WhitelistComponent>;
   let model = {
       ruleData: { 
         compare_key: 'testCompareKey',
-        blacklist: ['test1','test2']
+        whitelist: ['test1','test2'],
+        ignore_null: true
       }
   }
   beforeEach(async(() => {
     rulesService = TypeMoq.Mock.ofType(RulesService);
     TestBed.configureTestingModule({
       declarations: [
-          BlacklistComponent,
+          WhitelistComponent,
           OptionalCommonComponent,
           RequiredCommonComponent,
           AlertsComponent,
@@ -58,7 +59,7 @@ describe('BlacklistComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BlacklistComponent);
+    fixture = TestBed.createComponent(WhitelistComponent);
     component = fixture.componentInstance;
     component.model = model;
     fixture.detectChanges();
@@ -67,7 +68,8 @@ describe('BlacklistComponent', () => {
   it('should create and initialize', () => {
     expect(component).toBeTruthy();
     expect(component.ruleForm.controls['compareKey'].value).toEqual('testCompareKey');
-    expect(component.ruleForm.controls['blacklist'].value).toEqual('test1,test2');
+    expect(component.ruleForm.controls['whitelist'].value).toEqual('test1,test2');
+    expect(component.ruleForm.controls['ignoreNull'].value).toEqual(true);
   });
 
   it('should update model compare_key on change', () => {
@@ -75,9 +77,13 @@ describe('BlacklistComponent', () => {
     expect(component.model['ruleData']['compare_key']).toEqual('newCompareKey');
   });
 
-  it('should update model blacklist on change', () => {
-    component.ruleForm.controls['blacklist'].setValue('test1,test2,test3');
-    expect(component.model['ruleData']['blacklist']).toEqual(['test1','test2','test3']);
+  it('should update model whitelist on change', () => {
+    component.ruleForm.controls['whitelist'].setValue('test1,test2,test3');
+    expect(component.model['ruleData']['whitelist']).toEqual(['test1','test2','test3']);
+  });
+  it('should update model ignore_null on change', () => {
+    component.ruleForm.controls['ignoreNull'].setValue(false);
+    expect(component.model['ruleData']['ignore_null']).toEqual(false);
   });
 
 });

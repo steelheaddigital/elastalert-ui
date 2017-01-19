@@ -24,6 +24,8 @@ import { GlobalConfigService } from './globalconfig/globalconfig.service';
 import { ElastalertControlService } from './dashboard/elastalert-control/elastalert-control.service';
 import { RulesService } from './rules/rules.service';
 import { BlacklistComponent } from './rules/blacklist/blacklist.component';
+import { WhitelistComponent } from './rules/whitelist/whitelist.component';
+import { ChangeComponent } from './rules/change/change.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +44,9 @@ import { BlacklistComponent } from './rules/blacklist/blacklist.component';
       HipchatComponent,
       AlertsComponent,
       ElastalertControlComponent,
-      BlacklistComponent
+      BlacklistComponent,
+      WhitelistComponent,
+      ChangeComponent
     ],
     imports:      [
         BrowserModule,
@@ -58,7 +62,16 @@ import { BlacklistComponent } from './rules/blacklist/blacklist.component';
         ElastalertControlService,
         RulesService
     ],
-    entryComponents: [CardinalityComponent, AnyComponent, BlacklistComponent, AlertComponent, EmailComponent, HipchatComponent],
+    entryComponents: [
+        CardinalityComponent, 
+        AnyComponent, 
+        BlacklistComponent, 
+        WhitelistComponent,
+        ChangeComponent,
+        AlertComponent, 
+        EmailComponent, 
+        HipchatComponent
+    ],
     bootstrap: [
       AppComponent
     ],

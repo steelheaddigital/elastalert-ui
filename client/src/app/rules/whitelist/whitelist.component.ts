@@ -1,14 +1,14 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { RulesService } from '../rules.service';
 import { BaseRuleComponent } from '../base-rule.component';
 
 @Component({
-  selector: 'app-blacklist',
-  templateUrl: './blacklist.component.html',
-  styleUrls: ['./blacklist.component.scss']
+  selector: 'app-whitelist',
+  templateUrl: './whitelist.component.html',
+  styleUrls: ['./whitelist.component.css']
 })
-export class BlacklistComponent extends BaseRuleComponent implements OnInit {
+export class WhitelistComponent extends BaseRuleComponent implements OnInit {
 
   constructor(protected builder: FormBuilder, protected rulesService: RulesService) 
   { 
@@ -18,7 +18,8 @@ export class BlacklistComponent extends BaseRuleComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
     this.ruleForm.controls['compareKey'].setValue(this.model['ruleData']['compare_key']);
-    this.ruleForm.controls['blacklist'].setValue(this.model['ruleData']['blacklist'] !== undefined ? (this.model['ruleData']['blacklist'] as string[]).join(',') : null);
+    this.ruleForm.controls['whitelist'].setValue(this.model['ruleData']['whitelist'] !== undefined ? (this.model['ruleData']['whitelist'] as string[]).join(',') : null);
+    this.ruleForm.controls['ignoreNull'].setValue(this.model['ruleData']['ignore_null']);
     super.ngOnInit();
 
     this.bindControls();
@@ -29,7 +30,8 @@ export class BlacklistComponent extends BaseRuleComponent implements OnInit {
       commonRequiredForm: this.buildRequiredCommonForm(),
       commonOptionalForm: this.buildOptionalCommonForm(),
       compareKey: ['', Validators.required],
-      blacklist: ['', Validators.required]
+      whitelist: ['', Validators.required],
+      ignoreNull: false
     });
   }
 
@@ -37,8 +39,11 @@ export class BlacklistComponent extends BaseRuleComponent implements OnInit {
     this.subscriptions.push(this.ruleForm.controls['compareKey'].valueChanges.subscribe(val => {
       this.model['ruleData']['compare_key'] = val;
     }));
-    this.subscriptions.push(this.ruleForm.controls['blacklist'].valueChanges.subscribe(val => {
-      this.model['ruleData']['blacklist'] = (val as string).split(',');
+    this.subscriptions.push(this.ruleForm.controls['whitelist'].valueChanges.subscribe(val => {
+      this.model['ruleData']['whitelist'] = (val as string).split(',');
+    }));
+    this.subscriptions.push(this.ruleForm.controls['ignoreNull'].valueChanges.subscribe(val => {
+      this.model['ruleData']['ignore_null'] = val;
     }));
   }
 

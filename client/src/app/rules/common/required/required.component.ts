@@ -23,9 +23,15 @@ export class RequiredCommonComponent extends BaseFormComponent implements OnInit
   subscriptions: Array<Subscription> = new Array<Subscription>();
 
   public ruleTypes: string[] = [
-    "cardinality",
     "any",
-    "blacklist"
+    "blacklist",
+    "whitelist",
+    "change",
+    "frequency",
+    "spike",
+    "flatline",
+    "new_term",
+    "cardinality"
   ]
 
   constructor(private builder: FormBuilder)

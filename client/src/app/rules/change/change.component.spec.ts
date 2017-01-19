@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DebugElement } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
-import { BlacklistComponent } from './blacklist.component';
+import { ChangeComponent } from './change.component';
 import { OptionalCommonComponent } from '../common/optional/optional.component';
 import { RequiredCommonComponent } from '../common/required/required.component';
 import { AlertsComponent } from '../alerts/alerts.component';
@@ -16,21 +16,25 @@ import * as TypeMoq from "typemoq";
 import * as Rx from 'rxjs';
 
 
-describe('BlacklistComponent', () => {
-  let component: BlacklistComponent;
+describe('ChangeComponent', () => {
+  let component: ChangeComponent;
   let rulesService: TypeMoq.IMock<RulesService>;
-  let fixture: ComponentFixture<BlacklistComponent>;
+  let fixture: ComponentFixture<ChangeComponent>;
   let model = {
       ruleData: { 
         compare_key: 'testCompareKey',
-        blacklist: ['test1','test2']
+        ignore_null: true,
+        query_key: 'testQueryKey',
+        timeframe: {
+            minutes: 5
+        }
       }
   }
   beforeEach(async(() => {
     rulesService = TypeMoq.Mock.ofType(RulesService);
     TestBed.configureTestingModule({
       declarations: [
-          BlacklistComponent,
+          ChangeComponent,
           OptionalCommonComponent,
           RequiredCommonComponent,
           AlertsComponent,
@@ -58,7 +62,7 @@ describe('BlacklistComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BlacklistComponent);
+    fixture = TestBed.createComponent(ChangeComponent);
     component = fixture.componentInstance;
     component.model = model;
     fixture.detectChanges();
@@ -67,7 +71,9 @@ describe('BlacklistComponent', () => {
   it('should create and initialize', () => {
     expect(component).toBeTruthy();
     expect(component.ruleForm.controls['compareKey'].value).toEqual('testCompareKey');
-    expect(component.ruleForm.controls['blacklist'].value).toEqual('test1,test2');
+    expect(component.ruleForm.controls['ignoreNull'].value).toEqual(true);
+    expect(component.ruleForm.controls['queryKey'].value).toEqual('testQueryKey');
+    expect(component.ruleForm.controls['timeFrame'].value).toEqual(5);
   });
 
   it('should update model compare_key on change', () => {
@@ -75,9 +81,18 @@ describe('BlacklistComponent', () => {
     expect(component.model['ruleData']['compare_key']).toEqual('newCompareKey');
   });
 
-  it('should update model blacklist on change', () => {
-    component.ruleForm.controls['blacklist'].setValue('test1,test2,test3');
-    expect(component.model['ruleData']['blacklist']).toEqual(['test1','test2','test3']);
+  it('should update model ignore_null on change', () => {
+    component.ruleForm.controls['ignoreNull'].setValue(false);
+    expect(component.model['ruleData']['ignore_null']).toEqual(false);
   });
 
+  it('should update model query_key on change', () => {
+    component.ruleForm.controls['queryKey'].setValue('newQueryKey');
+    expect(component.model['ruleData']['query_key']).toEqual('newQueryKey');
+  });
+
+  it('should update model timeframe on change', () => {
+    component.ruleForm.controls['timeFrame'].setValue(10);
+    expect(component.model['ruleData']['timeframe']['minutes']).toEqual(10);
+  });
 });
