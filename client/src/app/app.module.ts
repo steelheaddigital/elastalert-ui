@@ -26,6 +26,7 @@ import { RulesService } from './rules/rules.service';
 import { BlacklistComponent } from './rules/blacklist/blacklist.component';
 import { WhitelistComponent } from './rules/whitelist/whitelist.component';
 import { ChangeComponent } from './rules/change/change.component';
+import { FrequencyComponent } from './rules/frequency/frequency.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { ChangeComponent } from './rules/change/change.component';
       ElastalertControlComponent,
       BlacklistComponent,
       WhitelistComponent,
-      ChangeComponent
+      ChangeComponent,
+      FrequencyComponent
     ],
     imports:      [
         BrowserModule,
@@ -69,7 +71,8 @@ import { ChangeComponent } from './rules/change/change.component';
         WhitelistComponent,
         ChangeComponent,
         AlertComponent, 
-        EmailComponent, 
+        EmailComponent,
+        FrequencyComponent,
         HipchatComponent
     ],
     bootstrap: [

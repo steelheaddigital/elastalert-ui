@@ -4,6 +4,7 @@ import { AnyComponent } from '../any/any.component';
 import { BlacklistComponent } from '../blacklist/blacklist.component';
 import { WhitelistComponent } from '../whitelist/whitelist.component';
 import { ChangeComponent } from '../change/change.component';
+import { FrequencyComponent } from '../frequency/frequency.component';
 
 @Component({
   selector: 'app-create',
@@ -46,6 +47,8 @@ export class CreateComponent implements OnInit {
         return this.componentFactoryResolver.resolveComponentFactory(WhitelistComponent);
       case 'change':
         return this.componentFactoryResolver.resolveComponentFactory(ChangeComponent);
+      case 'frequency':
+        return this.componentFactoryResolver.resolveComponentFactory(FrequencyComponent);
       default:
         return null;
     }

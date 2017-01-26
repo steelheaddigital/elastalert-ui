@@ -1,0 +1,47 @@
+<form [formGroup]="ruleForm" (submit)="save()">
+    <h1>Required Settings</h1>
+    <div formGroupName="commonRequiredForm">
+      <required-common [requiredGroup]="ruleForm.controls.commonRequiredForm" [model]="model" (typeUpdated)="typeUpdate($event)"></required-common>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.timeFrame.valid && !ruleForm.controls.timeFrame.pristine}">
+        <label class="control-label" for="timeFrame">Timeframe</label>
+        <input type="number" class="form-control" placeholder="Timeframe" formControlName="timeFrame" />
+        <div *ngIf="!ruleForm.controls.timeFrame.valid && ruleForm.controls.timeFrame.hasError('required') && !ruleForm.controls.timeFrame.pristine" class="alert alert-danger">
+            Timeframe is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.numEvents.valid && !ruleForm.controls.numEvents.pristine}">
+        <label class="control-label" for="numEvents">Num Events</label>
+        <input type="number" class="form-control" placeholder="Num Events" formControlName="numEvents" />
+        <div *ngIf="!ruleForm.controls.numEvents.valid && ruleForm.controls.numEvents.hasError('required') && !ruleForm.controls.numEvents.pristine" class="alert alert-danger">
+            Timeframe is required
+        </div>
+    </div>
+    <app-alerts [alertGroup]="ruleForm" [model]="model"></app-alerts>
+    <h1>Optional Settings</h1>
+    <div formGroupName="commonOptionalForm">
+      <optional-common [optionalGroup]="ruleForm.controls.commonOptionalForm" [model]="model"></optional-common>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.queryKey.valid && !ruleForm.controls.queryKey.pristine}">
+        <label class="control-label" for="queryKey">Query Key</label>
+        <input type="checkbox" formControlName="queryKey" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.termsSize.valid && !ruleForm.controls.termsSize.pristine}">
+        <label class="control-label" for="termsSize">Terms Size</label>
+        <input type="number" class="form-control" placeholder="Terms Size<" formControlName="termsSize" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.docType.valid && !ruleForm.controls.docType.pristine}">
+        <label class="control-label" for="docType">Doc Type</label>
+        <input type="text" class="form-control" placeholder="Doc Type" formControlName="docType" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.termsSize.valid && !ruleForm.controls.termsSize.pristine}">
+        <label class="control-label" for="name">Terms Size</label>
+        <input type="number" class="form-control" placeholder="Terms Size<" formControlName="termsSize" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-inverse btn-lg btn-register"
+                [disabled]="!ruleForm.valid">
+            Save
+        </button>
+    </div>
+</form>
