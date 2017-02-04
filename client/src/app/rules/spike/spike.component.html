@@ -1,0 +1,66 @@
+<form [formGroup]="ruleForm" (submit)="save()">
+    <h1>Required Settings</h1>
+    <div formGroupName="commonRequiredForm">
+      <required-common [requiredGroup]="ruleForm.controls.commonRequiredForm" [model]="model" (typeUpdated)="typeUpdate($event)"></required-common>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.timeFrame.valid && !ruleForm.controls.timeFrame.pristine}">
+        <label class="control-label" for="timeFrame">Timeframe</label>
+        <input type="number" class="form-control" placeholder="Timeframe" formControlName="timeFrame" />
+        <div *ngIf="!ruleForm.controls.timeFrame.valid && ruleForm.controls.timeFrame.hasError('required') && !ruleForm.controls.timeFrame.pristine" class="alert alert-danger">
+            Timeframe is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.spikeHeight.valid && !ruleForm.controls.spikeHeight.pristine}">
+        <label class="control-label" for="spikeHeight">Spike Height</label>
+        <input type="number" class="form-control" placeholder="Spike Height" formControlName="spikeHeight" />
+        <div *ngIf="!ruleForm.controls.spikeHeight.valid && ruleForm.controls.spikeHeight.hasError('required') && !ruleForm.controls.spikeHeight.pristine" class="alert alert-danger">
+            Spike Height is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.spikeType.valid && !ruleForm.controls.spikeType.pristine}">
+        <label class="control-label" for="type">Spike Type</label>
+        <select id="spikeType" name="spikeType" class="form-control" formControlName="spikeType">
+            <option *ngFor="let type of spikeTypes" [value]="type">
+                {{type}}
+            </option>
+        </select>
+        <div *ngIf="!ruleForm.controls.spikeType.valid && ruleForm.controls.spikeType.hasError('required') && !ruleForm.controls.spikeType.pristine" class="alert alert-danger">
+            Spike Type is required
+        </div>
+    </div>
+    <app-alerts [alertGroup]="ruleForm" [model]="model"></app-alerts>
+    <h1>Optional Settings</h1>
+    <div formGroupName="commonOptionalForm">
+      <optional-common [optionalGroup]="ruleForm.controls.commonOptionalForm" [model]="model"></optional-common>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.queryKey.valid && !ruleForm.controls.queryKey.pristine}">
+        <label class="control-label" for="queryKey">Query Key</label>
+        <input type="text" formControlName="queryKey" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.docType.valid && !ruleForm.controls.docType.pristine}">
+        <label class="control-label" for="docType">Doc Type</label>
+        <input type="text" class="form-control" placeholder="Doc Type" formControlName="docType" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.termsSize.valid && !ruleForm.controls.termsSize.pristine}">
+        <label class="control-label" for="name">Terms Size</label>
+        <input type="number" class="form-control" placeholder="Terms Size" formControlName="termsSize" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.alertOnNewData.valid && !ruleForm.controls.alertOnNewData.pristine}">
+        <label class="control-label" for="alertOnNewData">Alert On New Data</label>
+        <input type="checkbox" formControlName="alertOnNewData"/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.thresholdRef.valid && !ruleForm.controls.thresholdRef.pristine}">
+        <label class="control-label" for="name">Threshold Ref</label>
+        <input type="number" class="form-control" placeholder="Threshold Ref" formControlName="thresholdRef" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.thresholdCur.valid && !ruleForm.controls.thresholdCur.pristine}">
+        <label class="control-label" for="name">Threshold Cur</label>
+        <input type="number" class="form-control" placeholder="Threshold Cur" formControlName="thresholdCur" />
+    </div>
+    <div>
+      <button type="submit" class="btn btn-inverse btn-lg btn-register"
+              [disabled]="!ruleForm.valid">
+          Save
+      </button>
+    </div>
+</form>

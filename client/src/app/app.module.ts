@@ -27,6 +27,8 @@ import { BlacklistComponent } from './rules/blacklist/blacklist.component';
 import { WhitelistComponent } from './rules/whitelist/whitelist.component';
 import { ChangeComponent } from './rules/change/change.component';
 import { FrequencyComponent } from './rules/frequency/frequency.component';
+import { SpikeComponent } from './rules/spike/spike.component';
+import { FlatlineComponent } from './rules/flatline/flatline.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +50,9 @@ import { FrequencyComponent } from './rules/frequency/frequency.component';
       BlacklistComponent,
       WhitelistComponent,
       ChangeComponent,
-      FrequencyComponent
+      FrequencyComponent,
+      SpikeComponent,
+      FlatlineComponent
     ],
     imports:      [
         BrowserModule,
@@ -69,10 +73,11 @@ import { FrequencyComponent } from './rules/frequency/frequency.component';
         AnyComponent, 
         BlacklistComponent, 
         WhitelistComponent,
+        FrequencyComponent,
+        SpikeComponent,
         ChangeComponent,
         AlertComponent, 
         EmailComponent,
-        FrequencyComponent,
         HipchatComponent
     ],
     bootstrap: [

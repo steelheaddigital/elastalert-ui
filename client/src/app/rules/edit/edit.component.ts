@@ -9,6 +9,7 @@ import { BlacklistComponent } from '../blacklist/blacklist.component';
 import { WhitelistComponent } from '../whitelist/whitelist.component';
 import { ChangeComponent } from '../change/change.component';
 import { FrequencyComponent } from '../frequency/frequency.component';
+import { SpikeComponent } from '../spike/spike.component';
 
 @Component({
   selector: 'app-edit',
@@ -83,6 +84,8 @@ export class EditComponent implements OnInit {
         return this.componentFactoryResolver.resolveComponentFactory(ChangeComponent);
       case 'frequency':
         return this.componentFactoryResolver.resolveComponentFactory(FrequencyComponent);
+      case 'spike':
+        return this.componentFactoryResolver.resolveComponentFactory(SpikeComponent);
       default:
         return null;
     }
