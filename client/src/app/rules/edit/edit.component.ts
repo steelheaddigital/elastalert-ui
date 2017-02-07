@@ -10,6 +10,7 @@ import { WhitelistComponent } from '../whitelist/whitelist.component';
 import { ChangeComponent } from '../change/change.component';
 import { FrequencyComponent } from '../frequency/frequency.component';
 import { SpikeComponent } from '../spike/spike.component';
+import { FlatlineComponent } from '../flatline/flatline.component';
 
 @Component({
   selector: 'app-edit',
@@ -86,6 +87,8 @@ export class EditComponent implements OnInit {
         return this.componentFactoryResolver.resolveComponentFactory(FrequencyComponent);
       case 'spike':
         return this.componentFactoryResolver.resolveComponentFactory(SpikeComponent);
+      case 'flatline':
+        return this.componentFactoryResolver.resolveComponentFactory(FlatlineComponent);
       default:
         return null;
     }

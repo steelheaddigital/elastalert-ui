@@ -75,6 +75,7 @@ import { FlatlineComponent } from './rules/flatline/flatline.component';
         WhitelistComponent,
         FrequencyComponent,
         SpikeComponent,
+        FlatlineComponent,
         ChangeComponent,
         AlertComponent, 
         EmailComponent,

@@ -16,7 +16,7 @@ import * as TypeMoq from "typemoq";
 import * as Rx from 'rxjs';
 
 
-describe('FrequencyComponent', () => {
+describe('SpikeComponent', () => {
   let component: SpikeComponent;
   let rulesService: TypeMoq.IMock<RulesService>;
   let fixture: ComponentFixture<SpikeComponent>;

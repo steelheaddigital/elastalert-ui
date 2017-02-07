@@ -1,3 +1,39 @@
-<p>
-  flatline works!
-</p>
+<form [formGroup]="ruleForm" (submit)="save()">
+    <h1>Required Settings</h1>
+    <div formGroupName="commonRequiredForm">
+      <required-common [requiredGroup]="ruleForm.controls.commonRequiredForm" [model]="model" (typeUpdated)="typeUpdate($event)"></required-common>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.timeFrame.valid && !ruleForm.controls.timeFrame.pristine}">
+        <label class="control-label" for="timeFrame">Timeframe</label>
+        <input type="number" class="form-control" placeholder="Timeframe" formControlName="timeFrame" />
+        <div *ngIf="!ruleForm.controls.timeFrame.valid && ruleForm.controls.timeFrame.hasError('required') && !ruleForm.controls.timeFrame.pristine" class="alert alert-danger">
+            Timeframe is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.threshold.valid && !ruleForm.controls.threshold.pristine}">
+        <label class="control-label" for="threshold">Threshold</label>
+        <input type="number" class="form-control" placeholder="Threshold" formControlName="threshold" />
+        <div *ngIf="!ruleForm.controls.threshold.valid && ruleForm.controls.threshold.hasError('required') && !ruleForm.controls.threshold.pristine" class="alert alert-danger">
+            Spike Height is required
+        </div>
+    </div>
+    <app-alerts [alertGroup]="ruleForm" [model]="model"></app-alerts>
+    <h1>Optional Settings</h1>
+    <div formGroupName="commonOptionalForm">
+      <optional-common [optionalGroup]="ruleForm.controls.commonOptionalForm" [model]="model"></optional-common>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.queryKey.valid && !ruleForm.controls.queryKey.pristine}">
+        <label class="control-label" for="queryKey">Query Key</label>
+        <input type="text" formControlName="queryKey" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.docType.valid && !ruleForm.controls.docType.pristine}">
+        <label class="control-label" for="docType">Doc Type</label>
+        <input type="text" class="form-control" placeholder="Doc Type" formControlName="docType" />
+    </div>
+    <div>
+      <button type="submit" class="btn btn-inverse btn-lg btn-register"
+              [disabled]="!ruleForm.valid">
+          Save
+      </button>
+    </div>
+</form>
