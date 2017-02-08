@@ -29,6 +29,7 @@ import { ChangeComponent } from './rules/change/change.component';
 import { FrequencyComponent } from './rules/frequency/frequency.component';
 import { SpikeComponent } from './rules/spike/spike.component';
 import { FlatlineComponent } from './rules/flatline/flatline.component';
+import { NewTermComponent } from './rules/new-term/new-term.component';
 
 @NgModule({
     declarations: [
@@ -52,7 +53,8 @@ import { FlatlineComponent } from './rules/flatline/flatline.component';
       ChangeComponent,
       FrequencyComponent,
       SpikeComponent,
-      FlatlineComponent
+      FlatlineComponent,
+      NewTermComponent
     ],
     imports:      [
         BrowserModule,
@@ -76,6 +78,7 @@ import { FlatlineComponent } from './rules/flatline/flatline.component';
         FrequencyComponent,
         SpikeComponent,
         FlatlineComponent,
+        NewTermComponent,
         ChangeComponent,
         AlertComponent, 
         EmailComponent,

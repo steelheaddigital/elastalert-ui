@@ -7,6 +7,7 @@ import { ChangeComponent } from '../change/change.component';
 import { FrequencyComponent } from '../frequency/frequency.component';
 import { SpikeComponent } from '../spike/spike.component';
 import { FlatlineComponent } from '../flatline/flatline.component';
+import { NewTermComponent } from '../new-term/new-term.component';
 
 @Component({
   selector: 'app-create',
@@ -55,6 +56,8 @@ export class CreateComponent implements OnInit {
         return this.componentFactoryResolver.resolveComponentFactory(SpikeComponent);
       case 'flatline':
         return this.componentFactoryResolver.resolveComponentFactory(FlatlineComponent);
+      case 'new_term':
+        return this.componentFactoryResolver.resolveComponentFactory(NewTermComponent);
       default:
         return null;
     }

@@ -1,0 +1,47 @@
+<form [formGroup]="ruleForm" (submit)="save()">
+    <h1>Required Settings</h1>
+    <div formGroupName="commonRequiredForm">
+      <required-common [requiredGroup]="ruleForm.controls.commonRequiredForm" [model]="model" (typeUpdated)="typeUpdate($event)"></required-common>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.queryKey.valid && !ruleForm.controls.queryKey.pristine}">
+        <label class="control-label" for="timeFrame">Query Key</label>
+        <input type="number" class="form-control" placeholder="Query Key" formControlName="queryKey" />
+        <div *ngIf="!ruleForm.controls.queryKey.valid && ruleForm.controls.queryKey.hasError('required') && !ruleForm.controls.queryKey.pristine" class="alert alert-danger">
+            Query key is required
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.fields.valid && !ruleForm.controls.fields.pristine}">
+        <label class="control-label" for="spikeHeight">Fields</label>
+        <input type="number" class="form-control" placeholder="Fields" formControlName="fields" />
+        <div *ngIf="!ruleForm.controls.fields.valid && ruleForm.controls.fields.hasError('required') && !ruleForm.controls.fields.pristine" class="alert alert-danger">
+           Fields is required
+        </div>
+    </div>
+    <app-alerts [alertGroup]="ruleForm" [model]="model"></app-alerts>
+    <h1>Optional Settings</h1>
+    <div formGroupName="commonOptionalForm">
+      <optional-common [optionalGroup]="ruleForm.controls.commonOptionalForm" [model]="model"></optional-common>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.docType.valid && !ruleForm.controls.docType.pristine}">
+        <label class="control-label" for="docType">Doc Type</label>
+        <input type="text" class="form-control" placeholder="Doc Type" formControlName="docType" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.termsWindowSize.valid && !ruleForm.controls.termsWindowSize.pristine}">
+        <label class="control-label" for="termsWindowSize">Terms Window Size (Minutes)</label>
+        <input type="number" class="form-control" placeholder="Terms Window Size" formControlName="termsWindowSize" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.windowStepSize.valid && !ruleForm.controls.windowStepSize.pristine}">
+        <label class="control-label" for="windowStepSize">Window Step Size (Minutes)</label>
+        <input type="number" class="form-control" placeholder="Window Step Size" formControlName="windowStepSize" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error' : !ruleForm.controls.alertOnMissingFields.valid && !ruleForm.controls.alertOnMissingFields.pristine}">
+        <label class="control-label" for="alertOnMissingFields">Alert On Missing Fields</label>
+        <input type="checkbox" formControlName="alertOnMissingFields"/>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-inverse btn-lg btn-register"
+              [disabled]="!ruleForm.valid">
+          Save
+      </button>
+    </div>
+</form>
