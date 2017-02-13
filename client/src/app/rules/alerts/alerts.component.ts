@@ -15,8 +15,6 @@ export class AlertsComponent implements OnInit {
   @Input()
   model: Object
 
-  public isCollapsed : boolean = true;
-
   protected subscriptions: Array<Subscription> = new Array<Subscription>();
 
   constructor(protected builder: FormBuilder) { 

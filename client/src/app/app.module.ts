@@ -61,7 +61,7 @@ import { NewTermComponent } from './rules/new-term/new-term.component';
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
-        CollapseModule.forRoot(),
+        CollapseModule,
         routing
     ],
     providers: [
