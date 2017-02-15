@@ -1,0 +1,9 @@
+<div class="x_panel" [ngClass]="{'stopped': !status, 'running': status}" >
+  <div class="x_title">
+    <h2>Elastalert Status</h2>
+    <div class="clearfix"></div>
+  </div>
+  <div class="x_content">
+    <div class="status-container">{{status ? "RUNNING...": "STOPPED..."}}</div>
+  </div>
+</div>

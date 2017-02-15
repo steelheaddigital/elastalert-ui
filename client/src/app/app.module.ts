@@ -30,6 +30,8 @@ import { FrequencyComponent } from './rules/frequency/frequency.component';
 import { SpikeComponent } from './rules/spike/spike.component';
 import { FlatlineComponent } from './rules/flatline/flatline.component';
 import { NewTermComponent } from './rules/new-term/new-term.component';
+import { ElastalertStatusComponent } from './dashboard/elastalert-status/elastalert-status.component';
+import { ElastalertStatusService } from './dashboard/elastalert-status/elastalert-status.service';
 
 @NgModule({
     declarations: [
@@ -48,6 +50,7 @@ import { NewTermComponent } from './rules/new-term/new-term.component';
       HipchatComponent,
       AlertsComponent,
       ElastalertControlComponent,
+      ElastalertStatusComponent,
       BlacklistComponent,
       WhitelistComponent,
       ChangeComponent,
@@ -68,6 +71,7 @@ import { NewTermComponent } from './rules/new-term/new-term.component';
         APP_ROUTER_PROVIDERS,
         GlobalConfigService,
         ElastalertControlService,
+        ElastalertStatusService,
         RulesService
     ],
     entryComponents: [

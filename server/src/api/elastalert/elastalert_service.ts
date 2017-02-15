@@ -18,4 +18,8 @@ export class ElastalertService extends BaseService {
   public restart(): Promise<number> {
     return this.elastalertManager.restart();
   }
+
+  public status(): Promise<boolean> {
+    return this.elastalertManager.status();
+  }
 }

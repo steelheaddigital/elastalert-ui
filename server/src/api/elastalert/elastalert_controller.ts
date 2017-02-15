@@ -26,4 +26,11 @@ export class ElastalertController{
     .catch(next);
   }
 
+  public status = (req: Request, res: Response, next: NextFunction) => {
+    this.elastalertService.status().then(status => {
+        res.jsend.success(status);
+    })
+    .catch(next);
+  }
+
 }

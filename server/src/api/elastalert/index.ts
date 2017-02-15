@@ -12,5 +12,6 @@ let elastalertController = new ElastalertController(elastalertService);
 router.post('/start', elastalertController.start);
 router.post('/stop', elastalertController.stop);
 router.post('/restart', elastalertController.restart);
+router.get('/status', elastalertController.status);
 
 module.exports = router;

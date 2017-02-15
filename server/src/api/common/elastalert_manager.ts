@@ -81,6 +81,14 @@ export class ElastalertManager {
     });
   }
 
+  public status(): Promise<boolean> {
+    return new Promise( (resolve,reject) => {
+      fs.exists(this.pidFilePath, (exists) => {
+        resolve(exists);
+      })
+    })
+  }
+
   private removePidFile(): Promise<any> {
     return new Promise((resolve,reject) => {
       fs.unlink(config.elastalertDir + '/pid', (err) => {

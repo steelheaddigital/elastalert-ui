@@ -82,4 +82,30 @@ describe('Elastalert Controller', () => {
       elastalertService.verify(x => x.restart(), TypeMoq.Times.atLeastOnce())
     });
   });
+
+  describe('status method', () => {
+    it('calls service status method', function(done) {
+      let elastalertService = TypeMoq.Mock.ofType<ElastalertService>();
+
+      elastalertService.setup(x => x.status()).returns(() => {
+        return new Promise((resolve, reject) => {
+          resolve(true);
+        });
+      });
+      
+      let next: NextFunction;
+      let req: any = { };
+      let res: any = { jsend: {
+        success: function(data) {
+          expect(data).to.equal(true);
+          done();
+        }
+      }};
+
+      let elastalertController = new ElastalertController(elastalertService.object);
+
+      elastalertController.status(req, res, next);
+      elastalertService.verify(x => x.status(), TypeMoq.Times.atLeastOnce())
+    });
+  });
 })

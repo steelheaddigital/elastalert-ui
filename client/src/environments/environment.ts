@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
-  api_root: ''
+  api_root: '',
+  elastalert_status_refresh_interval: 5000
 };
 
