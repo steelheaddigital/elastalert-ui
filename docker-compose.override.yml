@@ -7,8 +7,6 @@ services:
     ports:
      - "3000:3000"
      - "5858:5858"
-     - "49152:49152"
-     - "4200:4200"
     environment:
       NODE_ENV: development
   elasticsearch:
