@@ -8,11 +8,12 @@ import { AlertsComponent } from './alerts.component';
 import { AlertComponent } from '../alert/alert.component';
 import { EmailComponent } from '../alert/email/email.component';
 import { HipchatComponent } from '../alert/hipchat/hipchat.component';
+import { CollapseModule } from 'ng2-bootstrap';
 import * as TypeMoq from "typemoq";
 import * as Rx from 'rxjs';
 
 
-describe('AlertComponent', () => {
+describe('AlertsComponent', () => {
   let component: AlertsComponent;
   let fixture: ComponentFixture<AlertsComponent>;
   let alertGroup: FormGroup;
@@ -25,7 +26,10 @@ describe('AlertComponent', () => {
         EmailComponent,
         HipchatComponent
       ],
-      imports: [ReactiveFormsModule],
+      imports: [
+        ReactiveFormsModule,
+        CollapseModule
+      ],
       providers: [
         ComponentFactoryResolver
       ]

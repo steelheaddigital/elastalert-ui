@@ -12,6 +12,7 @@ import { AlertComponent } from '../alert/alert.component';
 import { EmailComponent } from '../alert/email/email.component';
 import { HipchatComponent } from '../alert/hipchat/hipchat.component';
 import { RulesService } from '../rules.service';
+import { CollapseModule } from 'ng2-bootstrap';
 import * as TypeMoq from "typemoq";
 import * as Rx from 'rxjs';
 
@@ -41,7 +42,10 @@ describe('ChangeComponent', () => {
           AlertComponent,
           EmailComponent
       ],
-      imports: [ReactiveFormsModule],
+      imports: [
+        ReactiveFormsModule,
+        CollapseModule
+      ],
       providers: [
         FormBuilder,
         { provide: RulesService, useValue: rulesService.object }
