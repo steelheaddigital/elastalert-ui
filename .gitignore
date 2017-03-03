@@ -3,3 +3,4 @@
 .env
 ubuntu-xenial-*
 smtp_auth.yaml
+npm-debug.log
