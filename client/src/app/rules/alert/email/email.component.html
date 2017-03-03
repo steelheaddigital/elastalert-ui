@@ -16,7 +16,7 @@
    </div>
    <div class="form-group" [ngClass]="{ 'has-error' : !emailForm.controls.smtpSsl.valid && !emailForm.controls.smtpSsl.pristine}">
       <label class="control-label" for="name">SMTP SSL</label>
-      <input type="text" class="form-control" placeholder="SMTP SSL" formControlName="smtpSsl" />
+      <input type="checkbox" placeholder="Use SSL" formControlName="smtpSsl"/>
    </div>
    <div class="form-group" [ngClass]="{ 'has-error' : !emailForm.controls.smtpAuthFile.valid && !emailForm.controls.smtpAuthFile.pristine}">
       <label class="control-label" for="name">SMTP Auth File</label>
