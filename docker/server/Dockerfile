@@ -10,7 +10,7 @@ RUN pip install --upgrade pip
 # Install Elastalert
 COPY ./elastalert /opt/elastalert
 RUN cd /opt/elastalert && pip install -r requirements.txt
-RUN cd /opt/elastalert && python setup.py install 
+RUN cd /opt/elastalert && python setup.py install
 
 # Install NodeJS
 RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -

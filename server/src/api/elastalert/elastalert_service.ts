@@ -1,9 +1,10 @@
 import { BaseService } from '../common/base_service';
 import { ElastalertManager} from '../common/elastalert_manager'
-let config = require('../../../config');
+import * as es from 'elasticsearch';
 
 export class ElastalertService extends BaseService {
-  constructor(private elastalertManager: ElastalertManager){
+
+  constructor(private elastalertManager: ElastalertManager, private esClient: Elasticsearch.Client){
     super();
   }
 
@@ -21,5 +22,15 @@ export class ElastalertService extends BaseService {
 
   public status(): Promise<boolean> {
     return this.elastalertManager.status();
+  }
+
+  public alerts(limit: number): Promise<any> {
+    let params = {
+      size: limit,
+      index: 'elastalert_status',
+      type: 'elastalert'
+    } as es.SearchParams
+
+    return this.esClient.search(params) as Promise<any>;
   }
 }

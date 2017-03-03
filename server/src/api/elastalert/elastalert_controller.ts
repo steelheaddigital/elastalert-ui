@@ -33,4 +33,12 @@ export class ElastalertController{
     .catch(next);
   }
 
+  public alerts = (req: Request, res: Response, next: NextFunction) => {
+    let limit = req.query.limit;
+    this.elastalertService.alerts(limit).then(alerts => {
+        res.jsend.success(alerts);
+    })
+    .catch(next);
+  }
+
 }
