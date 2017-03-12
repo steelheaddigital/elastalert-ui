@@ -32,6 +32,8 @@ import { FlatlineComponent } from './rules/flatline/flatline.component';
 import { NewTermComponent } from './rules/new-term/new-term.component';
 import { ElastalertStatusComponent } from './dashboard/elastalert-status/elastalert-status.component';
 import { ElastalertStatusService } from './dashboard/elastalert-status/elastalert-status.service';
+import { ElastalertAlertsComponent } from './dashboard/elastalert-alerts/elastalert-alerts.component';
+import { ElastalertAlertsService } from './dashboard/elastalert-alerts/elastalert-alerts.service';
 
 @NgModule({
     declarations: [
@@ -57,7 +59,8 @@ import { ElastalertStatusService } from './dashboard/elastalert-status/elastaler
       FrequencyComponent,
       SpikeComponent,
       FlatlineComponent,
-      NewTermComponent
+      NewTermComponent,
+      ElastalertAlertsComponent
     ],
     imports:      [
         BrowserModule,
@@ -72,7 +75,8 @@ import { ElastalertStatusService } from './dashboard/elastalert-status/elastaler
         GlobalConfigService,
         ElastalertControlService,
         ElastalertStatusService,
-        RulesService
+        RulesService,
+        ElastalertAlertsService
     ],
     entryComponents: [
         CardinalityComponent, 

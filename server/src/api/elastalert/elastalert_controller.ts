@@ -14,11 +14,13 @@ export class ElastalertController{
     .catch(next);
   }
 
+  /* POST Start elastalert */
   public start = (req: Request, res: Response, next: NextFunction) => {
     let pid = this.elastalertService.start()
     res.jsend.success(pid);
   }
 
+  /* POST Re-start elastalert */
   public restart = (req: Request, res: Response, next: NextFunction) => {
     this.elastalertService.restart().then(pid => {
         res.jsend.success(pid);
@@ -26,6 +28,7 @@ export class ElastalertController{
     .catch(next);
   }
 
+  /* GET elastalert status */
   public status = (req: Request, res: Response, next: NextFunction) => {
     this.elastalertService.status().then(status => {
         res.jsend.success(status);
@@ -33,8 +36,9 @@ export class ElastalertController{
     .catch(next);
   }
 
+  /* GET last n elastalerts */
   public alerts = (req: Request, res: Response, next: NextFunction) => {
-    let limit = req.query.limit;
+    let limit = req.query.limit === null ? 10 : req.query.limit;
     this.elastalertService.alerts(limit).then(alerts => {
         res.jsend.success(alerts);
     })
