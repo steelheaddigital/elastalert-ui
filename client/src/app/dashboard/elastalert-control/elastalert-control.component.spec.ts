@@ -5,24 +5,25 @@ import { DebugElement } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { ElastalertControlComponent } from './elastalert-control.component';
 import { ElastalertControlService } from './elastalert-control.service';
-import * as TypeMoq from "typemoq";
+import * as Mockito from 'ts-mockito';
 import * as Rx from 'rxjs';
 
 
-describe('GlobalconfigComponent', () => {
+describe('ElastalertControlComponent', () => {
   let component: ElastalertControlComponent;
-  let elastalertControlService: TypeMoq.IMock<ElastalertControlService>;
+  let elastalertControlService: ElastalertControlService;
   let fixture: ComponentFixture<ElastalertControlComponent>;
 
   beforeEach(async(() => {
-    elastalertControlService = TypeMoq.Mock.ofType(ElastalertControlService);
-    elastalertControlService.setup(x => x.restart()).returns(() => new Rx.Observable<number>((observer: Rx.Subscriber<number>) => {
+    elastalertControlService = Mockito.mock(ElastalertControlService);
+
+    Mockito.when(elastalertControlService.restart()).thenReturn(new Rx.Observable<number>((observer: Rx.Subscriber<number>) => {
       observer.next(123);
     }));
-    elastalertControlService.setup(x => x.start()).returns(() => new Rx.Observable<number>((observer: Rx.Subscriber<number>) => {
+    Mockito.when(elastalertControlService.start()).thenReturn(new Rx.Observable<number>((observer: Rx.Subscriber<number>) => {
       observer.next(123);
     }));
-    elastalertControlService.setup(x => x.stop()).returns(() => new Rx.Observable<number>((observer: Rx.Subscriber<number>) => {
+    Mockito.when(elastalertControlService.stop()).thenReturn(new Rx.Observable<number>((observer: Rx.Subscriber<number>) => {
       observer.next(123);
     }));
 
@@ -31,7 +32,7 @@ describe('GlobalconfigComponent', () => {
       imports: [ReactiveFormsModule],
       providers: [
         FormBuilder,
-        { provide: ElastalertControlService, useValue: elastalertControlService.object }
+        { provide: ElastalertControlService, useValue: Mockito.instance(elastalertControlService) }
       ]
     })
     .compileComponents();
@@ -50,21 +51,21 @@ describe('GlobalconfigComponent', () => {
   describe("start method", () => {
     it('should call service start method', () => {
       component.start();
-      elastalertControlService.verify(x => x.start(), TypeMoq.Times.atLeastOnce())
+      Mockito.verify(elastalertControlService.start()).atLeast(1);
     });
   });
 
   describe("restart method", () => {
     it('should call service restart method', () => {
       component.restart();
-      elastalertControlService.verify(x => x.restart(), TypeMoq.Times.atLeastOnce())
+      Mockito.verify(elastalertControlService.restart()).atLeast(1);
     });
   });
 
   describe("stop method", () => {
     it('should call service stop method', () => {
       component.stop();
-      elastalertControlService.verify(x => x.stop(), TypeMoq.Times.atLeastOnce())
+      Mockito.verify(elastalertControlService.stop()).atLeast(1);
     });
   });
 });

@@ -4,7 +4,6 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { EmailComponent } from './email.component';
-import * as TypeMoq from "typemoq";
 import * as Rx from 'rxjs';
 
 

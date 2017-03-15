@@ -8,7 +8,6 @@ import { AlertComponent } from './alert.component';
 import { EmailComponent } from './email/email.component';
 import { HipchatComponent } from './hipchat/hipchat.component';
 import { CollapseModule } from 'ng2-bootstrap';
-import * as TypeMoq from "typemoq";
 import * as Rx from 'rxjs';
 
 

@@ -15,17 +15,17 @@ import { EmailComponent } from '../alert/email/email.component';
 import { HipchatComponent } from '../alert/hipchat/hipchat.component';
 import { RulesService } from '../rules.service';
 import { CollapseModule } from 'ng2-bootstrap';
-import * as TypeMoq from "typemoq";
+import * as Mockito from 'ts-mockito';
 import * as Rx from 'rxjs';
 
 
 describe('EditComponent', () => {
   let component: EditComponent;
   let fixture: ComponentFixture<EditComponent>;
-  let rulesService: TypeMoq.IMock<RulesService>;
+  let rulesService: RulesService;
 
   beforeEach(async(() => {
-    rulesService = TypeMoq.Mock.ofType(RulesService);
+    rulesService = Mockito.mock(RulesService);
     let ruleNames = [
       'ruleName1',
       'ruleName2'
@@ -33,11 +33,15 @@ describe('EditComponent', () => {
     let rule = {
       type: 'any'
     }
-    rulesService.setup(x => x.ruleNames()).returns(() => new Rx.Observable<string[]>((observer: Rx.Subscriber<string[]>) => {
+
+    Mockito.when(rulesService.ruleNames()).thenReturn(new Rx.Observable<string[]>((observer: Rx.Subscriber<string[]>) => {
       observer.next(ruleNames);
     }));
-    rulesService.setup(x => x.loadRule(TypeMoq.It.isAnyString())).returns(() => new Rx.Observable<Object>((observer: Rx.Subscriber<Object>) => {
+    Mockito.when(rulesService.loadRule(Mockito.anyString())).thenReturn(new Rx.Observable<Object>((observer: Rx.Subscriber<Object>) => {
       observer.next(rule);
+    }));
+    Mockito.when(rulesService.loadRule("ruleName2")).thenReturn(new Rx.Observable<Object>((observer: Rx.Subscriber<Object>) => {
+      observer.next({type: 'cardinality'});
     }));
 
     TestBed.configureTestingModule({
@@ -58,7 +62,7 @@ describe('EditComponent', () => {
       ],
       providers: [
         ComponentFactoryResolver,
-        { provide: RulesService, useValue: rulesService.object }
+        { provide: RulesService, useValue: Mockito.instance(rulesService) }
       ]
     })
 
@@ -99,13 +103,9 @@ describe('EditComponent', () => {
   }));
 
   it('should update rule when selected rule changes', async(() => {
-    rulesService.setup(x => x.loadRule(TypeMoq.It.isAnyString())).returns(() => new Rx.Observable<Object>((observer: Rx.Subscriber<Object>) => {
-      observer.next({type: 'cardinality'});
-    }));
-    
     component.ruleSelect.setValue('ruleName2');
     
     expect(component.model['ruleData']).toEqual({type: 'cardinality'});
-    rulesService.verify(x => x.loadRule(TypeMoq.It.isValue<string>("ruleName2")), TypeMoq.Times.atLeastOnce())
+    Mockito.verify(rulesService.loadRule("ruleName2")).atLeast(1);
   }));
 });

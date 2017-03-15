@@ -7,7 +7,6 @@ import { RulesService } from './rules.service';
 import { IJsendResponse } from '../shared/base.service';
 import { RULE_PATH } from '../shared/api';
 import { Observable } from 'rxjs';
-import * as TypeMoq from 'typemoq';
 
 describe('RulesService', () => {
   beforeEach(() => {

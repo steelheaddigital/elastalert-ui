@@ -13,13 +13,13 @@ import { EmailComponent } from '../alert/email/email.component';
 import { HipchatComponent } from '../alert/hipchat/hipchat.component';
 import { RulesService } from '../rules.service';
 import { CollapseModule } from 'ng2-bootstrap';
-import * as TypeMoq from "typemoq";
+import * as Mockito from 'ts-mockito';
 import * as Rx from 'rxjs';
 
 
 describe('BlacklistComponent', () => {
   let component: BlacklistComponent;
-  let rulesService: TypeMoq.IMock<RulesService>;
+  let rulesService: RulesService;
   let fixture: ComponentFixture<BlacklistComponent>;
   let model = {
       ruleData: { 
@@ -28,7 +28,7 @@ describe('BlacklistComponent', () => {
       }
   }
   beforeEach(async(() => {
-    rulesService = TypeMoq.Mock.ofType(RulesService);
+    rulesService = Mockito.mock(RulesService);
     TestBed.configureTestingModule({
       declarations: [
           BlacklistComponent,
@@ -44,7 +44,7 @@ describe('BlacklistComponent', () => {
       ],
       providers: [
         FormBuilder,
-        { provide: RulesService, useValue: rulesService.object }
+        { provide: RulesService, useValue: Mockito.instance(rulesService) }
       ]
     })
     

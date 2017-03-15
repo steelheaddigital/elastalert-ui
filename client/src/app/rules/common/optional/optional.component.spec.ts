@@ -5,7 +5,6 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { DebugElement } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { OptionalCommonComponent } from './optional.component';
-import * as TypeMoq from "typemoq";
 import * as Rx from 'rxjs';
 
 
