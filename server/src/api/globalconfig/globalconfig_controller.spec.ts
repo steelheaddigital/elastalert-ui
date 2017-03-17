@@ -1,23 +1,24 @@
 import 'mocha'
 import { expect } from 'chai'
 import { NextFunction } from 'express';
-import * as TypeMoq from 'typemoq';
+import * as Mockito from 'ts-mockito';
 import { GlobalConfigService } from './globalconfig_service';
 import { GlobalConfigController } from './globalconfig_controller';
+import { RuleService } from '../rule/rule_service';
 
 
 describe('GlobalConfig Controller', () => {
   describe('index method', () => {
     it('returns global config data', function(done) {
-      let globalConfigService = TypeMoq.Mock.ofType(GlobalConfigService);
+      let globalConfigService = Mockito.mock(GlobalConfigService);
       let globalConfig = {
         rules_folder: "testFolder"
       }
-      globalConfigService.setup(x => x.getGlobalConfig()).returns(() => {
-        return new Promise((resolve, reject) => {
+
+      Mockito.when(globalConfigService.getGlobalConfig()).thenReturn(
+        new Promise((resolve, reject) => {
           resolve(globalConfig);
-        });
-      });
+        }));
       
       let next: NextFunction;
       let req: any = { };
@@ -28,7 +29,7 @@ describe('GlobalConfig Controller', () => {
         }
       }};
 
-      let globalConfigController = new GlobalConfigController(globalConfigService.object);
+      let globalConfigController = new GlobalConfigController(Mockito.instance(globalConfigService));
 
       globalConfigController.index(req, res, next);
     });
@@ -36,15 +37,15 @@ describe('GlobalConfig Controller', () => {
 
   describe('save method', function() {
     it('saves global config data', function(done) {
-      let globalConfigService = TypeMoq.Mock.ofType(GlobalConfigService);
+      let globalConfigService = Mockito.mock(GlobalConfigService);
       let globalConfig = {
         rules_folder: "testFolder"
       }
-      globalConfigService.setup(x => x.saveGlobalConfig(TypeMoq.It.isAny())).returns(() => {
-        return new Promise((resolve, reject) => {
+
+      Mockito.when(globalConfigService.saveGlobalConfig(Mockito.anything())).thenReturn(
+        new Promise((resolve, reject) => {
           resolve(globalConfig);
-        });
-      });
+        }));
       
       let next: NextFunction;
       let req: any = { body: globalConfig };
@@ -55,12 +56,10 @@ describe('GlobalConfig Controller', () => {
         }
       }};
 
-      let globalConfigController = new GlobalConfigController(globalConfigService.object);
+      let globalConfigController = new GlobalConfigController(Mockito.instance(globalConfigService));
 
       globalConfigController.save(req, res, next);
-      globalConfigService.verify(x => x.saveGlobalConfig(TypeMoq.It.is<any>(x => 
-        x.rules_folder === "testFolder"
-      )), TypeMoq.Times.atLeastOnce())
+      Mockito.verify(globalConfigService.saveGlobalConfig(globalConfig)).atLeast(1);
     });
   });
 })

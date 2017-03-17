@@ -1,20 +1,20 @@
 import 'mocha'
 import { expect } from 'chai'
 import { NextFunction } from 'express';
-import * as TypeMoq from 'typemoq';
+import * as Mockito from 'ts-mockito';
 import { RuleService } from './rule_service';
+//import {RuleService } from './rule2';
 import { RuleController } from './rule_controller';
 
 describe('Rule Controller', () => {
   describe('ruleNames method', () => {
     it('calls service getRuleNames method', function(done) {
-      let ruleService = TypeMoq.Mock.ofType<RuleService>();
+      let ruleService = Mockito.mock(RuleService);
 
-      ruleService.setup(x => x.getRuleNames()).returns(() => {
-        return new Promise((resolve, reject) => {
+      Mockito.when(ruleService.getRuleNames()).thenReturn(
+        new Promise((resolve, reject) => {
           resolve(['rule1','rule2']);
-        });
-      });
+        }));
       
       let next: NextFunction;
       let req: any = { };
@@ -26,25 +26,24 @@ describe('Rule Controller', () => {
         }
       }};
 
-      let ruleController = new RuleController(ruleService.object);
+      let ruleController = new RuleController(Mockito.instance(ruleService));
 
       ruleController.ruleNames(req, res, next);
-      ruleService.verify(x => x.getRuleNames(), TypeMoq.Times.atLeastOnce())
+      Mockito.verify(ruleService.getRuleNames()).times(1);
     });
   });
 
   describe('getRule method', () => {
     it('calls service getRule method', (done) => {
-      let ruleService = TypeMoq.Mock.ofType<RuleService>();
+      let ruleService = Mockito.mock(RuleService);
 
-      ruleService.setup(x => x.getRule(TypeMoq.It.isAnyString())).returns(() => {
-        return new Promise((resolve, reject) => {
+      Mockito.when(ruleService.getRule(Mockito.anyString())).thenReturn(
+        new Promise((resolve, reject) => {
           resolve({
             someField: 'test1',
             someOtherField: 'test2'
           });
-        });
-      });
+        }));
       
       let next: NextFunction;
       let req: any = { 
@@ -60,22 +59,21 @@ describe('Rule Controller', () => {
         }
       }};
 
-      let ruleController = new RuleController(ruleService.object);
+      let ruleController = new RuleController(Mockito.instance(ruleService));
 
       ruleController.getRule(req, res, next);
-      ruleService.verify(x => x.getRule(TypeMoq.It.isValue<string>('rule1')), TypeMoq.Times.atLeastOnce())
+      Mockito.verify(ruleService.getRule('rule1')).atLeast(1);
     });
   });
 
   describe('save method', () => {
     it('calls service save method', (done) => {
-      let elastalertService = TypeMoq.Mock.ofType<RuleService>();
+      let ruleService = Mockito.mock(RuleService);
 
-      elastalertService.setup(x => x.saveRule(TypeMoq.It.isAnyString(), TypeMoq.It.isAny(), TypeMoq.It.isAnyString())).returns(() => {
-        return new Promise((resolve, reject) => {
+      Mockito.when(ruleService.saveRule(Mockito.anyString(), Mockito.anything(), Mockito.anyString())).thenReturn(
+        new Promise((resolve, reject) => {
           resolve();
-        });
-      });
+        }));
       
       let next: NextFunction;
       let req: any = { 
@@ -97,14 +95,11 @@ describe('Rule Controller', () => {
         }
       }};
 
-      let elastalertController = new RuleController(elastalertService.object);
+      let rulesController = new RuleController(Mockito.instance(ruleService);
 
-      elastalertController.save(req, res, next);
-        elastalertService.verify(x => x.saveRule(TypeMoq.It.is<string>(x => 
-          x === 'rule1'),
-        TypeMoq.It.is<any>(x => 
-          x.someField === 'testBody'
-        ), TypeMoq.It.isAny()), TypeMoq.Times.atLeastOnce())
+      rulesController.save(req, res, next);
+      Mockito.verify(ruleService.saveRule('rule1', Mockito.deepEqual(req.body), Mockito.anything())).atLeast(1)
     });
   });
 })
+

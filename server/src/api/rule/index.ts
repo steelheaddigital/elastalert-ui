@@ -6,7 +6,7 @@ import { FsDataStore } from '../common/datastore';
 
 var router = express.Router();
 
-var ruleService = new RuleService(new ElastalertManager(), new FsDataStore());
+var ruleService = new RuleService(new FsDataStore(), new ElastalertManager());
 var ruleController = new RuleController(ruleService);
 
 router.get('/', ruleController.ruleNames)

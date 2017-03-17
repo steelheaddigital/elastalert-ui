@@ -30,5 +30,4 @@ export class GlobalConfigService extends BaseService {
       return this.elastalertManager.restart();
     })
   }
-
 }

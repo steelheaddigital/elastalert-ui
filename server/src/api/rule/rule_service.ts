@@ -8,7 +8,7 @@ import { EventEmitter } from 'events';
 let config = require('../../../config');
 
 export class RuleService extends BaseService {
-  constructor(private elastalertManager: ElastalertManager, private datastore: IDataStore){
+  constructor(private datastore: IDataStore, private elastalertManager: ElastalertManager){
     super();
   }
 
@@ -21,7 +21,7 @@ export class RuleService extends BaseService {
                       console.log(fileName);
           return this.datastore.read(fileName).then((data) => {
             let doc = yaml.safeLoad(data);
-            let ruleName = doc !== undefined && doc.hasOwnProperty('name') ? doc.name : null
+            let ruleName = doc !== undefined && doc['name'] != undefined ? doc['name'] : null
             if(ruleName){
               ruleNames.push(ruleName);
             }
