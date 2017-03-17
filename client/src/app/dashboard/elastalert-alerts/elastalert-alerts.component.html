@@ -4,6 +4,17 @@
         <div class="clearfix"></div>
     </div>
     <div class="x_content">
-        {{alertData?.hits?.hits[0]._type}}
+        <table class="table">
+            <tr>
+                <th>Alert Time</th>
+                <th>Rule Name</th>
+                <th>Exception</th>
+            </tr>
+            <tr *ngFor="let row of alertData?.hits?.hits">
+                <td>{{row._source.alert_time}}</td>
+                <td>{{row._source.rule_name}}</td>
+                <td>{{row._source.alert_exception}}</td>
+            </tr>
+        </table>
     </div>
 </div>
