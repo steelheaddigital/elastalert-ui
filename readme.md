@@ -4,8 +4,8 @@ A UI for [Elastalert](https://github.com/Yelp/elastalert)
 
 Prerequisites
 ============
-[Docker](https://docs.docker.com/engine/installation/)
-[Node.js](https://nodejs.org/en/)
+* [Docker](https://docs.docker.com/engine/installation/)
+* [Node.js](https://nodejs.org/en/)
 
 Install Dev Environment
 =======================
