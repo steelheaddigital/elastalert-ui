@@ -35,3 +35,23 @@ A few other useful commands
 Start with production settings
 
 `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`
+
+Run without Docker
+------------------
+* Change es_host in config.yaml in elastalert to the host where your ES instance is running, for example localhost
+* Change the elastalertDir value in server/config for the appropriate environment (development.js and/or production.js) to the location of your elastalert files. To use the elastalert bundled with this repository, this value would be '../elastalert'
+* In the client directory run the following to compile the client Angular application:
+
+`ng build`
+
+* Run the following from the server directory:
+
+`npm start`
+
+* Start in production mode:
+
+`NODE_ENV=production npm start`
+
+* The UI will be available at http://localhost:3000/index.html
+
+
