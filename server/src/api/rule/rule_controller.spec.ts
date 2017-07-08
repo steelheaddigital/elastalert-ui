@@ -95,7 +95,7 @@ describe('Rule Controller', () => {
         }
       }};
 
-      let rulesController = new RuleController(Mockito.instance(ruleService);
+      let rulesController = new RuleController(Mockito.instance(ruleService));
 
       rulesController.save(req, res, next);
       Mockito.verify(ruleService.saveRule('rule1', Mockito.deepEqual(req.body), Mockito.anything())).atLeast(1)
