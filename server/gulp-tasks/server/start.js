@@ -9,6 +9,6 @@ const server = require('gulp-develop-server');
 module.exports = {
   dep: ['server:compile'],
   fn: function(gulp, basePath, callback) {
-    return server.listen( { path: basePath + 'bin/www', execArgv: ['--debug'] } );
+    return server.listen( { path: basePath + 'bin/www', execArgv: ['--inspect'] } );
   }
 }

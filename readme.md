@@ -38,15 +38,19 @@ Start with production settings
 
 Run without Docker
 ------------------
-* Change es_host in config.yaml in elastalert to the host where your ES instance is running, for example localhost
+* Change es_host in config.yaml in elastalert to the host where your Elastic Search instance is running, for example localhost
 * Change the elastalertDir value in server/config for the appropriate environment (development.js and/or production.js) to the location of your elastalert files. To use the elastalert bundled with this repository, this value would be '../elastalert'
 * In the client directory run the following to compile the client Angular application:
 
 `ng build`
 
-* Run the following from the server directory:
+* Run the following from the server directory to install the npm modules, compile the server, and start the application:
 
-`npm start`
+```
+npm install
+gulp server:compile
+npm start
+```
 
 * Start in production mode:
 

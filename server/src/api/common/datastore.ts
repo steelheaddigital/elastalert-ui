@@ -15,7 +15,7 @@ export class FsDataStore implements IDataStore{
 
   write(fileName: string, data: any): Promise<any> {
     return new Promise( (resolve,reject) => {
-      fs.writeFile(path.join(fileName), data, 'utf8', (err) => {
+      fs.writeFile(path.join(fileName), data, { 'encoding': 'utf8' }, (err) => {
         if(err !== null) return reject(err);
         return resolve();
       });
