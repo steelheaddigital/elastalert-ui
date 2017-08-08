@@ -7,10 +7,24 @@ Prerequisites
 * [Docker](https://docs.docker.com/engine/installation/)
 * [Node.js](https://nodejs.org/en/)
 
+Limitations
+===========
+* Currently only supports email notifications
+* Currently only supports elasticsearch [query string queries](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)
+
 Install Dev Environment
 =======================
 1. Clone this repo
 2. Make sure the prerequistes above are installed
+3. To enable email notifications, add an smtp_auth.yaml file to the elastalert directory. This file should be formatted as follows
+
+    ```
+    user: somebody@gmail.com
+    password: "MyPa33word"
+    ```
+
+    Specify this file when you create an email notification in the UI. For more information see the [elastalert docs](https://elastalert.readthedocs.io/en/latest/ruletypes.html?highlight=smtp_auth_file)
+
 4. In the directory where you cloned this repo, run the following to start the server
 
 `docker-compose up -d`
@@ -70,6 +84,15 @@ npm start
 * Start in production mode:
 
 `NODE_ENV=production npm start`
+
+* To enable email notifications, add an smtp_auth.yaml file to the elastalert directory specifiec above. This file should be formatted as follows
+
+    ```
+    user: somebody@gmail.com
+    password: "MyPa33word"
+    ```
+
+    Specify this file when you create an email notification in the UI. For more information see the [elastalert docs](https://elastalert.readthedocs.io/en/latest/ruletypes.html?highlight=smtp_auth_file)
 
 * The UI will be available at http://localhost:3000/index.html
 
