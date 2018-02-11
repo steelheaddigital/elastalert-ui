@@ -1,3 +1,6 @@
+I am not currently maintaining this application. There is a plugin for Kibana for managing elastalert that works great and that I reccomend. It is available at [https://github.com/bitsensor/elastalert-kibana-plugin](https://github.com/bitsensor/elastalert-kibana-plugin). If you are interested in taking over the maintenance of this, please contact me. Thanks.
+============================================================
+
 Elastalert UI
 ========================
 A UI for [Elastalert](https://github.com/Yelp/elastalert)
