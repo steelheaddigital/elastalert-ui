@@ -23,5 +23,5 @@ texttable==0.8.4
 tlslite==0.4.8
 twilio==5.6.0
 unittest2==0.8.0
-urllib3==1.8.2
+urllib3==1.26.5
 wsgiref==0.1.2
